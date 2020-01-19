@@ -1,5 +1,9535 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["vendor"],{
 
+/***/ "./node_modules/@angular/animations/fesm2015/animations.js":
+/*!*****************************************************************!*\
+  !*** ./node_modules/@angular/animations/fesm2015/animations.js ***!
+  \*****************************************************************/
+/*! exports provided: AnimationBuilder, AnimationFactory, AUTO_STYLE, animate, animateChild, animation, group, keyframes, query, sequence, stagger, state, style, transition, trigger, useAnimation, NoopAnimationPlayer, ɵAnimationGroupPlayer, ɵPRE_STYLE */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AnimationBuilder", function() { return AnimationBuilder; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AnimationFactory", function() { return AnimationFactory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AUTO_STYLE", function() { return AUTO_STYLE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "animate", function() { return animate; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "animateChild", function() { return animateChild; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "animation", function() { return animation; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "group", function() { return group; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "keyframes", function() { return keyframes; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "query", function() { return query; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "sequence", function() { return sequence; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "stagger", function() { return stagger; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "state", function() { return state; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "style", function() { return style; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "transition", function() { return transition; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "trigger", function() { return trigger; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "useAnimation", function() { return useAnimation; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NoopAnimationPlayer", function() { return NoopAnimationPlayer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵAnimationGroupPlayer", function() { return AnimationGroupPlayer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵPRE_STYLE", function() { return ɵPRE_STYLE; });
+/**
+ * @license Angular v8.2.14
+ * (c) 2010-2019 Google LLC. https://angular.io/
+ * License: MIT
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * An injectable service that produces an animation sequence programmatically within an
+ * Angular component or directive.
+ * Provided by the `BrowserAnimationsModule` or `NoopAnimationsModule`.
+ *
+ * \@usageNotes
+ *
+ * To use this service, add it to your component or directive as a dependency.
+ * The service is instantiated along with your component.
+ *
+ * Apps do not typically need to create their own animation players, but if you
+ * do need to, follow these steps:
+ *
+ * 1. Use the `build()` method to create a programmatic animation using the
+ * `animate()` function. The method returns an `AnimationFactory` instance.
+ *
+ * 2. Use the factory object to create an `AnimationPlayer` and attach it to a DOM element.
+ *
+ * 3. Use the player object to control the animation programmatically.
+ *
+ * For example:
+ *
+ * ```ts
+ * // import the service from BrowserAnimationsModule
+ * import {AnimationBuilder} from '\@angular/animations';
+ * // require the service as a dependency
+ * class MyCmp {
+ *   constructor(private _builder: AnimationBuilder) {}
+ *
+ *   makeAnimation(element: any) {
+ *     // first define a reusable animation
+ *     const myAnimation = this._builder.build([
+ *       style({ width: 0 }),
+ *       animate(1000, style({ width: '100px' }))
+ *     ]);
+ *
+ *     // use the returned factory object to create a player
+ *     const player = myAnimation.create(element);
+ *
+ *     player.play();
+ *   }
+ * }
+ * ```
+ *
+ * \@publicApi
+ * @abstract
+ */
+class AnimationBuilder {
+}
+if (false) {}
+/**
+ * A factory object returned from the `AnimationBuilder`.`build()` method.
+ *
+ * \@publicApi
+ * @abstract
+ */
+class AnimationFactory {
+}
+if (false) {}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * Represents a set of CSS styles for use in an animation style.
+ * @record
+ */
+function ɵStyleData() { }
+/** @enum {number} */
+const AnimationMetadataType = {
+    /**
+     * Associates a named animation state with a set of CSS styles.
+     * See `state()`
+     */
+    State: 0,
+    /**
+     * Data for a transition from one animation state to another.
+     * See `transition()`
+     */
+    Transition: 1,
+    /**
+     * Contains a set of animation steps.
+     * See `sequence()`
+     */
+    Sequence: 2,
+    /**
+     * Contains a set of animation steps.
+     * See `{@link animations/group group()}`
+     */
+    Group: 3,
+    /**
+     * Contains an animation step.
+     * See `animate()`
+     */
+    Animate: 4,
+    /**
+     * Contains a set of animation steps.
+     * See `keyframes()`
+     */
+    Keyframes: 5,
+    /**
+     * Contains a set of CSS property-value pairs into a named style.
+     * See `style()`
+     */
+    Style: 6,
+    /**
+     * Associates an animation with an entry trigger that can be attached to an element.
+     * See `trigger()`
+     */
+    Trigger: 7,
+    /**
+     * Contains a re-usable animation.
+     * See `animation()`
+     */
+    Reference: 8,
+    /**
+     * Contains data to use in executing child animations returned by a query.
+     * See `animateChild()`
+     */
+    AnimateChild: 9,
+    /**
+     * Contains animation parameters for a re-usable animation.
+     * See `useAnimation()`
+     */
+    AnimateRef: 10,
+    /**
+     * Contains child-animation query data.
+     * See `query()`
+     */
+    Query: 11,
+    /**
+     * Contains data for staggering an animation sequence.
+     * See `stagger()`
+     */
+    Stagger: 12,
+};
+/**
+ * Specifies automatic styling.
+ *
+ * \@publicApi
+ * @type {?}
+ */
+const AUTO_STYLE = '*';
+/**
+ * Base for animation data structures.
+ *
+ * \@publicApi
+ * @record
+ */
+function AnimationMetadata() { }
+if (false) {}
+/**
+ * Contains an animation trigger. Instantiated and returned by the
+ * `trigger()` function.
+ *
+ * \@publicApi
+ * @record
+ */
+function AnimationTriggerMetadata() { }
+if (false) {}
+/**
+ * Encapsulates an animation state by associating a state name with a set of CSS styles.
+ * Instantiated and returned by the `state()` function.
+ *
+ * \@publicApi
+ * @record
+ */
+function AnimationStateMetadata() { }
+if (false) {}
+/**
+ * Encapsulates an animation transition. Instantiated and returned by the
+ * `transition()` function.
+ *
+ * \@publicApi
+ * @record
+ */
+function AnimationTransitionMetadata() { }
+if (false) {}
+/**
+ * Encapsulates a reusable animation, which is a collection of individual animation steps.
+ * Instantiated and returned by the `animation()` function, and
+ * passed to the `useAnimation()` function.
+ *
+ * \@publicApi
+ * @record
+ */
+function AnimationReferenceMetadata() { }
+if (false) {}
+/**
+ * Encapsulates an animation query. Instantiated and returned by
+ * the `query()` function.
+ *
+ * \@publicApi
+ * @record
+ */
+function AnimationQueryMetadata() { }
+if (false) {}
+/**
+ * Encapsulates a keyframes sequence. Instantiated and returned by
+ * the `keyframes()` function.
+ *
+ * \@publicApi
+ * @record
+ */
+function AnimationKeyframesSequenceMetadata() { }
+if (false) {}
+/**
+ * Encapsulates an animation style. Instantiated and returned by
+ * the `style()` function.
+ *
+ * \@publicApi
+ * @record
+ */
+function AnimationStyleMetadata() { }
+if (false) {}
+/**
+ * Encapsulates an animation step. Instantiated and returned by
+ * the `animate()` function.
+ *
+ * \@publicApi
+ * @record
+ */
+function AnimationAnimateMetadata() { }
+if (false) {}
+/**
+ * Encapsulates a child animation, that can be run explicitly when the parent is run.
+ * Instantiated and returned by the `animateChild` function.
+ *
+ * \@publicApi
+ * @record
+ */
+function AnimationAnimateChildMetadata() { }
+if (false) {}
+/**
+ * Encapsulates a reusable animation.
+ * Instantiated and returned by the `useAnimation()` function.
+ *
+ * \@publicApi
+ * @record
+ */
+function AnimationAnimateRefMetadata() { }
+if (false) {}
+/**
+ * Encapsulates an animation sequence.
+ * Instantiated and returned by the `sequence()` function.
+ *
+ * \@publicApi
+ * @record
+ */
+function AnimationSequenceMetadata() { }
+if (false) {}
+/**
+ * Encapsulates an animation group.
+ * Instantiated and returned by the `{\@link animations/group group()}` function.
+ *
+ * \@publicApi
+ * @record
+ */
+function AnimationGroupMetadata() { }
+if (false) {}
+/**
+ * Encapsulates parameters for staggering the start times of a set of animation steps.
+ * Instantiated and returned by the `stagger()` function.
+ *
+ * \@publicApi
+ *
+ * @record
+ */
+function AnimationStaggerMetadata() { }
+if (false) {}
+/**
+ * Creates a named animation trigger, containing a  list of `state()`
+ * and `transition()` entries to be evaluated when the expression
+ * bound to the trigger changes.
+ *
+ * \@usageNotes
+ * Define an animation trigger in the `animations` section of `\@Component` metadata.
+ * In the template, reference the trigger by name and bind it to a trigger expression that
+ * evaluates to a defined animation state, using the following format:
+ *
+ * `[\@triggerName]="expression"`
+ *
+ * Animation trigger bindings convert all values to strings, and then match the
+ * previous and current values against any linked transitions.
+ * Booleans can be specified as `1` or `true` and `0` or `false`.
+ *
+ * ### Usage Example
+ *
+ * The following example creates an animation trigger reference based on the provided
+ * name value.
+ * The provided animation value is expected to be an array consisting of state and
+ * transition declarations.
+ *
+ * ```typescript
+ * \@Component({
+ *   selector: "my-component",
+ *   templateUrl: "my-component-tpl.html",
+ *   animations: [
+ *     trigger("myAnimationTrigger", [
+ *       state(...),
+ *       state(...),
+ *       transition(...),
+ *       transition(...)
+ *     ])
+ *   ]
+ * })
+ * class MyComponent {
+ *   myStatusExp = "something";
+ * }
+ * ```
+ *
+ * The template associated with this component makes use of the defined trigger
+ * by binding to an element within its template code.
+ *
+ * ```html
+ * <!-- somewhere inside of my-component-tpl.html -->
+ * <div [\@myAnimationTrigger]="myStatusExp">...</div>
+ * ```
+ *
+ * ### Using an inline function
+ * The `transition` animation method also supports reading an inline function which can decide
+ * if its associated animation should be run.
+ *
+ * ```typescript
+ * // this method is run each time the `myAnimationTrigger` trigger value changes.
+ * function myInlineMatcherFn(fromState: string, toState: string, element: any, params: {[key:
+ * string]: any}): boolean {
+ *   // notice that `element` and `params` are also available here
+ *   return toState == 'yes-please-animate';
+ * }
+ *  /
+ *   selector: 'my-component',
+ *   templateUrl: 'my-component-tpl.html',
+ *   animations: [
+ *     trigger('myAnimationTrigger', [
+ *       transition(myInlineMatcherFn, [
+ *         // the animation sequence code
+ *       ]),
+ *     ])
+ *   ]
+ * })
+ * class MyComponent {
+ *   myStatusExp = "yes-please-animate";
+ * }
+ * ```
+ *
+ * ### Disabling Animations
+ * When true, the special animation control binding `\@.disabled` binding prevents
+ * all animations from rendering.
+ * Place the  `\@.disabled` binding on an element to disable
+ * animations on the element itself, as well as any inner animation triggers
+ * within the element.
+ *
+ * The following example shows how to use this feature:
+ *
+ * ```typescript /
+ *   selector: 'my-component',
+ *   template: `
+ *     <div [\@.disabled]="isDisabled">
+ *       <div [\@childAnimation]="exp"></div>
+ *     </div>
+ *   `,
+ *   animations: [
+ *     trigger("childAnimation", [
+ *       // ...
+ *     ])
+ *   ]
+ * })
+ * class MyComponent {
+ *   isDisabled = true;
+ *   exp = '...';
+ * }
+ * ```
+ *
+ * When `\@.disabled` is true, it prevents the `\@childAnimation` trigger from animating,
+ * along with any inner animations.
+ *
+ * ### Disable animations application-wide
+ * When an area of the template is set to have animations disabled,
+ * **all** inner components have their animations disabled as well.
+ * This means that you can disable all animations for an app
+ * by placing a host binding set on `\@.disabled` on the topmost Angular component.
+ *
+ * ```typescript
+ * import {Component, HostBinding} from '\@angular/core';
+ *  /
+ *   selector: 'app-component',
+ *   templateUrl: 'app.component.html',
+ * })
+ * class AppComponent {
+ * \@HostBinding('@.disabled')
+ *   public animationsDisabled = true;
+ * }
+ * ```
+ *
+ * ### Overriding disablement of inner animations
+ * Despite inner animations being disabled, a parent animation can `query()`
+ * for inner elements located in disabled areas of the template and still animate
+ * them if needed. This is also the case for when a sub animation is
+ * queried by a parent and then later animated using `animateChild()`.
+ *
+ * ### Detecting when an animation is disabled
+ * If a region of the DOM (or the entire application) has its animations disabled, the animation
+ * trigger callbacks still fire, but for zero seconds. When the callback fires, it provides
+ * an instance of an `AnimationEvent`. If animations are disabled,
+ * the `.disabled` flag on the event is true.
+ *
+ * \@publicApi
+ * @param {?} name An identifying string.
+ * @param {?} definitions  An animation definition object, containing an array of `state()`
+ * and `transition()` declarations.
+ *
+ * @return {?} An object that encapsulates the trigger data.
+ *
+ */
+function trigger(name, definitions) {
+    return { type: 7 /* Trigger */, name, definitions, options: {} };
+}
+/**
+ * Defines an animation step that combines styling information with timing information.
+ *
+ * \@usageNotes
+ * Call within an animation `sequence()`, `{\@link animations/group group()}`, or
+ * `transition()` call to specify an animation step
+ * that applies given style data to the parent animation for a given amount of time.
+ *
+ * ### Syntax Examples
+ * **Timing examples**
+ *
+ * The following examples show various `timings` specifications.
+ * - `animate(500)` : Duration is 500 milliseconds.
+ * - `animate("1s")` : Duration is 1000 milliseconds.
+ * - `animate("100ms 0.5s")` : Duration is 100 milliseconds, delay is 500 milliseconds.
+ * - `animate("5s ease-in")` : Duration is 5000 milliseconds, easing in.
+ * - `animate("5s 10ms cubic-bezier(.17,.67,.88,.1)")` : Duration is 5000 milliseconds, delay is 10
+ * milliseconds, easing according to a bezier curve.
+ *
+ * **Style examples**
+ *
+ * The following example calls `style()` to set a single CSS style.
+ * ```typescript
+ * animate(500, style({ background: "red" }))
+ * ```
+ * The following example calls `keyframes()` to set a CSS style
+ * to different values for successive keyframes.
+ * ```typescript
+ * animate(500, keyframes(
+ *  [
+ *   style({ background: "blue" })),
+ *   style({ background: "red" }))
+ *  ])
+ * ```
+ *
+ * \@publicApi
+ * @param {?} timings Sets `AnimateTimings` for the parent animation.
+ * A string in the format "duration [delay] [easing]".
+ *  - Duration and delay are expressed as a number and optional time unit,
+ * such as "1s" or "10ms" for one second and 10 milliseconds, respectively.
+ * The default unit is milliseconds.
+ *  - The easing value controls how the animation accelerates and decelerates
+ * during its runtime. Value is one of  `ease`, `ease-in`, `ease-out`,
+ * `ease-in-out`, or a `cubic-bezier()` function call.
+ * If not supplied, no easing is applied.
+ *
+ * For example, the string "1s 100ms ease-out" specifies a duration of
+ * 1000 milliseconds, and delay of 100 ms, and the "ease-out" easing style,
+ * which decelerates near the end of the duration.
+ * @param {?=} styles Sets AnimationStyles for the parent animation.
+ * A function call to either `style()` or `keyframes()`
+ * that returns a collection of CSS style entries to be applied to the parent animation.
+ * When null, uses the styles from the destination state.
+ * This is useful when describing an animation step that will complete an animation;
+ * see "Animating to the final state" in `transitions()`.
+ * @return {?} An object that encapsulates the animation step.
+ *
+ */
+function animate(timings, styles = null) {
+    return { type: 4 /* Animate */, styles, timings };
+}
+/**
+ * \@description Defines a list of animation steps to be run in parallel.
+ *
+ * \@usageNotes
+ * Grouped animations are useful when a series of styles must be
+ * animated at different starting times and closed off at different ending times.
+ *
+ * When called within a `sequence()` or a
+ * `transition()` call, does not continue to the next
+ * instruction until all of the inner animation steps have completed.
+ *
+ * \@publicApi
+ * @param {?} steps An array of animation step objects.
+ * - When steps are defined by `style()` or `animate()`
+ * function calls, each call within the group is executed instantly.
+ * - To specify offset styles to be applied at a later time, define steps with
+ * `keyframes()`, or use `animate()` calls with a delay value.
+ * For example:
+ *
+ * ```typescript
+ * group([
+ *   animate("1s", style({ background: "black" })),
+ *   animate("2s", style({ color: "white" }))
+ * ])
+ * ```
+ *
+ * @param {?=} options An options object containing a delay and
+ * developer-defined parameters that provide styling defaults and
+ * can be overridden on invocation.
+ *
+ * @return {?} An object that encapsulates the group data.
+ *
+ */
+function group(steps, options = null) {
+    return { type: 3 /* Group */, steps, options };
+}
+/**
+ * Defines a list of animation steps to be run sequentially, one by one.
+ *
+ * \@usageNotes
+ * When you pass an array of steps to a
+ * `transition()` call, the steps run sequentially by default.
+ * Compare this to the `{\@link animations/group group()}` call, which runs animation steps in parallel.
+ *
+ * When a sequence is used within a `{\@link animations/group group()}` or a `transition()` call,
+ * execution continues to the next instruction only after each of the inner animation
+ * steps have completed.
+ *
+ * \@publicApi
+ *
+ * @param {?} steps An array of animation step objects.
+ * - Steps defined by `style()` calls apply the styling data immediately.
+ * - Steps defined by `animate()` calls apply the styling data over time
+ *   as specified by the timing data.
+ *
+ * ```typescript
+ * sequence([
+ *   style({ opacity: 0 }),
+ *   animate("1s", style({ opacity: 1 }))
+ * ])
+ * ```
+ *
+ * @param {?=} options An options object containing a delay and
+ * developer-defined parameters that provide styling defaults and
+ * can be overridden on invocation.
+ *
+ * @return {?} An object that encapsulates the sequence data.
+ *
+ */
+function sequence(steps, options = null) {
+    return { type: 2 /* Sequence */, steps, options };
+}
+/**
+ * Declares a key/value object containing CSS properties/styles that
+ * can then be used for an animation `state`, within an animation `sequence`,
+ * or as styling data for calls to `animate()` and `keyframes()`.
+ *
+ * \@usageNotes
+ * The following examples create animation styles that collect a set of
+ * CSS property values:
+ *
+ * ```typescript
+ * // string values for CSS properties
+ * style({ background: "red", color: "blue" })
+ *
+ * // numerical pixel values
+ * style({ width: 100, height: 0 })
+ * ```
+ *
+ * The following example uses auto-styling to allow a component to animate from
+ * a height of 0 up to the height of the parent element:
+ *
+ * ```
+ * style({ height: 0 }),
+ * animate("1s", style({ height: "*" }))
+ * ```
+ *
+ * \@publicApi
+ *
+ * @param {?} tokens A set of CSS styles or HTML styles associated with an animation state.
+ * The value can be any of the following:
+ * - A key-value style pair associating a CSS property with a value.
+ * - An array of key-value style pairs.
+ * - An asterisk (*), to use auto-styling, where styles are derived from the element
+ * being animated and applied to the animation when it starts.
+ *
+ * Auto-styling can be used to define a state that depends on layout or other
+ * environmental factors.
+ *
+ * @return {?} An object that encapsulates the style data.
+ *
+ */
+function style(tokens) {
+    return { type: 6 /* Style */, styles: tokens, offset: null };
+}
+/**
+ * Declares an animation state within a trigger attached to an element.
+ *
+ * \@usageNotes
+ * Use the `trigger()` function to register states to an animation trigger.
+ * Use the `transition()` function to animate between states.
+ * When a state is active within a component, its associated styles persist on the element,
+ * even when the animation ends.
+ *
+ * \@publicApi
+ *
+ * @param {?} name One or more names for the defined state in a comma-separated string.
+ * The following reserved state names can be supplied to define a style for specific use
+ * cases:
+ *
+ * - `void` You can associate styles with this name to be used when
+ * the element is detached from the application. For example, when an `ngIf` evaluates
+ * to false, the state of the associated element is void.
+ *  - `*` (asterisk) Indicates the default state. You can associate styles with this name
+ * to be used as the fallback when the state that is being animated is not declared
+ * within the trigger.
+ *
+ * @param {?} styles A set of CSS styles associated with this state, created using the
+ * `style()` function.
+ * This set of styles persists on the element once the state has been reached.
+ * @param {?=} options Parameters that can be passed to the state when it is invoked.
+ * 0 or more key-value pairs.
+ * @return {?} An object that encapsulates the new state data.
+ *
+ */
+function state(name, styles, options) {
+    return { type: 0 /* State */, name, styles, options };
+}
+/**
+ * Defines a set of animation styles, associating each style with an optional `offset` value.
+ *
+ * \@usageNotes
+ * Use with the `animate()` call. Instead of applying animations
+ * from the current state
+ * to the destination state, keyframes describe how each style entry is applied and at what point
+ * within the animation arc.
+ * Compare [CSS Keyframe Animations](https://www.w3schools.com/css/css3_animations.asp).
+ *
+ * ### Usage
+ *
+ * In the following example, the offset values describe
+ * when each `backgroundColor` value is applied. The color is red at the start, and changes to
+ * blue when 20% of the total time has elapsed.
+ *
+ * ```typescript
+ * // the provided offset values
+ * animate("5s", keyframes([
+ *   style({ backgroundColor: "red", offset: 0 }),
+ *   style({ backgroundColor: "blue", offset: 0.2 }),
+ *   style({ backgroundColor: "orange", offset: 0.3 }),
+ *   style({ backgroundColor: "black", offset: 1 })
+ * ]))
+ * ```
+ *
+ * If there are no `offset` values specified in the style entries, the offsets
+ * are calculated automatically.
+ *
+ * ```typescript
+ * animate("5s", keyframes([
+ *   style({ backgroundColor: "red" }) // offset = 0
+ *   style({ backgroundColor: "blue" }) // offset = 0.33
+ *   style({ backgroundColor: "orange" }) // offset = 0.66
+ *   style({ backgroundColor: "black" }) // offset = 1
+ * ]))
+ * ```
+ * \@publicApi
+ * @param {?} steps A set of animation styles with optional offset data.
+ * The optional `offset` value for a style specifies a percentage of the total animation
+ * time at which that style is applied.
+ * @return {?} An object that encapsulates the keyframes data.
+ *
+ */
+function keyframes(steps) {
+    return { type: 5 /* Keyframes */, steps };
+}
+/**
+ * Declares an animation transition as a sequence of animation steps to run when a given
+ * condition is satisfied. The condition is a Boolean expression or function that compares
+ * the previous and current animation states, and returns true if this transition should occur.
+ * When the state criteria of a defined transition are met, the associated animation is
+ * triggered.
+ *
+ * \@usageNotes
+ * The template associated with a component binds an animation trigger to an element.
+ *
+ * ```HTML
+ * <!-- somewhere inside of my-component-tpl.html -->
+ * <div [\@myAnimationTrigger]="myStatusExp">...</div>
+ * ```
+ *
+ * All transitions are defined within an animation trigger,
+ * along with named states that the transitions change to and from.
+ *
+ * ```typescript
+ * trigger("myAnimationTrigger", [
+ *  // define states
+ *  state("on", style({ background: "green" })),
+ *  state("off", style({ background: "grey" })),
+ *  ...]
+ * ```
+ *
+ * Note that when you call the `sequence()` function within a `{\@link animations/group group()}`
+ * or a `transition()` call, execution does not continue to the next instruction
+ * until each of the inner animation steps have completed.
+ *
+ * ### Syntax examples
+ *
+ * The following examples define transitions between the two defined states (and default states),
+ * using various options:
+ *
+ * ```typescript
+ * // Transition occurs when the state value
+ * // bound to "myAnimationTrigger" changes from "on" to "off"
+ * transition("on => off", animate(500))
+ * // Run the same animation for both directions
+ * transition("on <=> off", animate(500))
+ * // Define multiple state-change pairs separated by commas
+ * transition("on => off, off => void", animate(500))
+ * ```
+ *
+ * ### Special values for state-change expressions
+ *
+ * - Catch-all state change for when an element is inserted into the page and the
+ * destination state is unknown:
+ *
+ * ```typescript
+ * transition("void => *", [
+ *  style({ opacity: 0 }),
+ *  animate(500)
+ *  ])
+ * ```
+ *
+ * - Capture a state change between any states:
+ *
+ *  `transition("* => *", animate("1s 0s"))`
+ *
+ * - Entry and exit transitions:
+ *
+ * ```typescript
+ * transition(":enter", [
+ *   style({ opacity: 0 }),
+ *   animate(500, style({ opacity: 1 }))
+ *   ]),
+ * transition(":leave", [
+ *   animate(500, style({ opacity: 0 }))
+ *   ])
+ * ```
+ *
+ * - Use `:increment` and `:decrement` to initiate transitions:
+ *
+ * ```typescript
+ * transition(":increment", group([
+ *  query(':enter', [
+ *     style({ left: '100%' }),
+ *     animate('0.5s ease-out', style('*'))
+ *   ]),
+ *  query(':leave', [
+ *     animate('0.5s ease-out', style({ left: '-100%' }))
+ *  ])
+ * ]))
+ *
+ * transition(":decrement", group([
+ *  query(':enter', [
+ *     style({ left: '100%' }),
+ *     animate('0.5s ease-out', style('*'))
+ *   ]),
+ *  query(':leave', [
+ *     animate('0.5s ease-out', style({ left: '-100%' }))
+ *  ])
+ * ]))
+ * ```
+ *
+ * ### State-change functions
+ *
+ * Here is an example of a `fromState` specified as a state-change function that invokes an
+ * animation when true:
+ *
+ * ```typescript
+ * transition((fromState, toState) =>
+ *  {
+ *   return fromState == "off" && toState == "on";
+ *  },
+ *  animate("1s 0s"))
+ * ```
+ *
+ * ### Animating to the final state
+ *
+ * If the final step in a transition is a call to `animate()` that uses a timing value
+ * with no style data, that step is automatically considered the final animation arc,
+ * for the element to reach the final state. Angular automatically adds or removes
+ * CSS styles to ensure that the element is in the correct final state.
+ *
+ * The following example defines a transition that starts by hiding the element,
+ * then makes sure that it animates properly to whatever state is currently active for trigger:
+ *
+ * ```typescript
+ * transition("void => *", [
+ *   style({ opacity: 0 }),
+ *   animate(500)
+ *  ])
+ * ```
+ * ### Boolean value matching
+ * If a trigger binding value is a Boolean, it can be matched using a transition expression
+ * that compares true and false or 1 and 0. For example:
+ *
+ * ```
+ * // in the template
+ * <div [\@openClose]="open ? true : false">...</div>
+ * // in the component metadata
+ * trigger('openClose', [
+ *   state('true', style({ height: '*' })),
+ *   state('false', style({ height: '0px' })),
+ *   transition('false <=> true', animate(500))
+ * ])
+ * ```
+ *
+ * \@publicApi
+ *
+ * @param {?} stateChangeExpr A Boolean expression or function that compares the previous and current
+ * animation states, and returns true if this transition should occur. Note that  "true" and "false"
+ * match 1 and 0, respectively. An expression is evaluated each time a state change occurs in the
+ * animation trigger element.
+ * The animation steps run when the expression evaluates to true.
+ *
+ * - A state-change string takes the form "state1 => state2", where each side is a defined animation
+ * state, or an asterix (*) to refer to a dynamic start or end state.
+ *   - The expression string can contain multiple comma-separated statements;
+ * for example "state1 => state2, state3 => state4".
+ *   - Special values `:enter` and `:leave` initiate a transition on the entry and exit states,
+ * equivalent to  "void => *"  and "* => void".
+ *   - Special values `:increment` and `:decrement` initiate a transition when a numeric value has
+ * increased or decreased in value.
+ * - A function is executed each time a state change occurs in the animation trigger element.
+ * The animation steps run when the function returns true.
+ *
+ * @param {?} steps One or more animation objects, as returned by the `animate()` or
+ * `sequence()` function, that form a transformation from one state to another.
+ * A sequence is used by default when you pass an array.
+ * @param {?=} options An options object that can contain a delay value for the start of the animation,
+ * and additional developer-defined parameters. Provided values for additional parameters are used
+ * as defaults, and override values can be passed to the caller on invocation.
+ * @return {?} An object that encapsulates the transition data.
+ *
+ */
+function transition(stateChangeExpr, steps, options = null) {
+    return { type: 1 /* Transition */, expr: stateChangeExpr, animation: steps, options };
+}
+/**
+ * Produces a reusable animation that can be invoked in another animation or sequence,
+ * by calling the `useAnimation()` function.
+ *
+ * \@usageNotes
+ * The following example defines a reusable animation, providing some default parameter
+ * values.
+ *
+ * ```typescript
+ * var fadeAnimation = animation([
+ *   style({ opacity: '{{ start }}' }),
+ *   animate('{{ time }}',
+ *   style({ opacity: '{{ end }}'}))
+ *   ],
+ *   { params: { time: '1000ms', start: 0, end: 1 }});
+ * ```
+ *
+ * The following invokes the defined animation with a call to `useAnimation()`,
+ * passing in override parameter values.
+ *
+ * ```js
+ * useAnimation(fadeAnimation, {
+ *   params: {
+ *     time: '2s',
+ *     start: 1,
+ *     end: 0
+ *   }
+ * })
+ * ```
+ *
+ * If any of the passed-in parameter values are missing from this call,
+ * the default values are used. If one or more parameter values are missing before a step is
+ * animated, `useAnimation()` throws an error.
+ *
+ * \@publicApi
+ * @param {?} steps One or more animation objects, as returned by the `animate()`
+ * or `sequence()` function, that form a transformation from one state to another.
+ * A sequence is used by default when you pass an array.
+ * @param {?=} options An options object that can contain a delay value for the start of the
+ * animation, and additional developer-defined parameters.
+ * Provided values for additional parameters are used as defaults,
+ * and override values can be passed to the caller on invocation.
+ * @return {?} An object that encapsulates the animation data.
+ *
+ */
+function animation(steps, options = null) {
+    return { type: 8 /* Reference */, animation: steps, options };
+}
+/**
+ * Executes a queried inner animation element within an animation sequence.
+ *
+ * \@usageNotes
+ * Each time an animation is triggered in Angular, the parent animation
+ * has priority and any child animations are blocked. In order
+ * for a child animation to run, the parent animation must query each of the elements
+ * containing child animations, and run them using this function.
+ *
+ * Note that this feature is designed to be used with `query()` and it will only work
+ * with animations that are assigned using the Angular animation library. CSS keyframes
+ * and transitions are not handled by this API.
+ *
+ * \@publicApi
+ * @param {?=} options An options object that can contain a delay value for the start of the
+ * animation, and additional override values for developer-defined parameters.
+ * @return {?} An object that encapsulates the child animation data.
+ *
+ */
+function animateChild(options = null) {
+    return { type: 9 /* AnimateChild */, options };
+}
+/**
+ * Starts a reusable animation that is created using the `animation()` function.
+ *
+ * \@publicApi
+ * @param {?} animation The reusable animation to start.
+ * @param {?=} options An options object that can contain a delay value for the start of
+ * the animation, and additional override values for developer-defined parameters.
+ * @return {?} An object that contains the animation parameters.
+ *
+ */
+function useAnimation(animation, options = null) {
+    return { type: 10 /* AnimateRef */, animation, options };
+}
+/**
+ * Finds one or more inner elements within the current element that is
+ * being animated within a sequence. Use with `animate()`.
+ *
+ * \@usageNotes
+ * Tokens can be merged into a combined query selector string. For example:
+ *
+ * ```typescript
+ *  query(':self, .record:enter, .record:leave, \@subTrigger', [...])
+ * ```
+ *
+ * The `query()` function collects multiple elements and works internally by using
+ * `element.querySelectorAll`. Use the `limit` field of an options object to limit
+ * the total number of items to be collected. For example:
+ *
+ * ```js
+ * query('div', [
+ *   animate(...),
+ *   animate(...)
+ * ], { limit: 1 })
+ * ```
+ *
+ * By default, throws an error when zero items are found. Set the
+ * `optional` flag to ignore this error. For example:
+ *
+ * ```js
+ * query('.some-element-that-may-not-be-there', [
+ *   animate(...),
+ *   animate(...)
+ * ], { optional: true })
+ * ```
+ *
+ * ### Usage Example
+ *
+ * The following example queries for inner elements and animates them
+ * individually using `animate()`.
+ *
+ * ```typescript
+ * \@Component({
+ *   selector: 'inner',
+ *   template: `
+ *     <div [\@queryAnimation]="exp">
+ *       <h1>Title</h1>
+ *       <div class="content">
+ *         Blah blah blah
+ *       </div>
+ *     </div>
+ *   `,
+ *   animations: [
+ *    trigger('queryAnimation', [
+ *      transition('* => goAnimate', [
+ *        // hide the inner elements
+ *        query('h1', style({ opacity: 0 })),
+ *        query('.content', style({ opacity: 0 })),
+ *
+ *        // animate the inner elements in, one by one
+ *        query('h1', animate(1000, style({ opacity: 1 }))),
+ *        query('.content', animate(1000, style({ opacity: 1 }))),
+ *      ])
+ *    ])
+ *  ]
+ * })
+ * class Cmp {
+ *   exp = '';
+ *
+ *   goAnimate() {
+ *     this.exp = 'goAnimate';
+ *   }
+ * }
+ * ```
+ *
+ * \@publicApi
+ * @param {?} selector The element to query, or a set of elements that contain Angular-specific
+ * characteristics, specified with one or more of the following tokens.
+ *  - `query(":enter")` or `query(":leave")` : Query for newly inserted/removed elements.
+ *  - `query(":animating")` : Query all currently animating elements.
+ *  - `query("\@triggerName")` : Query elements that contain an animation trigger.
+ *  - `query("\@*")` : Query all elements that contain an animation triggers.
+ *  - `query(":self")` : Include the current element into the animation sequence.
+ *
+ * @param {?} animation One or more animation steps to apply to the queried element or elements.
+ * An array is treated as an animation sequence.
+ * @param {?=} options An options object. Use the 'limit' field to limit the total number of
+ * items to collect.
+ * @return {?} An object that encapsulates the query data.
+ *
+ */
+function query(selector, animation, options = null) {
+    return { type: 11 /* Query */, selector, animation, options };
+}
+/**
+ * Use within an animation `query()` call to issue a timing gap after
+ * each queried item is animated.
+ *
+ * \@usageNotes
+ * In the following example, a container element wraps a list of items stamped out
+ * by an `ngFor`. The container element contains an animation trigger that will later be set
+ * to query for each of the inner items.
+ *
+ * Each time items are added, the opacity fade-in animation runs,
+ * and each removed item is faded out.
+ * When either of these animations occur, the stagger effect is
+ * applied after each item's animation is started.
+ *
+ * ```html
+ * <!-- list.component.html -->
+ * <button (click)="toggle()">Show / Hide Items</button>
+ * <hr />
+ * <div [\@listAnimation]="items.length">
+ *   <div *ngFor="let item of items">
+ *     {{ item }}
+ *   </div>
+ * </div>
+ * ```
+ *
+ * Here is the component code:
+ *
+ * ```typescript
+ * import {trigger, transition, style, animate, query, stagger} from '\@angular/animations';
+ * \@Component({
+ *   templateUrl: 'list.component.html',
+ *   animations: [
+ *     trigger('listAnimation', [
+ *     ...
+ *     ])
+ *   ]
+ * })
+ * class ListComponent {
+ *   items = [];
+ *
+ *   showItems() {
+ *     this.items = [0,1,2,3,4];
+ *   }
+ *
+ *   hideItems() {
+ *     this.items = [];
+ *   }
+ *
+ *   toggle() {
+ *     this.items.length ? this.hideItems() : this.showItems();
+ *    }
+ *  }
+ * ```
+ *
+ * Here is the animation trigger code:
+ *
+ * ```typescript
+ * trigger('listAnimation', [
+ *   transition('* => *', [ // each time the binding value changes
+ *     query(':leave', [
+ *       stagger(100, [
+ *         animate('0.5s', style({ opacity: 0 }))
+ *       ])
+ *     ]),
+ *     query(':enter', [
+ *       style({ opacity: 0 }),
+ *       stagger(100, [
+ *         animate('0.5s', style({ opacity: 1 }))
+ *       ])
+ *     ])
+ *   ])
+ * ])
+ * ```
+ *
+ * \@publicApi
+ * @param {?} timings A delay value.
+ * @param {?} animation One ore more animation steps.
+ * @return {?} An object that encapsulates the stagger data.
+ *
+ */
+function stagger(timings, animation) {
+    return { type: 12 /* Stagger */, timings, animation };
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ * @param {?} cb
+ * @return {?}
+ */
+function scheduleMicroTask(cb) {
+    Promise.resolve(null).then(cb);
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Provides programmatic control of a reusable animation sequence,
+ * built using the `build()` method of `AnimationBuilder`. The `build()` method
+ * returns a factory, whose `create()` method instantiates and initializes this interface.
+ *
+ * @see `AnimationBuilder`
+ * @see `AnimationFactory`
+ * @see `animate()`
+ *
+ * \@publicApi
+ * @record
+ */
+function AnimationPlayer() { }
+if (false) {}
+/**
+ * An empty programmatic controller for reusable animations.
+ * Used internally when animations are disabled, to avoid
+ * checking for the null case when an animation player is expected.
+ *
+ * @see `animate()`
+ * @see `AnimationPlayer`
+ * @see `GroupPlayer`
+ *
+ * \@publicApi
+ */
+class NoopAnimationPlayer {
+    /**
+     * @param {?=} duration
+     * @param {?=} delay
+     */
+    constructor(duration = 0, delay = 0) {
+        this._onDoneFns = [];
+        this._onStartFns = [];
+        this._onDestroyFns = [];
+        this._started = false;
+        this._destroyed = false;
+        this._finished = false;
+        this.parentPlayer = null;
+        this.totalTime = duration + delay;
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    _onFinish() {
+        if (!this._finished) {
+            this._finished = true;
+            this._onDoneFns.forEach((/**
+             * @param {?} fn
+             * @return {?}
+             */
+            fn => fn()));
+            this._onDoneFns = [];
+        }
+    }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    onStart(fn) { this._onStartFns.push(fn); }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    onDone(fn) { this._onDoneFns.push(fn); }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    onDestroy(fn) { this._onDestroyFns.push(fn); }
+    /**
+     * @return {?}
+     */
+    hasStarted() { return this._started; }
+    /**
+     * @return {?}
+     */
+    init() { }
+    /**
+     * @return {?}
+     */
+    play() {
+        if (!this.hasStarted()) {
+            this._onStart();
+            this.triggerMicrotask();
+        }
+        this._started = true;
+    }
+    /**
+     * \@internal
+     * @return {?}
+     */
+    triggerMicrotask() { scheduleMicroTask((/**
+     * @return {?}
+     */
+    () => this._onFinish())); }
+    /**
+     * @private
+     * @return {?}
+     */
+    _onStart() {
+        this._onStartFns.forEach((/**
+         * @param {?} fn
+         * @return {?}
+         */
+        fn => fn()));
+        this._onStartFns = [];
+    }
+    /**
+     * @return {?}
+     */
+    pause() { }
+    /**
+     * @return {?}
+     */
+    restart() { }
+    /**
+     * @return {?}
+     */
+    finish() { this._onFinish(); }
+    /**
+     * @return {?}
+     */
+    destroy() {
+        if (!this._destroyed) {
+            this._destroyed = true;
+            if (!this.hasStarted()) {
+                this._onStart();
+            }
+            this.finish();
+            this._onDestroyFns.forEach((/**
+             * @param {?} fn
+             * @return {?}
+             */
+            fn => fn()));
+            this._onDestroyFns = [];
+        }
+    }
+    /**
+     * @return {?}
+     */
+    reset() { }
+    /**
+     * @param {?} position
+     * @return {?}
+     */
+    setPosition(position) { }
+    /**
+     * @return {?}
+     */
+    getPosition() { return 0; }
+    /**
+     * \@internal
+     * @param {?} phaseName
+     * @return {?}
+     */
+    triggerCallback(phaseName) {
+        /** @type {?} */
+        const methods = phaseName == 'start' ? this._onStartFns : this._onDoneFns;
+        methods.forEach((/**
+         * @param {?} fn
+         * @return {?}
+         */
+        fn => fn()));
+        methods.length = 0;
+    }
+}
+if (false) {}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * A programmatic controller for a group of reusable animations.
+ * Used internally to control animations.
+ *
+ * @see `AnimationPlayer`
+ * @see `{\@link animations/group group()}`
+ *
+ */
+class AnimationGroupPlayer {
+    /**
+     * @param {?} _players
+     */
+    constructor(_players) {
+        this._onDoneFns = [];
+        this._onStartFns = [];
+        this._finished = false;
+        this._started = false;
+        this._destroyed = false;
+        this._onDestroyFns = [];
+        this.parentPlayer = null;
+        this.totalTime = 0;
+        this.players = _players;
+        /** @type {?} */
+        let doneCount = 0;
+        /** @type {?} */
+        let destroyCount = 0;
+        /** @type {?} */
+        let startCount = 0;
+        /** @type {?} */
+        const total = this.players.length;
+        if (total == 0) {
+            scheduleMicroTask((/**
+             * @return {?}
+             */
+            () => this._onFinish()));
+        }
+        else {
+            this.players.forEach((/**
+             * @param {?} player
+             * @return {?}
+             */
+            player => {
+                player.onDone((/**
+                 * @return {?}
+                 */
+                () => {
+                    if (++doneCount == total) {
+                        this._onFinish();
+                    }
+                }));
+                player.onDestroy((/**
+                 * @return {?}
+                 */
+                () => {
+                    if (++destroyCount == total) {
+                        this._onDestroy();
+                    }
+                }));
+                player.onStart((/**
+                 * @return {?}
+                 */
+                () => {
+                    if (++startCount == total) {
+                        this._onStart();
+                    }
+                }));
+            }));
+        }
+        this.totalTime = this.players.reduce((/**
+         * @param {?} time
+         * @param {?} player
+         * @return {?}
+         */
+        (time, player) => Math.max(time, player.totalTime)), 0);
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    _onFinish() {
+        if (!this._finished) {
+            this._finished = true;
+            this._onDoneFns.forEach((/**
+             * @param {?} fn
+             * @return {?}
+             */
+            fn => fn()));
+            this._onDoneFns = [];
+        }
+    }
+    /**
+     * @return {?}
+     */
+    init() { this.players.forEach((/**
+     * @param {?} player
+     * @return {?}
+     */
+    player => player.init())); }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    onStart(fn) { this._onStartFns.push(fn); }
+    /**
+     * @private
+     * @return {?}
+     */
+    _onStart() {
+        if (!this.hasStarted()) {
+            this._started = true;
+            this._onStartFns.forEach((/**
+             * @param {?} fn
+             * @return {?}
+             */
+            fn => fn()));
+            this._onStartFns = [];
+        }
+    }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    onDone(fn) { this._onDoneFns.push(fn); }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    onDestroy(fn) { this._onDestroyFns.push(fn); }
+    /**
+     * @return {?}
+     */
+    hasStarted() { return this._started; }
+    /**
+     * @return {?}
+     */
+    play() {
+        if (!this.parentPlayer) {
+            this.init();
+        }
+        this._onStart();
+        this.players.forEach((/**
+         * @param {?} player
+         * @return {?}
+         */
+        player => player.play()));
+    }
+    /**
+     * @return {?}
+     */
+    pause() { this.players.forEach((/**
+     * @param {?} player
+     * @return {?}
+     */
+    player => player.pause())); }
+    /**
+     * @return {?}
+     */
+    restart() { this.players.forEach((/**
+     * @param {?} player
+     * @return {?}
+     */
+    player => player.restart())); }
+    /**
+     * @return {?}
+     */
+    finish() {
+        this._onFinish();
+        this.players.forEach((/**
+         * @param {?} player
+         * @return {?}
+         */
+        player => player.finish()));
+    }
+    /**
+     * @return {?}
+     */
+    destroy() { this._onDestroy(); }
+    /**
+     * @private
+     * @return {?}
+     */
+    _onDestroy() {
+        if (!this._destroyed) {
+            this._destroyed = true;
+            this._onFinish();
+            this.players.forEach((/**
+             * @param {?} player
+             * @return {?}
+             */
+            player => player.destroy()));
+            this._onDestroyFns.forEach((/**
+             * @param {?} fn
+             * @return {?}
+             */
+            fn => fn()));
+            this._onDestroyFns = [];
+        }
+    }
+    /**
+     * @return {?}
+     */
+    reset() {
+        this.players.forEach((/**
+         * @param {?} player
+         * @return {?}
+         */
+        player => player.reset()));
+        this._destroyed = false;
+        this._finished = false;
+        this._started = false;
+    }
+    /**
+     * @param {?} p
+     * @return {?}
+     */
+    setPosition(p) {
+        /** @type {?} */
+        const timeAtPosition = p * this.totalTime;
+        this.players.forEach((/**
+         * @param {?} player
+         * @return {?}
+         */
+        player => {
+            /** @type {?} */
+            const position = player.totalTime ? Math.min(1, timeAtPosition / player.totalTime) : 1;
+            player.setPosition(position);
+        }));
+    }
+    /**
+     * @return {?}
+     */
+    getPosition() {
+        /** @type {?} */
+        let min = 0;
+        this.players.forEach((/**
+         * @param {?} player
+         * @return {?}
+         */
+        player => {
+            /** @type {?} */
+            const p = player.getPosition();
+            min = Math.min(p, min);
+        }));
+        return min;
+    }
+    /**
+     * @return {?}
+     */
+    beforeDestroy() {
+        this.players.forEach((/**
+         * @param {?} player
+         * @return {?}
+         */
+        player => {
+            if (player.beforeDestroy) {
+                player.beforeDestroy();
+            }
+        }));
+    }
+    /**
+     * \@internal
+     * @param {?} phaseName
+     * @return {?}
+     */
+    triggerCallback(phaseName) {
+        /** @type {?} */
+        const methods = phaseName == 'start' ? this._onStartFns : this._onDoneFns;
+        methods.forEach((/**
+         * @param {?} fn
+         * @return {?}
+         */
+        fn => fn()));
+        methods.length = 0;
+    }
+}
+if (false) {}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+const ɵPRE_STYLE = '!';
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * Generated bundle index. Do not edit.
+ */
+
+
+//# sourceMappingURL=animations.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/@angular/animations/fesm2015/browser.js":
+/*!**************************************************************!*\
+  !*** ./node_modules/@angular/animations/fesm2015/browser.js ***!
+  \**************************************************************/
+/*! exports provided: ɵangular_packages_animations_browser_browser_a, AnimationDriver, ɵAnimationDriver, ɵAnimation, ɵAnimationStyleNormalizer, ɵNoopAnimationStyleNormalizer, ɵWebAnimationsStyleNormalizer, ɵNoopAnimationDriver, ɵAnimationEngine, ɵCssKeyframesDriver, ɵCssKeyframesPlayer, ɵcontainsElement, ɵinvokeQuery, ɵmatchesElement, ɵvalidateStyleProperty, ɵWebAnimationsDriver, ɵsupportsWebAnimations, ɵWebAnimationsPlayer, ɵallowPreviousPlayerStylesMerge */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵangular_packages_animations_browser_browser_a", function() { return SpecialCasedStyles; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AnimationDriver", function() { return AnimationDriver; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵAnimationDriver", function() { return AnimationDriver; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵAnimation", function() { return Animation; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵAnimationStyleNormalizer", function() { return AnimationStyleNormalizer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵNoopAnimationStyleNormalizer", function() { return NoopAnimationStyleNormalizer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵWebAnimationsStyleNormalizer", function() { return WebAnimationsStyleNormalizer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵNoopAnimationDriver", function() { return NoopAnimationDriver; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵAnimationEngine", function() { return AnimationEngine; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵCssKeyframesDriver", function() { return CssKeyframesDriver; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵCssKeyframesPlayer", function() { return CssKeyframesPlayer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵcontainsElement", function() { return containsElement; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵinvokeQuery", function() { return invokeQuery; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵmatchesElement", function() { return matchesElement; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵvalidateStyleProperty", function() { return validateStyleProperty; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵWebAnimationsDriver", function() { return WebAnimationsDriver; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵsupportsWebAnimations", function() { return supportsWebAnimations; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵWebAnimationsPlayer", function() { return WebAnimationsPlayer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵallowPreviousPlayerStylesMerge", function() { return allowPreviousPlayerStylesMerge; });
+/* harmony import */ var _angular_animations__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/animations */ "./node_modules/@angular/animations/fesm2015/animations.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/**
+ * @license Angular v8.2.14
+ * (c) 2010-2019 Google LLC. https://angular.io/
+ * License: MIT
+ */
+
+
+
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @return {?}
+ */
+function isBrowser() {
+    return (typeof window !== 'undefined' && typeof window.document !== 'undefined');
+}
+/**
+ * @return {?}
+ */
+function isNode() {
+    return (typeof process !== 'undefined');
+}
+/**
+ * @param {?} players
+ * @return {?}
+ */
+function optimizeGroupPlayer(players) {
+    switch (players.length) {
+        case 0:
+            return new _angular_animations__WEBPACK_IMPORTED_MODULE_0__["NoopAnimationPlayer"]();
+        case 1:
+            return players[0];
+        default:
+            return new _angular_animations__WEBPACK_IMPORTED_MODULE_0__["ɵAnimationGroupPlayer"](players);
+    }
+}
+/**
+ * @param {?} driver
+ * @param {?} normalizer
+ * @param {?} element
+ * @param {?} keyframes
+ * @param {?=} preStyles
+ * @param {?=} postStyles
+ * @return {?}
+ */
+function normalizeKeyframes(driver, normalizer, element, keyframes, preStyles = {}, postStyles = {}) {
+    /** @type {?} */
+    const errors = [];
+    /** @type {?} */
+    const normalizedKeyframes = [];
+    /** @type {?} */
+    let previousOffset = -1;
+    /** @type {?} */
+    let previousKeyframe = null;
+    keyframes.forEach((/**
+     * @param {?} kf
+     * @return {?}
+     */
+    kf => {
+        /** @type {?} */
+        const offset = (/** @type {?} */ (kf['offset']));
+        /** @type {?} */
+        const isSameOffset = offset == previousOffset;
+        /** @type {?} */
+        const normalizedKeyframe = (isSameOffset && previousKeyframe) || {};
+        Object.keys(kf).forEach((/**
+         * @param {?} prop
+         * @return {?}
+         */
+        prop => {
+            /** @type {?} */
+            let normalizedProp = prop;
+            /** @type {?} */
+            let normalizedValue = kf[prop];
+            if (prop !== 'offset') {
+                normalizedProp = normalizer.normalizePropertyName(normalizedProp, errors);
+                switch (normalizedValue) {
+                    case _angular_animations__WEBPACK_IMPORTED_MODULE_0__["ɵPRE_STYLE"]:
+                        normalizedValue = preStyles[prop];
+                        break;
+                    case _angular_animations__WEBPACK_IMPORTED_MODULE_0__["AUTO_STYLE"]:
+                        normalizedValue = postStyles[prop];
+                        break;
+                    default:
+                        normalizedValue =
+                            normalizer.normalizeStyleValue(prop, normalizedProp, normalizedValue, errors);
+                        break;
+                }
+            }
+            normalizedKeyframe[normalizedProp] = normalizedValue;
+        }));
+        if (!isSameOffset) {
+            normalizedKeyframes.push(normalizedKeyframe);
+        }
+        previousKeyframe = normalizedKeyframe;
+        previousOffset = offset;
+    }));
+    if (errors.length) {
+        /** @type {?} */
+        const LINE_START = '\n - ';
+        throw new Error(`Unable to animate due to the following errors:${LINE_START}${errors.join(LINE_START)}`);
+    }
+    return normalizedKeyframes;
+}
+/**
+ * @param {?} player
+ * @param {?} eventName
+ * @param {?} event
+ * @param {?} callback
+ * @return {?}
+ */
+function listenOnPlayer(player, eventName, event, callback) {
+    switch (eventName) {
+        case 'start':
+            player.onStart((/**
+             * @return {?}
+             */
+            () => callback(event && copyAnimationEvent(event, 'start', player))));
+            break;
+        case 'done':
+            player.onDone((/**
+             * @return {?}
+             */
+            () => callback(event && copyAnimationEvent(event, 'done', player))));
+            break;
+        case 'destroy':
+            player.onDestroy((/**
+             * @return {?}
+             */
+            () => callback(event && copyAnimationEvent(event, 'destroy', player))));
+            break;
+    }
+}
+/**
+ * @param {?} e
+ * @param {?} phaseName
+ * @param {?} player
+ * @return {?}
+ */
+function copyAnimationEvent(e, phaseName, player) {
+    /** @type {?} */
+    const totalTime = player.totalTime;
+    /** @type {?} */
+    const disabled = ((/** @type {?} */ (player))).disabled ? true : false;
+    /** @type {?} */
+    const event = makeAnimationEvent(e.element, e.triggerName, e.fromState, e.toState, phaseName || e.phaseName, totalTime == undefined ? e.totalTime : totalTime, disabled);
+    /** @type {?} */
+    const data = ((/** @type {?} */ (e)))['_data'];
+    if (data != null) {
+        ((/** @type {?} */ (event)))['_data'] = data;
+    }
+    return event;
+}
+/**
+ * @param {?} element
+ * @param {?} triggerName
+ * @param {?} fromState
+ * @param {?} toState
+ * @param {?=} phaseName
+ * @param {?=} totalTime
+ * @param {?=} disabled
+ * @return {?}
+ */
+function makeAnimationEvent(element, triggerName, fromState, toState, phaseName = '', totalTime = 0, disabled) {
+    return { element, triggerName, fromState, toState, phaseName, totalTime, disabled: !!disabled };
+}
+/**
+ * @param {?} map
+ * @param {?} key
+ * @param {?} defaultValue
+ * @return {?}
+ */
+function getOrSetAsInMap(map, key, defaultValue) {
+    /** @type {?} */
+    let value;
+    if (map instanceof Map) {
+        value = map.get(key);
+        if (!value) {
+            map.set(key, value = defaultValue);
+        }
+    }
+    else {
+        value = map[key];
+        if (!value) {
+            value = map[key] = defaultValue;
+        }
+    }
+    return value;
+}
+/**
+ * @param {?} command
+ * @return {?}
+ */
+function parseTimelineCommand(command) {
+    /** @type {?} */
+    const separatorPos = command.indexOf(':');
+    /** @type {?} */
+    const id = command.substring(1, separatorPos);
+    /** @type {?} */
+    const action = command.substr(separatorPos + 1);
+    return [id, action];
+}
+/** @type {?} */
+let _contains = (/**
+ * @param {?} elm1
+ * @param {?} elm2
+ * @return {?}
+ */
+(elm1, elm2) => false);
+const ɵ0 = _contains;
+/** @type {?} */
+let _matches = (/**
+ * @param {?} element
+ * @param {?} selector
+ * @return {?}
+ */
+(element, selector) => false);
+const ɵ1 = _matches;
+/** @type {?} */
+let _query = (/**
+ * @param {?} element
+ * @param {?} selector
+ * @param {?} multi
+ * @return {?}
+ */
+(element, selector, multi) => {
+    return [];
+});
+const ɵ2 = _query;
+// Define utility methods for browsers and platform-server(domino) where Element
+// and utility methods exist.
+/** @type {?} */
+const _isNode = isNode();
+if (_isNode || typeof Element !== 'undefined') {
+    // this is well supported in all browsers
+    _contains = (/**
+     * @param {?} elm1
+     * @param {?} elm2
+     * @return {?}
+     */
+    (elm1, elm2) => { return (/** @type {?} */ (elm1.contains(elm2))); });
+    _matches = ((/**
+     * @return {?}
+     */
+    () => {
+        if (_isNode || Element.prototype.matches) {
+            return (/**
+             * @param {?} element
+             * @param {?} selector
+             * @return {?}
+             */
+            (element, selector) => element.matches(selector));
+        }
+        else {
+            /** @type {?} */
+            const proto = (/** @type {?} */ (Element.prototype));
+            /** @type {?} */
+            const fn = proto.matchesSelector || proto.mozMatchesSelector || proto.msMatchesSelector ||
+                proto.oMatchesSelector || proto.webkitMatchesSelector;
+            if (fn) {
+                return (/**
+                 * @param {?} element
+                 * @param {?} selector
+                 * @return {?}
+                 */
+                (element, selector) => fn.apply(element, [selector]));
+            }
+            else {
+                return _matches;
+            }
+        }
+    }))();
+    _query = (/**
+     * @param {?} element
+     * @param {?} selector
+     * @param {?} multi
+     * @return {?}
+     */
+    (element, selector, multi) => {
+        /** @type {?} */
+        let results = [];
+        if (multi) {
+            results.push(...element.querySelectorAll(selector));
+        }
+        else {
+            /** @type {?} */
+            const elm = element.querySelector(selector);
+            if (elm) {
+                results.push(elm);
+            }
+        }
+        return results;
+    });
+}
+/**
+ * @param {?} prop
+ * @return {?}
+ */
+function containsVendorPrefix(prop) {
+    // Webkit is the only real popular vendor prefix nowadays
+    // cc: http://shouldiprefix.com/
+    return prop.substring(1, 6) == 'ebkit'; // webkit or Webkit
+}
+/** @type {?} */
+let _CACHED_BODY = null;
+/** @type {?} */
+let _IS_WEBKIT = false;
+/**
+ * @param {?} prop
+ * @return {?}
+ */
+function validateStyleProperty(prop) {
+    if (!_CACHED_BODY) {
+        _CACHED_BODY = getBodyNode() || {};
+        _IS_WEBKIT = (/** @type {?} */ (_CACHED_BODY)).style ? ('WebkitAppearance' in (/** @type {?} */ (_CACHED_BODY)).style) : false;
+    }
+    /** @type {?} */
+    let result = true;
+    if ((/** @type {?} */ (_CACHED_BODY)).style && !containsVendorPrefix(prop)) {
+        result = prop in (/** @type {?} */ (_CACHED_BODY)).style;
+        if (!result && _IS_WEBKIT) {
+            /** @type {?} */
+            const camelProp = 'Webkit' + prop.charAt(0).toUpperCase() + prop.substr(1);
+            result = camelProp in (/** @type {?} */ (_CACHED_BODY)).style;
+        }
+    }
+    return result;
+}
+/**
+ * @return {?}
+ */
+function getBodyNode() {
+    if (typeof document != 'undefined') {
+        return document.body;
+    }
+    return null;
+}
+/** @type {?} */
+const matchesElement = _matches;
+/** @type {?} */
+const containsElement = _contains;
+/** @type {?} */
+const invokeQuery = _query;
+/**
+ * @param {?} object
+ * @return {?}
+ */
+function hypenatePropsObject(object) {
+    /** @type {?} */
+    const newObj = {};
+    Object.keys(object).forEach((/**
+     * @param {?} prop
+     * @return {?}
+     */
+    prop => {
+        /** @type {?} */
+        const newProp = prop.replace(/([a-z])([A-Z])/g, '$1-$2');
+        newObj[newProp] = object[prop];
+    }));
+    return newObj;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * \@publicApi
+ */
+class NoopAnimationDriver {
+    /**
+     * @param {?} prop
+     * @return {?}
+     */
+    validateStyleProperty(prop) { return validateStyleProperty(prop); }
+    /**
+     * @param {?} element
+     * @param {?} selector
+     * @return {?}
+     */
+    matchesElement(element, selector) {
+        return matchesElement(element, selector);
+    }
+    /**
+     * @param {?} elm1
+     * @param {?} elm2
+     * @return {?}
+     */
+    containsElement(elm1, elm2) { return containsElement(elm1, elm2); }
+    /**
+     * @param {?} element
+     * @param {?} selector
+     * @param {?} multi
+     * @return {?}
+     */
+    query(element, selector, multi) {
+        return invokeQuery(element, selector, multi);
+    }
+    /**
+     * @param {?} element
+     * @param {?} prop
+     * @param {?=} defaultValue
+     * @return {?}
+     */
+    computeStyle(element, prop, defaultValue) {
+        return defaultValue || '';
+    }
+    /**
+     * @param {?} element
+     * @param {?} keyframes
+     * @param {?} duration
+     * @param {?} delay
+     * @param {?} easing
+     * @param {?=} previousPlayers
+     * @param {?=} scrubberAccessRequested
+     * @return {?}
+     */
+    animate(element, keyframes, duration, delay, easing, previousPlayers = [], scrubberAccessRequested) {
+        return new _angular_animations__WEBPACK_IMPORTED_MODULE_0__["NoopAnimationPlayer"](duration, delay);
+    }
+}
+NoopAnimationDriver.decorators = [
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"] }
+];
+/**
+ * \@publicApi
+ * @abstract
+ */
+class AnimationDriver {
+}
+AnimationDriver.NOOP = new NoopAnimationDriver();
+if (false) {}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+const ONE_SECOND = 1000;
+/** @type {?} */
+const SUBSTITUTION_EXPR_START = '{{';
+/** @type {?} */
+const SUBSTITUTION_EXPR_END = '}}';
+/** @type {?} */
+const ENTER_CLASSNAME = 'ng-enter';
+/** @type {?} */
+const LEAVE_CLASSNAME = 'ng-leave';
+/** @type {?} */
+const ENTER_SELECTOR = '.ng-enter';
+/** @type {?} */
+const LEAVE_SELECTOR = '.ng-leave';
+/** @type {?} */
+const NG_TRIGGER_CLASSNAME = 'ng-trigger';
+/** @type {?} */
+const NG_TRIGGER_SELECTOR = '.ng-trigger';
+/** @type {?} */
+const NG_ANIMATING_CLASSNAME = 'ng-animating';
+/** @type {?} */
+const NG_ANIMATING_SELECTOR = '.ng-animating';
+/**
+ * @param {?} value
+ * @return {?}
+ */
+function resolveTimingValue(value) {
+    if (typeof value == 'number')
+        return value;
+    /** @type {?} */
+    const matches = ((/** @type {?} */ (value))).match(/^(-?[\.\d]+)(m?s)/);
+    if (!matches || matches.length < 2)
+        return 0;
+    return _convertTimeValueToMS(parseFloat(matches[1]), matches[2]);
+}
+/**
+ * @param {?} value
+ * @param {?} unit
+ * @return {?}
+ */
+function _convertTimeValueToMS(value, unit) {
+    switch (unit) {
+        case 's':
+            return value * ONE_SECOND;
+        default: // ms or something else
+            return value;
+    }
+}
+/**
+ * @param {?} timings
+ * @param {?} errors
+ * @param {?=} allowNegativeValues
+ * @return {?}
+ */
+function resolveTiming(timings, errors, allowNegativeValues) {
+    return timings.hasOwnProperty('duration') ?
+        (/** @type {?} */ (timings)) :
+        parseTimeExpression((/** @type {?} */ (timings)), errors, allowNegativeValues);
+}
+/**
+ * @param {?} exp
+ * @param {?} errors
+ * @param {?=} allowNegativeValues
+ * @return {?}
+ */
+function parseTimeExpression(exp, errors, allowNegativeValues) {
+    /** @type {?} */
+    const regex = /^(-?[\.\d]+)(m?s)(?:\s+(-?[\.\d]+)(m?s))?(?:\s+([-a-z]+(?:\(.+?\))?))?$/i;
+    /** @type {?} */
+    let duration;
+    /** @type {?} */
+    let delay = 0;
+    /** @type {?} */
+    let easing = '';
+    if (typeof exp === 'string') {
+        /** @type {?} */
+        const matches = exp.match(regex);
+        if (matches === null) {
+            errors.push(`The provided timing value "${exp}" is invalid.`);
+            return { duration: 0, delay: 0, easing: '' };
+        }
+        duration = _convertTimeValueToMS(parseFloat(matches[1]), matches[2]);
+        /** @type {?} */
+        const delayMatch = matches[3];
+        if (delayMatch != null) {
+            delay = _convertTimeValueToMS(parseFloat(delayMatch), matches[4]);
+        }
+        /** @type {?} */
+        const easingVal = matches[5];
+        if (easingVal) {
+            easing = easingVal;
+        }
+    }
+    else {
+        duration = (/** @type {?} */ (exp));
+    }
+    if (!allowNegativeValues) {
+        /** @type {?} */
+        let containsErrors = false;
+        /** @type {?} */
+        let startIndex = errors.length;
+        if (duration < 0) {
+            errors.push(`Duration values below 0 are not allowed for this animation step.`);
+            containsErrors = true;
+        }
+        if (delay < 0) {
+            errors.push(`Delay values below 0 are not allowed for this animation step.`);
+            containsErrors = true;
+        }
+        if (containsErrors) {
+            errors.splice(startIndex, 0, `The provided timing value "${exp}" is invalid.`);
+        }
+    }
+    return { duration, delay, easing };
+}
+/**
+ * @param {?} obj
+ * @param {?=} destination
+ * @return {?}
+ */
+function copyObj(obj, destination = {}) {
+    Object.keys(obj).forEach((/**
+     * @param {?} prop
+     * @return {?}
+     */
+    prop => { destination[prop] = obj[prop]; }));
+    return destination;
+}
+/**
+ * @param {?} styles
+ * @return {?}
+ */
+function normalizeStyles(styles) {
+    /** @type {?} */
+    const normalizedStyles = {};
+    if (Array.isArray(styles)) {
+        styles.forEach((/**
+         * @param {?} data
+         * @return {?}
+         */
+        data => copyStyles(data, false, normalizedStyles)));
+    }
+    else {
+        copyStyles(styles, false, normalizedStyles);
+    }
+    return normalizedStyles;
+}
+/**
+ * @param {?} styles
+ * @param {?} readPrototype
+ * @param {?=} destination
+ * @return {?}
+ */
+function copyStyles(styles, readPrototype, destination = {}) {
+    if (readPrototype) {
+        // we make use of a for-in loop so that the
+        // prototypically inherited properties are
+        // revealed from the backFill map
+        for (let prop in styles) {
+            destination[prop] = styles[prop];
+        }
+    }
+    else {
+        copyObj(styles, destination);
+    }
+    return destination;
+}
+/**
+ * @param {?} element
+ * @param {?} key
+ * @param {?} value
+ * @return {?}
+ */
+function getStyleAttributeString(element, key, value) {
+    // Return the key-value pair string to be added to the style attribute for the
+    // given CSS style key.
+    if (value) {
+        return key + ':' + value + ';';
+    }
+    else {
+        return '';
+    }
+}
+/**
+ * @param {?} element
+ * @return {?}
+ */
+function writeStyleAttribute(element) {
+    // Read the style property of the element and manually reflect it to the
+    // style attribute. This is needed because Domino on platform-server doesn't
+    // understand the full set of allowed CSS properties and doesn't reflect some
+    // of them automatically.
+    /** @type {?} */
+    let styleAttrValue = '';
+    for (let i = 0; i < element.style.length; i++) {
+        /** @type {?} */
+        const key = element.style.item(i);
+        styleAttrValue += getStyleAttributeString(element, key, element.style.getPropertyValue(key));
+    }
+    for (const key in element.style) {
+        // Skip internal Domino properties that don't need to be reflected.
+        if (!element.style.hasOwnProperty(key) || key.startsWith('_')) {
+            continue;
+        }
+        /** @type {?} */
+        const dashKey = camelCaseToDashCase(key);
+        styleAttrValue += getStyleAttributeString(element, dashKey, element.style[key]);
+    }
+    element.setAttribute('style', styleAttrValue);
+}
+/**
+ * @param {?} element
+ * @param {?} styles
+ * @param {?=} formerStyles
+ * @return {?}
+ */
+function setStyles(element, styles, formerStyles) {
+    if (element['style']) {
+        Object.keys(styles).forEach((/**
+         * @param {?} prop
+         * @return {?}
+         */
+        prop => {
+            /** @type {?} */
+            const camelProp = dashCaseToCamelCase(prop);
+            if (formerStyles && !formerStyles.hasOwnProperty(prop)) {
+                formerStyles[prop] = element.style[camelProp];
+            }
+            element.style[camelProp] = styles[prop];
+        }));
+        // On the server set the 'style' attribute since it's not automatically reflected.
+        if (isNode()) {
+            writeStyleAttribute(element);
+        }
+    }
+}
+/**
+ * @param {?} element
+ * @param {?} styles
+ * @return {?}
+ */
+function eraseStyles(element, styles) {
+    if (element['style']) {
+        Object.keys(styles).forEach((/**
+         * @param {?} prop
+         * @return {?}
+         */
+        prop => {
+            /** @type {?} */
+            const camelProp = dashCaseToCamelCase(prop);
+            element.style[camelProp] = '';
+        }));
+        // On the server set the 'style' attribute since it's not automatically reflected.
+        if (isNode()) {
+            writeStyleAttribute(element);
+        }
+    }
+}
+/**
+ * @param {?} steps
+ * @return {?}
+ */
+function normalizeAnimationEntry(steps) {
+    if (Array.isArray(steps)) {
+        if (steps.length == 1)
+            return steps[0];
+        return Object(_angular_animations__WEBPACK_IMPORTED_MODULE_0__["sequence"])(steps);
+    }
+    return (/** @type {?} */ (steps));
+}
+/**
+ * @param {?} value
+ * @param {?} options
+ * @param {?} errors
+ * @return {?}
+ */
+function validateStyleParams(value, options, errors) {
+    /** @type {?} */
+    const params = options.params || {};
+    /** @type {?} */
+    const matches = extractStyleParams(value);
+    if (matches.length) {
+        matches.forEach((/**
+         * @param {?} varName
+         * @return {?}
+         */
+        varName => {
+            if (!params.hasOwnProperty(varName)) {
+                errors.push(`Unable to resolve the local animation param ${varName} in the given list of values`);
+            }
+        }));
+    }
+}
+/** @type {?} */
+const PARAM_REGEX = new RegExp(`${SUBSTITUTION_EXPR_START}\\s*(.+?)\\s*${SUBSTITUTION_EXPR_END}`, 'g');
+/**
+ * @param {?} value
+ * @return {?}
+ */
+function extractStyleParams(value) {
+    /** @type {?} */
+    let params = [];
+    if (typeof value === 'string') {
+        /** @type {?} */
+        const val = value.toString();
+        /** @type {?} */
+        let match;
+        while (match = PARAM_REGEX.exec(val)) {
+            params.push((/** @type {?} */ (match[1])));
+        }
+        PARAM_REGEX.lastIndex = 0;
+    }
+    return params;
+}
+/**
+ * @param {?} value
+ * @param {?} params
+ * @param {?} errors
+ * @return {?}
+ */
+function interpolateParams(value, params, errors) {
+    /** @type {?} */
+    const original = value.toString();
+    /** @type {?} */
+    const str = original.replace(PARAM_REGEX, (/**
+     * @param {?} _
+     * @param {?} varName
+     * @return {?}
+     */
+    (_, varName) => {
+        /** @type {?} */
+        let localVal = params[varName];
+        // this means that the value was never overridden by the data passed in by the user
+        if (!params.hasOwnProperty(varName)) {
+            errors.push(`Please provide a value for the animation param ${varName}`);
+            localVal = '';
+        }
+        return localVal.toString();
+    }));
+    // we do this to assert that numeric values stay as they are
+    return str == original ? value : str;
+}
+/**
+ * @param {?} iterator
+ * @return {?}
+ */
+function iteratorToArray(iterator) {
+    /** @type {?} */
+    const arr = [];
+    /** @type {?} */
+    let item = iterator.next();
+    while (!item.done) {
+        arr.push(item.value);
+        item = iterator.next();
+    }
+    return arr;
+}
+/**
+ * @param {?} source
+ * @param {?} destination
+ * @return {?}
+ */
+function mergeAnimationOptions(source, destination) {
+    if (source.params) {
+        /** @type {?} */
+        const p0 = source.params;
+        if (!destination.params) {
+            destination.params = {};
+        }
+        /** @type {?} */
+        const p1 = destination.params;
+        Object.keys(p0).forEach((/**
+         * @param {?} param
+         * @return {?}
+         */
+        param => {
+            if (!p1.hasOwnProperty(param)) {
+                p1[param] = p0[param];
+            }
+        }));
+    }
+    return destination;
+}
+/** @type {?} */
+const DASH_CASE_REGEXP = /-+([a-z0-9])/g;
+/**
+ * @param {?} input
+ * @return {?}
+ */
+function dashCaseToCamelCase(input) {
+    return input.replace(DASH_CASE_REGEXP, (/**
+     * @param {...?} m
+     * @return {?}
+     */
+    (...m) => m[1].toUpperCase()));
+}
+/**
+ * @param {?} input
+ * @return {?}
+ */
+function camelCaseToDashCase(input) {
+    return input.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+}
+/**
+ * @param {?} duration
+ * @param {?} delay
+ * @return {?}
+ */
+function allowPreviousPlayerStylesMerge(duration, delay) {
+    return duration === 0 || delay === 0;
+}
+/**
+ * @param {?} element
+ * @param {?} keyframes
+ * @param {?} previousStyles
+ * @return {?}
+ */
+function balancePreviousStylesIntoKeyframes(element, keyframes, previousStyles) {
+    /** @type {?} */
+    const previousStyleProps = Object.keys(previousStyles);
+    if (previousStyleProps.length && keyframes.length) {
+        /** @type {?} */
+        let startingKeyframe = keyframes[0];
+        /** @type {?} */
+        let missingStyleProps = [];
+        previousStyleProps.forEach((/**
+         * @param {?} prop
+         * @return {?}
+         */
+        prop => {
+            if (!startingKeyframe.hasOwnProperty(prop)) {
+                missingStyleProps.push(prop);
+            }
+            startingKeyframe[prop] = previousStyles[prop];
+        }));
+        if (missingStyleProps.length) {
+            // tslint:disable-next-line
+            for (var i = 1; i < keyframes.length; i++) {
+                /** @type {?} */
+                let kf = keyframes[i];
+                missingStyleProps.forEach((/**
+                 * @param {?} prop
+                 * @return {?}
+                 */
+                function (prop) { kf[prop] = computeStyle(element, prop); }));
+            }
+        }
+    }
+    return keyframes;
+}
+/**
+ * @param {?} visitor
+ * @param {?} node
+ * @param {?} context
+ * @return {?}
+ */
+function visitDslNode(visitor, node, context) {
+    switch (node.type) {
+        case 7 /* Trigger */:
+            return visitor.visitTrigger(node, context);
+        case 0 /* State */:
+            return visitor.visitState(node, context);
+        case 1 /* Transition */:
+            return visitor.visitTransition(node, context);
+        case 2 /* Sequence */:
+            return visitor.visitSequence(node, context);
+        case 3 /* Group */:
+            return visitor.visitGroup(node, context);
+        case 4 /* Animate */:
+            return visitor.visitAnimate(node, context);
+        case 5 /* Keyframes */:
+            return visitor.visitKeyframes(node, context);
+        case 6 /* Style */:
+            return visitor.visitStyle(node, context);
+        case 8 /* Reference */:
+            return visitor.visitReference(node, context);
+        case 9 /* AnimateChild */:
+            return visitor.visitAnimateChild(node, context);
+        case 10 /* AnimateRef */:
+            return visitor.visitAnimateRef(node, context);
+        case 11 /* Query */:
+            return visitor.visitQuery(node, context);
+        case 12 /* Stagger */:
+            return visitor.visitStagger(node, context);
+        default:
+            throw new Error(`Unable to resolve animation metadata node #${node.type}`);
+    }
+}
+/**
+ * @param {?} element
+ * @param {?} prop
+ * @return {?}
+ */
+function computeStyle(element, prop) {
+    return ((/** @type {?} */ (window.getComputedStyle(element))))[prop];
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ * @type {?}
+ */
+const ANY_STATE = '*';
+/**
+ * @param {?} transitionValue
+ * @param {?} errors
+ * @return {?}
+ */
+function parseTransitionExpr(transitionValue, errors) {
+    /** @type {?} */
+    const expressions = [];
+    if (typeof transitionValue == 'string') {
+        ((/** @type {?} */ (transitionValue)))
+            .split(/\s*,\s*/)
+            .forEach((/**
+         * @param {?} str
+         * @return {?}
+         */
+        str => parseInnerTransitionStr(str, expressions, errors)));
+    }
+    else {
+        expressions.push((/** @type {?} */ (transitionValue)));
+    }
+    return expressions;
+}
+/**
+ * @param {?} eventStr
+ * @param {?} expressions
+ * @param {?} errors
+ * @return {?}
+ */
+function parseInnerTransitionStr(eventStr, expressions, errors) {
+    if (eventStr[0] == ':') {
+        /** @type {?} */
+        const result = parseAnimationAlias(eventStr, errors);
+        if (typeof result == 'function') {
+            expressions.push(result);
+            return;
+        }
+        eventStr = (/** @type {?} */ (result));
+    }
+    /** @type {?} */
+    const match = eventStr.match(/^(\*|[-\w]+)\s*(<?[=-]>)\s*(\*|[-\w]+)$/);
+    if (match == null || match.length < 4) {
+        errors.push(`The provided transition expression "${eventStr}" is not supported`);
+        return expressions;
+    }
+    /** @type {?} */
+    const fromState = match[1];
+    /** @type {?} */
+    const separator = match[2];
+    /** @type {?} */
+    const toState = match[3];
+    expressions.push(makeLambdaFromStates(fromState, toState));
+    /** @type {?} */
+    const isFullAnyStateExpr = fromState == ANY_STATE && toState == ANY_STATE;
+    if (separator[0] == '<' && !isFullAnyStateExpr) {
+        expressions.push(makeLambdaFromStates(toState, fromState));
+    }
+}
+/**
+ * @param {?} alias
+ * @param {?} errors
+ * @return {?}
+ */
+function parseAnimationAlias(alias, errors) {
+    switch (alias) {
+        case ':enter':
+            return 'void => *';
+        case ':leave':
+            return '* => void';
+        case ':increment':
+            return (/**
+             * @param {?} fromState
+             * @param {?} toState
+             * @return {?}
+             */
+            (fromState, toState) => parseFloat(toState) > parseFloat(fromState));
+        case ':decrement':
+            return (/**
+             * @param {?} fromState
+             * @param {?} toState
+             * @return {?}
+             */
+            (fromState, toState) => parseFloat(toState) < parseFloat(fromState));
+        default:
+            errors.push(`The transition alias value "${alias}" is not supported`);
+            return '* => *';
+    }
+}
+// DO NOT REFACTOR ... keep the follow set instantiations
+// with the values intact (closure compiler for some reason
+// removes follow-up lines that add the values outside of
+// the constructor...
+/** @type {?} */
+const TRUE_BOOLEAN_VALUES = new Set(['true', '1']);
+/** @type {?} */
+const FALSE_BOOLEAN_VALUES = new Set(['false', '0']);
+/**
+ * @param {?} lhs
+ * @param {?} rhs
+ * @return {?}
+ */
+function makeLambdaFromStates(lhs, rhs) {
+    /** @type {?} */
+    const LHS_MATCH_BOOLEAN = TRUE_BOOLEAN_VALUES.has(lhs) || FALSE_BOOLEAN_VALUES.has(lhs);
+    /** @type {?} */
+    const RHS_MATCH_BOOLEAN = TRUE_BOOLEAN_VALUES.has(rhs) || FALSE_BOOLEAN_VALUES.has(rhs);
+    return (/**
+     * @param {?} fromState
+     * @param {?} toState
+     * @return {?}
+     */
+    (fromState, toState) => {
+        /** @type {?} */
+        let lhsMatch = lhs == ANY_STATE || lhs == fromState;
+        /** @type {?} */
+        let rhsMatch = rhs == ANY_STATE || rhs == toState;
+        if (!lhsMatch && LHS_MATCH_BOOLEAN && typeof fromState === 'boolean') {
+            lhsMatch = fromState ? TRUE_BOOLEAN_VALUES.has(lhs) : FALSE_BOOLEAN_VALUES.has(lhs);
+        }
+        if (!rhsMatch && RHS_MATCH_BOOLEAN && typeof toState === 'boolean') {
+            rhsMatch = toState ? TRUE_BOOLEAN_VALUES.has(rhs) : FALSE_BOOLEAN_VALUES.has(rhs);
+        }
+        return lhsMatch && rhsMatch;
+    });
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+const SELF_TOKEN = ':self';
+/** @type {?} */
+const SELF_TOKEN_REGEX = new RegExp(`\s*${SELF_TOKEN}\s*,?`, 'g');
+/*
+ * [Validation]
+ * The visitor code below will traverse the animation AST generated by the animation verb functions
+ * (the output is a tree of objects) and attempt to perform a series of validations on the data. The
+ * following corner-cases will be validated:
+ *
+ * 1. Overlap of animations
+ * Given that a CSS property cannot be animated in more than one place at the same time, it's
+ * important that this behavior is detected and validated. The way in which this occurs is that
+ * each time a style property is examined, a string-map containing the property will be updated with
+ * the start and end times for when the property is used within an animation step.
+ *
+ * If there are two or more parallel animations that are currently running (these are invoked by the
+ * group()) on the same element then the validator will throw an error. Since the start/end timing
+ * values are collected for each property then if the current animation step is animating the same
+ * property and its timing values fall anywhere into the window of time that the property is
+ * currently being animated within then this is what causes an error.
+ *
+ * 2. Timing values
+ * The validator will validate to see if a timing value of `duration delay easing` or
+ * `durationNumber` is valid or not.
+ *
+ * (note that upon validation the code below will replace the timing data with an object containing
+ * {duration,delay,easing}.
+ *
+ * 3. Offset Validation
+ * Each of the style() calls are allowed to have an offset value when placed inside of keyframes().
+ * Offsets within keyframes() are considered valid when:
+ *
+ *   - No offsets are used at all
+ *   - Each style() entry contains an offset value
+ *   - Each offset is between 0 and 1
+ *   - Each offset is greater to or equal than the previous one
+ *
+ * Otherwise an error will be thrown.
+ */
+/**
+ * @param {?} driver
+ * @param {?} metadata
+ * @param {?} errors
+ * @return {?}
+ */
+function buildAnimationAst(driver, metadata, errors) {
+    return new AnimationAstBuilderVisitor(driver).build(metadata, errors);
+}
+/** @type {?} */
+const ROOT_SELECTOR = '';
+class AnimationAstBuilderVisitor {
+    /**
+     * @param {?} _driver
+     */
+    constructor(_driver) {
+        this._driver = _driver;
+    }
+    /**
+     * @param {?} metadata
+     * @param {?} errors
+     * @return {?}
+     */
+    build(metadata, errors) {
+        /** @type {?} */
+        const context = new AnimationAstBuilderContext(errors);
+        this._resetContextStyleTimingState(context);
+        return (/** @type {?} */ (visitDslNode(this, normalizeAnimationEntry(metadata), context)));
+    }
+    /**
+     * @private
+     * @param {?} context
+     * @return {?}
+     */
+    _resetContextStyleTimingState(context) {
+        context.currentQuerySelector = ROOT_SELECTOR;
+        context.collectedStyles = {};
+        context.collectedStyles[ROOT_SELECTOR] = {};
+        context.currentTime = 0;
+    }
+    /**
+     * @param {?} metadata
+     * @param {?} context
+     * @return {?}
+     */
+    visitTrigger(metadata, context) {
+        /** @type {?} */
+        let queryCount = context.queryCount = 0;
+        /** @type {?} */
+        let depCount = context.depCount = 0;
+        /** @type {?} */
+        const states = [];
+        /** @type {?} */
+        const transitions = [];
+        if (metadata.name.charAt(0) == '@') {
+            context.errors.push('animation triggers cannot be prefixed with an `@` sign (e.g. trigger(\'@foo\', [...]))');
+        }
+        metadata.definitions.forEach((/**
+         * @param {?} def
+         * @return {?}
+         */
+        def => {
+            this._resetContextStyleTimingState(context);
+            if (def.type == 0 /* State */) {
+                /** @type {?} */
+                const stateDef = (/** @type {?} */ (def));
+                /** @type {?} */
+                const name = stateDef.name;
+                name.toString().split(/\s*,\s*/).forEach((/**
+                 * @param {?} n
+                 * @return {?}
+                 */
+                n => {
+                    stateDef.name = n;
+                    states.push(this.visitState(stateDef, context));
+                }));
+                stateDef.name = name;
+            }
+            else if (def.type == 1 /* Transition */) {
+                /** @type {?} */
+                const transition = this.visitTransition((/** @type {?} */ (def)), context);
+                queryCount += transition.queryCount;
+                depCount += transition.depCount;
+                transitions.push(transition);
+            }
+            else {
+                context.errors.push('only state() and transition() definitions can sit inside of a trigger()');
+            }
+        }));
+        return {
+            type: 7 /* Trigger */,
+            name: metadata.name, states, transitions, queryCount, depCount,
+            options: null
+        };
+    }
+    /**
+     * @param {?} metadata
+     * @param {?} context
+     * @return {?}
+     */
+    visitState(metadata, context) {
+        /** @type {?} */
+        const styleAst = this.visitStyle(metadata.styles, context);
+        /** @type {?} */
+        const astParams = (metadata.options && metadata.options.params) || null;
+        if (styleAst.containsDynamicStyles) {
+            /** @type {?} */
+            const missingSubs = new Set();
+            /** @type {?} */
+            const params = astParams || {};
+            styleAst.styles.forEach((/**
+             * @param {?} value
+             * @return {?}
+             */
+            value => {
+                if (isObject(value)) {
+                    /** @type {?} */
+                    const stylesObj = (/** @type {?} */ (value));
+                    Object.keys(stylesObj).forEach((/**
+                     * @param {?} prop
+                     * @return {?}
+                     */
+                    prop => {
+                        extractStyleParams(stylesObj[prop]).forEach((/**
+                         * @param {?} sub
+                         * @return {?}
+                         */
+                        sub => {
+                            if (!params.hasOwnProperty(sub)) {
+                                missingSubs.add(sub);
+                            }
+                        }));
+                    }));
+                }
+            }));
+            if (missingSubs.size) {
+                /** @type {?} */
+                const missingSubsArr = iteratorToArray(missingSubs.values());
+                context.errors.push(`state("${metadata.name}", ...) must define default values for all the following style substitutions: ${missingSubsArr.join(', ')}`);
+            }
+        }
+        return {
+            type: 0 /* State */,
+            name: metadata.name,
+            style: styleAst,
+            options: astParams ? { params: astParams } : null
+        };
+    }
+    /**
+     * @param {?} metadata
+     * @param {?} context
+     * @return {?}
+     */
+    visitTransition(metadata, context) {
+        context.queryCount = 0;
+        context.depCount = 0;
+        /** @type {?} */
+        const animation = visitDslNode(this, normalizeAnimationEntry(metadata.animation), context);
+        /** @type {?} */
+        const matchers = parseTransitionExpr(metadata.expr, context.errors);
+        return {
+            type: 1 /* Transition */,
+            matchers,
+            animation,
+            queryCount: context.queryCount,
+            depCount: context.depCount,
+            options: normalizeAnimationOptions(metadata.options)
+        };
+    }
+    /**
+     * @param {?} metadata
+     * @param {?} context
+     * @return {?}
+     */
+    visitSequence(metadata, context) {
+        return {
+            type: 2 /* Sequence */,
+            steps: metadata.steps.map((/**
+             * @param {?} s
+             * @return {?}
+             */
+            s => visitDslNode(this, s, context))),
+            options: normalizeAnimationOptions(metadata.options)
+        };
+    }
+    /**
+     * @param {?} metadata
+     * @param {?} context
+     * @return {?}
+     */
+    visitGroup(metadata, context) {
+        /** @type {?} */
+        const currentTime = context.currentTime;
+        /** @type {?} */
+        let furthestTime = 0;
+        /** @type {?} */
+        const steps = metadata.steps.map((/**
+         * @param {?} step
+         * @return {?}
+         */
+        step => {
+            context.currentTime = currentTime;
+            /** @type {?} */
+            const innerAst = visitDslNode(this, step, context);
+            furthestTime = Math.max(furthestTime, context.currentTime);
+            return innerAst;
+        }));
+        context.currentTime = furthestTime;
+        return {
+            type: 3 /* Group */,
+            steps,
+            options: normalizeAnimationOptions(metadata.options)
+        };
+    }
+    /**
+     * @param {?} metadata
+     * @param {?} context
+     * @return {?}
+     */
+    visitAnimate(metadata, context) {
+        /** @type {?} */
+        const timingAst = constructTimingAst(metadata.timings, context.errors);
+        context.currentAnimateTimings = timingAst;
+        /** @type {?} */
+        let styleAst;
+        /** @type {?} */
+        let styleMetadata = metadata.styles ? metadata.styles : Object(_angular_animations__WEBPACK_IMPORTED_MODULE_0__["style"])({});
+        if (styleMetadata.type == 5 /* Keyframes */) {
+            styleAst = this.visitKeyframes((/** @type {?} */ (styleMetadata)), context);
+        }
+        else {
+            /** @type {?} */
+            let styleMetadata = (/** @type {?} */ (metadata.styles));
+            /** @type {?} */
+            let isEmpty = false;
+            if (!styleMetadata) {
+                isEmpty = true;
+                /** @type {?} */
+                const newStyleData = {};
+                if (timingAst.easing) {
+                    newStyleData['easing'] = timingAst.easing;
+                }
+                styleMetadata = Object(_angular_animations__WEBPACK_IMPORTED_MODULE_0__["style"])(newStyleData);
+            }
+            context.currentTime += timingAst.duration + timingAst.delay;
+            /** @type {?} */
+            const _styleAst = this.visitStyle(styleMetadata, context);
+            _styleAst.isEmptyStep = isEmpty;
+            styleAst = _styleAst;
+        }
+        context.currentAnimateTimings = null;
+        return {
+            type: 4 /* Animate */,
+            timings: timingAst,
+            style: styleAst,
+            options: null
+        };
+    }
+    /**
+     * @param {?} metadata
+     * @param {?} context
+     * @return {?}
+     */
+    visitStyle(metadata, context) {
+        /** @type {?} */
+        const ast = this._makeStyleAst(metadata, context);
+        this._validateStyleAst(ast, context);
+        return ast;
+    }
+    /**
+     * @private
+     * @param {?} metadata
+     * @param {?} context
+     * @return {?}
+     */
+    _makeStyleAst(metadata, context) {
+        /** @type {?} */
+        const styles = [];
+        if (Array.isArray(metadata.styles)) {
+            ((/** @type {?} */ (metadata.styles))).forEach((/**
+             * @param {?} styleTuple
+             * @return {?}
+             */
+            styleTuple => {
+                if (typeof styleTuple == 'string') {
+                    if (styleTuple == _angular_animations__WEBPACK_IMPORTED_MODULE_0__["AUTO_STYLE"]) {
+                        styles.push((/** @type {?} */ (styleTuple)));
+                    }
+                    else {
+                        context.errors.push(`The provided style string value ${styleTuple} is not allowed.`);
+                    }
+                }
+                else {
+                    styles.push((/** @type {?} */ (styleTuple)));
+                }
+            }));
+        }
+        else {
+            styles.push(metadata.styles);
+        }
+        /** @type {?} */
+        let containsDynamicStyles = false;
+        /** @type {?} */
+        let collectedEasing = null;
+        styles.forEach((/**
+         * @param {?} styleData
+         * @return {?}
+         */
+        styleData => {
+            if (isObject(styleData)) {
+                /** @type {?} */
+                const styleMap = (/** @type {?} */ (styleData));
+                /** @type {?} */
+                const easing = styleMap['easing'];
+                if (easing) {
+                    collectedEasing = (/** @type {?} */ (easing));
+                    delete styleMap['easing'];
+                }
+                if (!containsDynamicStyles) {
+                    for (let prop in styleMap) {
+                        /** @type {?} */
+                        const value = styleMap[prop];
+                        if (value.toString().indexOf(SUBSTITUTION_EXPR_START) >= 0) {
+                            containsDynamicStyles = true;
+                            break;
+                        }
+                    }
+                }
+            }
+        }));
+        return {
+            type: 6 /* Style */,
+            styles,
+            easing: collectedEasing,
+            offset: metadata.offset, containsDynamicStyles,
+            options: null
+        };
+    }
+    /**
+     * @private
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    _validateStyleAst(ast, context) {
+        /** @type {?} */
+        const timings = context.currentAnimateTimings;
+        /** @type {?} */
+        let endTime = context.currentTime;
+        /** @type {?} */
+        let startTime = context.currentTime;
+        if (timings && startTime > 0) {
+            startTime -= timings.duration + timings.delay;
+        }
+        ast.styles.forEach((/**
+         * @param {?} tuple
+         * @return {?}
+         */
+        tuple => {
+            if (typeof tuple == 'string')
+                return;
+            Object.keys(tuple).forEach((/**
+             * @param {?} prop
+             * @return {?}
+             */
+            prop => {
+                if (!this._driver.validateStyleProperty(prop)) {
+                    context.errors.push(`The provided animation property "${prop}" is not a supported CSS property for animations`);
+                    return;
+                }
+                /** @type {?} */
+                const collectedStyles = context.collectedStyles[(/** @type {?} */ (context.currentQuerySelector))];
+                /** @type {?} */
+                const collectedEntry = collectedStyles[prop];
+                /** @type {?} */
+                let updateCollectedStyle = true;
+                if (collectedEntry) {
+                    if (startTime != endTime && startTime >= collectedEntry.startTime &&
+                        endTime <= collectedEntry.endTime) {
+                        context.errors.push(`The CSS property "${prop}" that exists between the times of "${collectedEntry.startTime}ms" and "${collectedEntry.endTime}ms" is also being animated in a parallel animation between the times of "${startTime}ms" and "${endTime}ms"`);
+                        updateCollectedStyle = false;
+                    }
+                    // we always choose the smaller start time value since we
+                    // want to have a record of the entire animation window where
+                    // the style property is being animated in between
+                    startTime = collectedEntry.startTime;
+                }
+                if (updateCollectedStyle) {
+                    collectedStyles[prop] = { startTime, endTime };
+                }
+                if (context.options) {
+                    validateStyleParams(tuple[prop], context.options, context.errors);
+                }
+            }));
+        }));
+    }
+    /**
+     * @param {?} metadata
+     * @param {?} context
+     * @return {?}
+     */
+    visitKeyframes(metadata, context) {
+        /** @type {?} */
+        const ast = { type: 5 /* Keyframes */, styles: [], options: null };
+        if (!context.currentAnimateTimings) {
+            context.errors.push(`keyframes() must be placed inside of a call to animate()`);
+            return ast;
+        }
+        /** @type {?} */
+        const MAX_KEYFRAME_OFFSET = 1;
+        /** @type {?} */
+        let totalKeyframesWithOffsets = 0;
+        /** @type {?} */
+        const offsets = [];
+        /** @type {?} */
+        let offsetsOutOfOrder = false;
+        /** @type {?} */
+        let keyframesOutOfRange = false;
+        /** @type {?} */
+        let previousOffset = 0;
+        /** @type {?} */
+        const keyframes = metadata.steps.map((/**
+         * @param {?} styles
+         * @return {?}
+         */
+        styles => {
+            /** @type {?} */
+            const style = this._makeStyleAst(styles, context);
+            /** @type {?} */
+            let offsetVal = style.offset != null ? style.offset : consumeOffset(style.styles);
+            /** @type {?} */
+            let offset = 0;
+            if (offsetVal != null) {
+                totalKeyframesWithOffsets++;
+                offset = style.offset = offsetVal;
+            }
+            keyframesOutOfRange = keyframesOutOfRange || offset < 0 || offset > 1;
+            offsetsOutOfOrder = offsetsOutOfOrder || offset < previousOffset;
+            previousOffset = offset;
+            offsets.push(offset);
+            return style;
+        }));
+        if (keyframesOutOfRange) {
+            context.errors.push(`Please ensure that all keyframe offsets are between 0 and 1`);
+        }
+        if (offsetsOutOfOrder) {
+            context.errors.push(`Please ensure that all keyframe offsets are in order`);
+        }
+        /** @type {?} */
+        const length = metadata.steps.length;
+        /** @type {?} */
+        let generatedOffset = 0;
+        if (totalKeyframesWithOffsets > 0 && totalKeyframesWithOffsets < length) {
+            context.errors.push(`Not all style() steps within the declared keyframes() contain offsets`);
+        }
+        else if (totalKeyframesWithOffsets == 0) {
+            generatedOffset = MAX_KEYFRAME_OFFSET / (length - 1);
+        }
+        /** @type {?} */
+        const limit = length - 1;
+        /** @type {?} */
+        const currentTime = context.currentTime;
+        /** @type {?} */
+        const currentAnimateTimings = (/** @type {?} */ (context.currentAnimateTimings));
+        /** @type {?} */
+        const animateDuration = currentAnimateTimings.duration;
+        keyframes.forEach((/**
+         * @param {?} kf
+         * @param {?} i
+         * @return {?}
+         */
+        (kf, i) => {
+            /** @type {?} */
+            const offset = generatedOffset > 0 ? (i == limit ? 1 : (generatedOffset * i)) : offsets[i];
+            /** @type {?} */
+            const durationUpToThisFrame = offset * animateDuration;
+            context.currentTime = currentTime + currentAnimateTimings.delay + durationUpToThisFrame;
+            currentAnimateTimings.duration = durationUpToThisFrame;
+            this._validateStyleAst(kf, context);
+            kf.offset = offset;
+            ast.styles.push(kf);
+        }));
+        return ast;
+    }
+    /**
+     * @param {?} metadata
+     * @param {?} context
+     * @return {?}
+     */
+    visitReference(metadata, context) {
+        return {
+            type: 8 /* Reference */,
+            animation: visitDslNode(this, normalizeAnimationEntry(metadata.animation), context),
+            options: normalizeAnimationOptions(metadata.options)
+        };
+    }
+    /**
+     * @param {?} metadata
+     * @param {?} context
+     * @return {?}
+     */
+    visitAnimateChild(metadata, context) {
+        context.depCount++;
+        return {
+            type: 9 /* AnimateChild */,
+            options: normalizeAnimationOptions(metadata.options)
+        };
+    }
+    /**
+     * @param {?} metadata
+     * @param {?} context
+     * @return {?}
+     */
+    visitAnimateRef(metadata, context) {
+        return {
+            type: 10 /* AnimateRef */,
+            animation: this.visitReference(metadata.animation, context),
+            options: normalizeAnimationOptions(metadata.options)
+        };
+    }
+    /**
+     * @param {?} metadata
+     * @param {?} context
+     * @return {?}
+     */
+    visitQuery(metadata, context) {
+        /** @type {?} */
+        const parentSelector = (/** @type {?} */ (context.currentQuerySelector));
+        /** @type {?} */
+        const options = (/** @type {?} */ ((metadata.options || {})));
+        context.queryCount++;
+        context.currentQuery = metadata;
+        const [selector, includeSelf] = normalizeSelector(metadata.selector);
+        context.currentQuerySelector =
+            parentSelector.length ? (parentSelector + ' ' + selector) : selector;
+        getOrSetAsInMap(context.collectedStyles, context.currentQuerySelector, {});
+        /** @type {?} */
+        const animation = visitDslNode(this, normalizeAnimationEntry(metadata.animation), context);
+        context.currentQuery = null;
+        context.currentQuerySelector = parentSelector;
+        return {
+            type: 11 /* Query */,
+            selector,
+            limit: options.limit || 0,
+            optional: !!options.optional, includeSelf, animation,
+            originalSelector: metadata.selector,
+            options: normalizeAnimationOptions(metadata.options)
+        };
+    }
+    /**
+     * @param {?} metadata
+     * @param {?} context
+     * @return {?}
+     */
+    visitStagger(metadata, context) {
+        if (!context.currentQuery) {
+            context.errors.push(`stagger() can only be used inside of query()`);
+        }
+        /** @type {?} */
+        const timings = metadata.timings === 'full' ?
+            { duration: 0, delay: 0, easing: 'full' } :
+            resolveTiming(metadata.timings, context.errors, true);
+        return {
+            type: 12 /* Stagger */,
+            animation: visitDslNode(this, normalizeAnimationEntry(metadata.animation), context), timings,
+            options: null
+        };
+    }
+}
+if (false) {}
+/**
+ * @param {?} selector
+ * @return {?}
+ */
+function normalizeSelector(selector) {
+    /** @type {?} */
+    const hasAmpersand = selector.split(/\s*,\s*/).find((/**
+     * @param {?} token
+     * @return {?}
+     */
+    token => token == SELF_TOKEN)) ? true : false;
+    if (hasAmpersand) {
+        selector = selector.replace(SELF_TOKEN_REGEX, '');
+    }
+    // the :enter and :leave selectors are filled in at runtime during timeline building
+    selector = selector.replace(/@\*/g, NG_TRIGGER_SELECTOR)
+        .replace(/@\w+/g, (/**
+     * @param {?} match
+     * @return {?}
+     */
+    match => NG_TRIGGER_SELECTOR + '-' + match.substr(1)))
+        .replace(/:animating/g, NG_ANIMATING_SELECTOR);
+    return [selector, hasAmpersand];
+}
+/**
+ * @param {?} obj
+ * @return {?}
+ */
+function normalizeParams(obj) {
+    return obj ? copyObj(obj) : null;
+}
+class AnimationAstBuilderContext {
+    /**
+     * @param {?} errors
+     */
+    constructor(errors) {
+        this.errors = errors;
+        this.queryCount = 0;
+        this.depCount = 0;
+        this.currentTransition = null;
+        this.currentQuery = null;
+        this.currentQuerySelector = null;
+        this.currentAnimateTimings = null;
+        this.currentTime = 0;
+        this.collectedStyles = {};
+        this.options = null;
+    }
+}
+if (false) {}
+/**
+ * @param {?} styles
+ * @return {?}
+ */
+function consumeOffset(styles) {
+    if (typeof styles == 'string')
+        return null;
+    /** @type {?} */
+    let offset = null;
+    if (Array.isArray(styles)) {
+        styles.forEach((/**
+         * @param {?} styleTuple
+         * @return {?}
+         */
+        styleTuple => {
+            if (isObject(styleTuple) && styleTuple.hasOwnProperty('offset')) {
+                /** @type {?} */
+                const obj = (/** @type {?} */ (styleTuple));
+                offset = parseFloat((/** @type {?} */ (obj['offset'])));
+                delete obj['offset'];
+            }
+        }));
+    }
+    else if (isObject(styles) && styles.hasOwnProperty('offset')) {
+        /** @type {?} */
+        const obj = (/** @type {?} */ (styles));
+        offset = parseFloat((/** @type {?} */ (obj['offset'])));
+        delete obj['offset'];
+    }
+    return offset;
+}
+/**
+ * @param {?} value
+ * @return {?}
+ */
+function isObject(value) {
+    return !Array.isArray(value) && typeof value == 'object';
+}
+/**
+ * @param {?} value
+ * @param {?} errors
+ * @return {?}
+ */
+function constructTimingAst(value, errors) {
+    /** @type {?} */
+    let timings = null;
+    if (value.hasOwnProperty('duration')) {
+        timings = (/** @type {?} */ (value));
+    }
+    else if (typeof value == 'number') {
+        /** @type {?} */
+        const duration = resolveTiming((/** @type {?} */ (value)), errors).duration;
+        return makeTimingAst((/** @type {?} */ (duration)), 0, '');
+    }
+    /** @type {?} */
+    const strValue = (/** @type {?} */ (value));
+    /** @type {?} */
+    const isDynamic = strValue.split(/\s+/).some((/**
+     * @param {?} v
+     * @return {?}
+     */
+    v => v.charAt(0) == '{' && v.charAt(1) == '{'));
+    if (isDynamic) {
+        /** @type {?} */
+        const ast = (/** @type {?} */ (makeTimingAst(0, 0, '')));
+        ast.dynamic = true;
+        ast.strValue = strValue;
+        return (/** @type {?} */ (ast));
+    }
+    timings = timings || resolveTiming(strValue, errors);
+    return makeTimingAst(timings.duration, timings.delay, timings.easing);
+}
+/**
+ * @param {?} options
+ * @return {?}
+ */
+function normalizeAnimationOptions(options) {
+    if (options) {
+        options = copyObj(options);
+        if (options['params']) {
+            options['params'] = (/** @type {?} */ (normalizeParams(options['params'])));
+        }
+    }
+    else {
+        options = {};
+    }
+    return options;
+}
+/**
+ * @param {?} duration
+ * @param {?} delay
+ * @param {?} easing
+ * @return {?}
+ */
+function makeTimingAst(duration, delay, easing) {
+    return { duration, delay, easing };
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+function AnimationTimelineInstruction() { }
+if (false) {}
+/**
+ * @param {?} element
+ * @param {?} keyframes
+ * @param {?} preStyleProps
+ * @param {?} postStyleProps
+ * @param {?} duration
+ * @param {?} delay
+ * @param {?=} easing
+ * @param {?=} subTimeline
+ * @return {?}
+ */
+function createTimelineInstruction(element, keyframes, preStyleProps, postStyleProps, duration, delay, easing = null, subTimeline = false) {
+    return {
+        type: 1 /* TimelineAnimation */,
+        element,
+        keyframes,
+        preStyleProps,
+        postStyleProps,
+        duration,
+        delay,
+        totalTime: duration + delay, easing, subTimeline
+    };
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class ElementInstructionMap {
+    constructor() {
+        this._map = new Map();
+    }
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    consume(element) {
+        /** @type {?} */
+        let instructions = this._map.get(element);
+        if (instructions) {
+            this._map.delete(element);
+        }
+        else {
+            instructions = [];
+        }
+        return instructions;
+    }
+    /**
+     * @param {?} element
+     * @param {?} instructions
+     * @return {?}
+     */
+    append(element, instructions) {
+        /** @type {?} */
+        let existingInstructions = this._map.get(element);
+        if (!existingInstructions) {
+            this._map.set(element, existingInstructions = []);
+        }
+        existingInstructions.push(...instructions);
+    }
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    has(element) { return this._map.has(element); }
+    /**
+     * @return {?}
+     */
+    clear() { this._map.clear(); }
+}
+if (false) {}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+const ONE_FRAME_IN_MILLISECONDS = 1;
+/** @type {?} */
+const ENTER_TOKEN = ':enter';
+/** @type {?} */
+const ENTER_TOKEN_REGEX = new RegExp(ENTER_TOKEN, 'g');
+/** @type {?} */
+const LEAVE_TOKEN = ':leave';
+/** @type {?} */
+const LEAVE_TOKEN_REGEX = new RegExp(LEAVE_TOKEN, 'g');
+/*
+ * The code within this file aims to generate web-animations-compatible keyframes from Angular's
+ * animation DSL code.
+ *
+ * The code below will be converted from:
+ *
+ * ```
+ * sequence([
+ *   style({ opacity: 0 }),
+ *   animate(1000, style({ opacity: 0 }))
+ * ])
+ * ```
+ *
+ * To:
+ * ```
+ * keyframes = [{ opacity: 0, offset: 0 }, { opacity: 1, offset: 1 }]
+ * duration = 1000
+ * delay = 0
+ * easing = ''
+ * ```
+ *
+ * For this operation to cover the combination of animation verbs (style, animate, group, etc...) a
+ * combination of prototypical inheritance, AST traversal and merge-sort-like algorithms are used.
+ *
+ * [AST Traversal]
+ * Each of the animation verbs, when executed, will return an string-map object representing what
+ * type of action it is (style, animate, group, etc...) and the data associated with it. This means
+ * that when functional composition mix of these functions is evaluated (like in the example above)
+ * then it will end up producing a tree of objects representing the animation itself.
+ *
+ * When this animation object tree is processed by the visitor code below it will visit each of the
+ * verb statements within the visitor. And during each visit it will build the context of the
+ * animation keyframes by interacting with the `TimelineBuilder`.
+ *
+ * [TimelineBuilder]
+ * This class is responsible for tracking the styles and building a series of keyframe objects for a
+ * timeline between a start and end time. The builder starts off with an initial timeline and each
+ * time the AST comes across a `group()`, `keyframes()` or a combination of the two wihtin a
+ * `sequence()` then it will generate a sub timeline for each step as well as a new one after
+ * they are complete.
+ *
+ * As the AST is traversed, the timing state on each of the timelines will be incremented. If a sub
+ * timeline was created (based on one of the cases above) then the parent timeline will attempt to
+ * merge the styles used within the sub timelines into itself (only with group() this will happen).
+ * This happens with a merge operation (much like how the merge works in mergesort) and it will only
+ * copy the most recently used styles from the sub timelines into the parent timeline. This ensures
+ * that if the styles are used later on in another phase of the animation then they will be the most
+ * up-to-date values.
+ *
+ * [How Missing Styles Are Updated]
+ * Each timeline has a `backFill` property which is responsible for filling in new styles into
+ * already processed keyframes if a new style shows up later within the animation sequence.
+ *
+ * ```
+ * sequence([
+ *   style({ width: 0 }),
+ *   animate(1000, style({ width: 100 })),
+ *   animate(1000, style({ width: 200 })),
+ *   animate(1000, style({ width: 300 }))
+ *   animate(1000, style({ width: 400, height: 400 })) // notice how `height` doesn't exist anywhere
+ * else
+ * ])
+ * ```
+ *
+ * What is happening here is that the `height` value is added later in the sequence, but is missing
+ * from all previous animation steps. Therefore when a keyframe is created it would also be missing
+ * from all previous keyframes up until where it is first used. For the timeline keyframe generation
+ * to properly fill in the style it will place the previous value (the value from the parent
+ * timeline) or a default value of `*` into the backFill object. Given that each of the keyframe
+ * styles are objects that prototypically inhert from the backFill object, this means that if a
+ * value is added into the backFill then it will automatically propagate any missing values to all
+ * keyframes. Therefore the missing `height` value will be properly filled into the already
+ * processed keyframes.
+ *
+ * When a sub-timeline is created it will have its own backFill property. This is done so that
+ * styles present within the sub-timeline do not accidentally seep into the previous/future timeline
+ * keyframes
+ *
+ * (For prototypically-inherited contents to be detected a `for(i in obj)` loop must be used.)
+ *
+ * [Validation]
+ * The code in this file is not responsible for validation. That functionality happens with within
+ * the `AnimationValidatorVisitor` code.
+ */
+/**
+ * @param {?} driver
+ * @param {?} rootElement
+ * @param {?} ast
+ * @param {?} enterClassName
+ * @param {?} leaveClassName
+ * @param {?=} startingStyles
+ * @param {?=} finalStyles
+ * @param {?=} options
+ * @param {?=} subInstructions
+ * @param {?=} errors
+ * @return {?}
+ */
+function buildAnimationTimelines(driver, rootElement, ast, enterClassName, leaveClassName, startingStyles = {}, finalStyles = {}, options, subInstructions, errors = []) {
+    return new AnimationTimelineBuilderVisitor().buildKeyframes(driver, rootElement, ast, enterClassName, leaveClassName, startingStyles, finalStyles, options, subInstructions, errors);
+}
+class AnimationTimelineBuilderVisitor {
+    /**
+     * @param {?} driver
+     * @param {?} rootElement
+     * @param {?} ast
+     * @param {?} enterClassName
+     * @param {?} leaveClassName
+     * @param {?} startingStyles
+     * @param {?} finalStyles
+     * @param {?} options
+     * @param {?=} subInstructions
+     * @param {?=} errors
+     * @return {?}
+     */
+    buildKeyframes(driver, rootElement, ast, enterClassName, leaveClassName, startingStyles, finalStyles, options, subInstructions, errors = []) {
+        subInstructions = subInstructions || new ElementInstructionMap();
+        /** @type {?} */
+        const context = new AnimationTimelineContext(driver, rootElement, subInstructions, enterClassName, leaveClassName, errors, []);
+        context.options = options;
+        context.currentTimeline.setStyles([startingStyles], null, context.errors, options);
+        visitDslNode(this, ast, context);
+        // this checks to see if an actual animation happened
+        /** @type {?} */
+        const timelines = context.timelines.filter((/**
+         * @param {?} timeline
+         * @return {?}
+         */
+        timeline => timeline.containsAnimation()));
+        if (timelines.length && Object.keys(finalStyles).length) {
+            /** @type {?} */
+            const tl = timelines[timelines.length - 1];
+            if (!tl.allowOnlyTimelineStyles()) {
+                tl.setStyles([finalStyles], null, context.errors, options);
+            }
+        }
+        return timelines.length ? timelines.map((/**
+         * @param {?} timeline
+         * @return {?}
+         */
+        timeline => timeline.buildKeyframes())) :
+            [createTimelineInstruction(rootElement, [], [], [], 0, 0, '', false)];
+    }
+    /**
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    visitTrigger(ast, context) {
+        // these values are not visited in this AST
+    }
+    /**
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    visitState(ast, context) {
+        // these values are not visited in this AST
+    }
+    /**
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    visitTransition(ast, context) {
+        // these values are not visited in this AST
+    }
+    /**
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    visitAnimateChild(ast, context) {
+        /** @type {?} */
+        const elementInstructions = context.subInstructions.consume(context.element);
+        if (elementInstructions) {
+            /** @type {?} */
+            const innerContext = context.createSubContext(ast.options);
+            /** @type {?} */
+            const startTime = context.currentTimeline.currentTime;
+            /** @type {?} */
+            const endTime = this._visitSubInstructions(elementInstructions, innerContext, (/** @type {?} */ (innerContext.options)));
+            if (startTime != endTime) {
+                // we do this on the upper context because we created a sub context for
+                // the sub child animations
+                context.transformIntoNewTimeline(endTime);
+            }
+        }
+        context.previousNode = ast;
+    }
+    /**
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    visitAnimateRef(ast, context) {
+        /** @type {?} */
+        const innerContext = context.createSubContext(ast.options);
+        innerContext.transformIntoNewTimeline();
+        this.visitReference(ast.animation, innerContext);
+        context.transformIntoNewTimeline(innerContext.currentTimeline.currentTime);
+        context.previousNode = ast;
+    }
+    /**
+     * @private
+     * @param {?} instructions
+     * @param {?} context
+     * @param {?} options
+     * @return {?}
+     */
+    _visitSubInstructions(instructions, context, options) {
+        /** @type {?} */
+        const startTime = context.currentTimeline.currentTime;
+        /** @type {?} */
+        let furthestTime = startTime;
+        // this is a special-case for when a user wants to skip a sub
+        // animation from being fired entirely.
+        /** @type {?} */
+        const duration = options.duration != null ? resolveTimingValue(options.duration) : null;
+        /** @type {?} */
+        const delay = options.delay != null ? resolveTimingValue(options.delay) : null;
+        if (duration !== 0) {
+            instructions.forEach((/**
+             * @param {?} instruction
+             * @return {?}
+             */
+            instruction => {
+                /** @type {?} */
+                const instructionTimings = context.appendInstructionToTimeline(instruction, duration, delay);
+                furthestTime =
+                    Math.max(furthestTime, instructionTimings.duration + instructionTimings.delay);
+            }));
+        }
+        return furthestTime;
+    }
+    /**
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    visitReference(ast, context) {
+        context.updateOptions(ast.options, true);
+        visitDslNode(this, ast.animation, context);
+        context.previousNode = ast;
+    }
+    /**
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    visitSequence(ast, context) {
+        /** @type {?} */
+        const subContextCount = context.subContextCount;
+        /** @type {?} */
+        let ctx = context;
+        /** @type {?} */
+        const options = ast.options;
+        if (options && (options.params || options.delay)) {
+            ctx = context.createSubContext(options);
+            ctx.transformIntoNewTimeline();
+            if (options.delay != null) {
+                if (ctx.previousNode.type == 6 /* Style */) {
+                    ctx.currentTimeline.snapshotCurrentStyles();
+                    ctx.previousNode = DEFAULT_NOOP_PREVIOUS_NODE;
+                }
+                /** @type {?} */
+                const delay = resolveTimingValue(options.delay);
+                ctx.delayNextStep(delay);
+            }
+        }
+        if (ast.steps.length) {
+            ast.steps.forEach((/**
+             * @param {?} s
+             * @return {?}
+             */
+            s => visitDslNode(this, s, ctx)));
+            // this is here just incase the inner steps only contain or end with a style() call
+            ctx.currentTimeline.applyStylesToKeyframe();
+            // this means that some animation function within the sequence
+            // ended up creating a sub timeline (which means the current
+            // timeline cannot overlap with the contents of the sequence)
+            if (ctx.subContextCount > subContextCount) {
+                ctx.transformIntoNewTimeline();
+            }
+        }
+        context.previousNode = ast;
+    }
+    /**
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    visitGroup(ast, context) {
+        /** @type {?} */
+        const innerTimelines = [];
+        /** @type {?} */
+        let furthestTime = context.currentTimeline.currentTime;
+        /** @type {?} */
+        const delay = ast.options && ast.options.delay ? resolveTimingValue(ast.options.delay) : 0;
+        ast.steps.forEach((/**
+         * @param {?} s
+         * @return {?}
+         */
+        s => {
+            /** @type {?} */
+            const innerContext = context.createSubContext(ast.options);
+            if (delay) {
+                innerContext.delayNextStep(delay);
+            }
+            visitDslNode(this, s, innerContext);
+            furthestTime = Math.max(furthestTime, innerContext.currentTimeline.currentTime);
+            innerTimelines.push(innerContext.currentTimeline);
+        }));
+        // this operation is run after the AST loop because otherwise
+        // if the parent timeline's collected styles were updated then
+        // it would pass in invalid data into the new-to-be forked items
+        innerTimelines.forEach((/**
+         * @param {?} timeline
+         * @return {?}
+         */
+        timeline => context.currentTimeline.mergeTimelineCollectedStyles(timeline)));
+        context.transformIntoNewTimeline(furthestTime);
+        context.previousNode = ast;
+    }
+    /**
+     * @private
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    _visitTiming(ast, context) {
+        if (((/** @type {?} */ (ast))).dynamic) {
+            /** @type {?} */
+            const strValue = ((/** @type {?} */ (ast))).strValue;
+            /** @type {?} */
+            const timingValue = context.params ? interpolateParams(strValue, context.params, context.errors) : strValue;
+            return resolveTiming(timingValue, context.errors);
+        }
+        else {
+            return { duration: ast.duration, delay: ast.delay, easing: ast.easing };
+        }
+    }
+    /**
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    visitAnimate(ast, context) {
+        /** @type {?} */
+        const timings = context.currentAnimateTimings = this._visitTiming(ast.timings, context);
+        /** @type {?} */
+        const timeline = context.currentTimeline;
+        if (timings.delay) {
+            context.incrementTime(timings.delay);
+            timeline.snapshotCurrentStyles();
+        }
+        /** @type {?} */
+        const style = ast.style;
+        if (style.type == 5 /* Keyframes */) {
+            this.visitKeyframes(style, context);
+        }
+        else {
+            context.incrementTime(timings.duration);
+            this.visitStyle((/** @type {?} */ (style)), context);
+            timeline.applyStylesToKeyframe();
+        }
+        context.currentAnimateTimings = null;
+        context.previousNode = ast;
+    }
+    /**
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    visitStyle(ast, context) {
+        /** @type {?} */
+        const timeline = context.currentTimeline;
+        /** @type {?} */
+        const timings = (/** @type {?} */ (context.currentAnimateTimings));
+        // this is a special case for when a style() call
+        // directly follows  an animate() call (but not inside of an animate() call)
+        if (!timings && timeline.getCurrentStyleProperties().length) {
+            timeline.forwardFrame();
+        }
+        /** @type {?} */
+        const easing = (timings && timings.easing) || ast.easing;
+        if (ast.isEmptyStep) {
+            timeline.applyEmptyStep(easing);
+        }
+        else {
+            timeline.setStyles(ast.styles, easing, context.errors, context.options);
+        }
+        context.previousNode = ast;
+    }
+    /**
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    visitKeyframes(ast, context) {
+        /** @type {?} */
+        const currentAnimateTimings = (/** @type {?} */ (context.currentAnimateTimings));
+        /** @type {?} */
+        const startTime = ((/** @type {?} */ (context.currentTimeline))).duration;
+        /** @type {?} */
+        const duration = currentAnimateTimings.duration;
+        /** @type {?} */
+        const innerContext = context.createSubContext();
+        /** @type {?} */
+        const innerTimeline = innerContext.currentTimeline;
+        innerTimeline.easing = currentAnimateTimings.easing;
+        ast.styles.forEach((/**
+         * @param {?} step
+         * @return {?}
+         */
+        step => {
+            /** @type {?} */
+            const offset = step.offset || 0;
+            innerTimeline.forwardTime(offset * duration);
+            innerTimeline.setStyles(step.styles, step.easing, context.errors, context.options);
+            innerTimeline.applyStylesToKeyframe();
+        }));
+        // this will ensure that the parent timeline gets all the styles from
+        // the child even if the new timeline below is not used
+        context.currentTimeline.mergeTimelineCollectedStyles(innerTimeline);
+        // we do this because the window between this timeline and the sub timeline
+        // should ensure that the styles within are exactly the same as they were before
+        context.transformIntoNewTimeline(startTime + duration);
+        context.previousNode = ast;
+    }
+    /**
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    visitQuery(ast, context) {
+        // in the event that the first step before this is a style step we need
+        // to ensure the styles are applied before the children are animated
+        /** @type {?} */
+        const startTime = context.currentTimeline.currentTime;
+        /** @type {?} */
+        const options = (/** @type {?} */ ((ast.options || {})));
+        /** @type {?} */
+        const delay = options.delay ? resolveTimingValue(options.delay) : 0;
+        if (delay && (context.previousNode.type === 6 /* Style */ ||
+            (startTime == 0 && context.currentTimeline.getCurrentStyleProperties().length))) {
+            context.currentTimeline.snapshotCurrentStyles();
+            context.previousNode = DEFAULT_NOOP_PREVIOUS_NODE;
+        }
+        /** @type {?} */
+        let furthestTime = startTime;
+        /** @type {?} */
+        const elms = context.invokeQuery(ast.selector, ast.originalSelector, ast.limit, ast.includeSelf, options.optional ? true : false, context.errors);
+        context.currentQueryTotal = elms.length;
+        /** @type {?} */
+        let sameElementTimeline = null;
+        elms.forEach((/**
+         * @param {?} element
+         * @param {?} i
+         * @return {?}
+         */
+        (element, i) => {
+            context.currentQueryIndex = i;
+            /** @type {?} */
+            const innerContext = context.createSubContext(ast.options, element);
+            if (delay) {
+                innerContext.delayNextStep(delay);
+            }
+            if (element === context.element) {
+                sameElementTimeline = innerContext.currentTimeline;
+            }
+            visitDslNode(this, ast.animation, innerContext);
+            // this is here just incase the inner steps only contain or end
+            // with a style() call (which is here to signal that this is a preparatory
+            // call to style an element before it is animated again)
+            innerContext.currentTimeline.applyStylesToKeyframe();
+            /** @type {?} */
+            const endTime = innerContext.currentTimeline.currentTime;
+            furthestTime = Math.max(furthestTime, endTime);
+        }));
+        context.currentQueryIndex = 0;
+        context.currentQueryTotal = 0;
+        context.transformIntoNewTimeline(furthestTime);
+        if (sameElementTimeline) {
+            context.currentTimeline.mergeTimelineCollectedStyles(sameElementTimeline);
+            context.currentTimeline.snapshotCurrentStyles();
+        }
+        context.previousNode = ast;
+    }
+    /**
+     * @param {?} ast
+     * @param {?} context
+     * @return {?}
+     */
+    visitStagger(ast, context) {
+        /** @type {?} */
+        const parentContext = (/** @type {?} */ (context.parentContext));
+        /** @type {?} */
+        const tl = context.currentTimeline;
+        /** @type {?} */
+        const timings = ast.timings;
+        /** @type {?} */
+        const duration = Math.abs(timings.duration);
+        /** @type {?} */
+        const maxTime = duration * (context.currentQueryTotal - 1);
+        /** @type {?} */
+        let delay = duration * context.currentQueryIndex;
+        /** @type {?} */
+        let staggerTransformer = timings.duration < 0 ? 'reverse' : timings.easing;
+        switch (staggerTransformer) {
+            case 'reverse':
+                delay = maxTime - delay;
+                break;
+            case 'full':
+                delay = parentContext.currentStaggerTime;
+                break;
+        }
+        /** @type {?} */
+        const timeline = context.currentTimeline;
+        if (delay) {
+            timeline.delayNextStep(delay);
+        }
+        /** @type {?} */
+        const startingTime = timeline.currentTime;
+        visitDslNode(this, ast.animation, context);
+        context.previousNode = ast;
+        // time = duration + delay
+        // the reason why this computation is so complex is because
+        // the inner timeline may either have a delay value or a stretched
+        // keyframe depending on if a subtimeline is not used or is used.
+        parentContext.currentStaggerTime =
+            (tl.currentTime - startingTime) + (tl.startTime - parentContext.currentTimeline.startTime);
+    }
+}
+/** @type {?} */
+const DEFAULT_NOOP_PREVIOUS_NODE = (/** @type {?} */ ({}));
+class AnimationTimelineContext {
+    /**
+     * @param {?} _driver
+     * @param {?} element
+     * @param {?} subInstructions
+     * @param {?} _enterClassName
+     * @param {?} _leaveClassName
+     * @param {?} errors
+     * @param {?} timelines
+     * @param {?=} initialTimeline
+     */
+    constructor(_driver, element, subInstructions, _enterClassName, _leaveClassName, errors, timelines, initialTimeline) {
+        this._driver = _driver;
+        this.element = element;
+        this.subInstructions = subInstructions;
+        this._enterClassName = _enterClassName;
+        this._leaveClassName = _leaveClassName;
+        this.errors = errors;
+        this.timelines = timelines;
+        this.parentContext = null;
+        this.currentAnimateTimings = null;
+        this.previousNode = DEFAULT_NOOP_PREVIOUS_NODE;
+        this.subContextCount = 0;
+        this.options = {};
+        this.currentQueryIndex = 0;
+        this.currentQueryTotal = 0;
+        this.currentStaggerTime = 0;
+        this.currentTimeline = initialTimeline || new TimelineBuilder(this._driver, element, 0);
+        timelines.push(this.currentTimeline);
+    }
+    /**
+     * @return {?}
+     */
+    get params() { return this.options.params; }
+    /**
+     * @param {?} options
+     * @param {?=} skipIfExists
+     * @return {?}
+     */
+    updateOptions(options, skipIfExists) {
+        if (!options)
+            return;
+        /** @type {?} */
+        const newOptions = (/** @type {?} */ (options));
+        /** @type {?} */
+        let optionsToUpdate = this.options;
+        // NOTE: this will get patched up when other animation methods support duration overrides
+        if (newOptions.duration != null) {
+            ((/** @type {?} */ (optionsToUpdate))).duration = resolveTimingValue(newOptions.duration);
+        }
+        if (newOptions.delay != null) {
+            optionsToUpdate.delay = resolveTimingValue(newOptions.delay);
+        }
+        /** @type {?} */
+        const newParams = newOptions.params;
+        if (newParams) {
+            /** @type {?} */
+            let paramsToUpdate = (/** @type {?} */ (optionsToUpdate.params));
+            if (!paramsToUpdate) {
+                paramsToUpdate = this.options.params = {};
+            }
+            Object.keys(newParams).forEach((/**
+             * @param {?} name
+             * @return {?}
+             */
+            name => {
+                if (!skipIfExists || !paramsToUpdate.hasOwnProperty(name)) {
+                    paramsToUpdate[name] = interpolateParams(newParams[name], paramsToUpdate, this.errors);
+                }
+            }));
+        }
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    _copyOptions() {
+        /** @type {?} */
+        const options = {};
+        if (this.options) {
+            /** @type {?} */
+            const oldParams = this.options.params;
+            if (oldParams) {
+                /** @type {?} */
+                const params = options['params'] = {};
+                Object.keys(oldParams).forEach((/**
+                 * @param {?} name
+                 * @return {?}
+                 */
+                name => { params[name] = oldParams[name]; }));
+            }
+        }
+        return options;
+    }
+    /**
+     * @param {?=} options
+     * @param {?=} element
+     * @param {?=} newTime
+     * @return {?}
+     */
+    createSubContext(options = null, element, newTime) {
+        /** @type {?} */
+        const target = element || this.element;
+        /** @type {?} */
+        const context = new AnimationTimelineContext(this._driver, target, this.subInstructions, this._enterClassName, this._leaveClassName, this.errors, this.timelines, this.currentTimeline.fork(target, newTime || 0));
+        context.previousNode = this.previousNode;
+        context.currentAnimateTimings = this.currentAnimateTimings;
+        context.options = this._copyOptions();
+        context.updateOptions(options);
+        context.currentQueryIndex = this.currentQueryIndex;
+        context.currentQueryTotal = this.currentQueryTotal;
+        context.parentContext = this;
+        this.subContextCount++;
+        return context;
+    }
+    /**
+     * @param {?=} newTime
+     * @return {?}
+     */
+    transformIntoNewTimeline(newTime) {
+        this.previousNode = DEFAULT_NOOP_PREVIOUS_NODE;
+        this.currentTimeline = this.currentTimeline.fork(this.element, newTime);
+        this.timelines.push(this.currentTimeline);
+        return this.currentTimeline;
+    }
+    /**
+     * @param {?} instruction
+     * @param {?} duration
+     * @param {?} delay
+     * @return {?}
+     */
+    appendInstructionToTimeline(instruction, duration, delay) {
+        /** @type {?} */
+        const updatedTimings = {
+            duration: duration != null ? duration : instruction.duration,
+            delay: this.currentTimeline.currentTime + (delay != null ? delay : 0) + instruction.delay,
+            easing: ''
+        };
+        /** @type {?} */
+        const builder = new SubTimelineBuilder(this._driver, instruction.element, instruction.keyframes, instruction.preStyleProps, instruction.postStyleProps, updatedTimings, instruction.stretchStartingKeyframe);
+        this.timelines.push(builder);
+        return updatedTimings;
+    }
+    /**
+     * @param {?} time
+     * @return {?}
+     */
+    incrementTime(time) {
+        this.currentTimeline.forwardTime(this.currentTimeline.duration + time);
+    }
+    /**
+     * @param {?} delay
+     * @return {?}
+     */
+    delayNextStep(delay) {
+        // negative delays are not yet supported
+        if (delay > 0) {
+            this.currentTimeline.delayNextStep(delay);
+        }
+    }
+    /**
+     * @param {?} selector
+     * @param {?} originalSelector
+     * @param {?} limit
+     * @param {?} includeSelf
+     * @param {?} optional
+     * @param {?} errors
+     * @return {?}
+     */
+    invokeQuery(selector, originalSelector, limit, includeSelf, optional, errors) {
+        /** @type {?} */
+        let results = [];
+        if (includeSelf) {
+            results.push(this.element);
+        }
+        if (selector.length > 0) { // if :self is only used then the selector is empty
+            selector = selector.replace(ENTER_TOKEN_REGEX, '.' + this._enterClassName);
+            selector = selector.replace(LEAVE_TOKEN_REGEX, '.' + this._leaveClassName);
+            /** @type {?} */
+            const multi = limit != 1;
+            /** @type {?} */
+            let elements = this._driver.query(this.element, selector, multi);
+            if (limit !== 0) {
+                elements = limit < 0 ? elements.slice(elements.length + limit, elements.length) :
+                    elements.slice(0, limit);
+            }
+            results.push(...elements);
+        }
+        if (!optional && results.length == 0) {
+            errors.push(`\`query("${originalSelector}")\` returned zero elements. (Use \`query("${originalSelector}", { optional: true })\` if you wish to allow this.)`);
+        }
+        return results;
+    }
+}
+if (false) {}
+class TimelineBuilder {
+    /**
+     * @param {?} _driver
+     * @param {?} element
+     * @param {?} startTime
+     * @param {?=} _elementTimelineStylesLookup
+     */
+    constructor(_driver, element, startTime, _elementTimelineStylesLookup) {
+        this._driver = _driver;
+        this.element = element;
+        this.startTime = startTime;
+        this._elementTimelineStylesLookup = _elementTimelineStylesLookup;
+        this.duration = 0;
+        this._previousKeyframe = {};
+        this._currentKeyframe = {};
+        this._keyframes = new Map();
+        this._styleSummary = {};
+        this._pendingStyles = {};
+        this._backFill = {};
+        this._currentEmptyStepKeyframe = null;
+        if (!this._elementTimelineStylesLookup) {
+            this._elementTimelineStylesLookup = new Map();
+        }
+        this._localTimelineStyles = Object.create(this._backFill, {});
+        this._globalTimelineStyles = (/** @type {?} */ (this._elementTimelineStylesLookup.get(element)));
+        if (!this._globalTimelineStyles) {
+            this._globalTimelineStyles = this._localTimelineStyles;
+            this._elementTimelineStylesLookup.set(element, this._localTimelineStyles);
+        }
+        this._loadKeyframe();
+    }
+    /**
+     * @return {?}
+     */
+    containsAnimation() {
+        switch (this._keyframes.size) {
+            case 0:
+                return false;
+            case 1:
+                return this.getCurrentStyleProperties().length > 0;
+            default:
+                return true;
+        }
+    }
+    /**
+     * @return {?}
+     */
+    getCurrentStyleProperties() { return Object.keys(this._currentKeyframe); }
+    /**
+     * @return {?}
+     */
+    get currentTime() { return this.startTime + this.duration; }
+    /**
+     * @param {?} delay
+     * @return {?}
+     */
+    delayNextStep(delay) {
+        // in the event that a style() step is placed right before a stagger()
+        // and that style() step is the very first style() value in the animation
+        // then we need to make a copy of the keyframe [0, copy, 1] so that the delay
+        // properly applies the style() values to work with the stagger...
+        /** @type {?} */
+        const hasPreStyleStep = this._keyframes.size == 1 && Object.keys(this._pendingStyles).length;
+        if (this.duration || hasPreStyleStep) {
+            this.forwardTime(this.currentTime + delay);
+            if (hasPreStyleStep) {
+                this.snapshotCurrentStyles();
+            }
+        }
+        else {
+            this.startTime += delay;
+        }
+    }
+    /**
+     * @param {?} element
+     * @param {?=} currentTime
+     * @return {?}
+     */
+    fork(element, currentTime) {
+        this.applyStylesToKeyframe();
+        return new TimelineBuilder(this._driver, element, currentTime || this.currentTime, this._elementTimelineStylesLookup);
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    _loadKeyframe() {
+        if (this._currentKeyframe) {
+            this._previousKeyframe = this._currentKeyframe;
+        }
+        this._currentKeyframe = (/** @type {?} */ (this._keyframes.get(this.duration)));
+        if (!this._currentKeyframe) {
+            this._currentKeyframe = Object.create(this._backFill, {});
+            this._keyframes.set(this.duration, this._currentKeyframe);
+        }
+    }
+    /**
+     * @return {?}
+     */
+    forwardFrame() {
+        this.duration += ONE_FRAME_IN_MILLISECONDS;
+        this._loadKeyframe();
+    }
+    /**
+     * @param {?} time
+     * @return {?}
+     */
+    forwardTime(time) {
+        this.applyStylesToKeyframe();
+        this.duration = time;
+        this._loadKeyframe();
+    }
+    /**
+     * @private
+     * @param {?} prop
+     * @param {?} value
+     * @return {?}
+     */
+    _updateStyle(prop, value) {
+        this._localTimelineStyles[prop] = value;
+        this._globalTimelineStyles[prop] = value;
+        this._styleSummary[prop] = { time: this.currentTime, value };
+    }
+    /**
+     * @return {?}
+     */
+    allowOnlyTimelineStyles() { return this._currentEmptyStepKeyframe !== this._currentKeyframe; }
+    /**
+     * @param {?} easing
+     * @return {?}
+     */
+    applyEmptyStep(easing) {
+        if (easing) {
+            this._previousKeyframe['easing'] = easing;
+        }
+        // special case for animate(duration):
+        // all missing styles are filled with a `*` value then
+        // if any destination styles are filled in later on the same
+        // keyframe then they will override the overridden styles
+        // We use `_globalTimelineStyles` here because there may be
+        // styles in previous keyframes that are not present in this timeline
+        Object.keys(this._globalTimelineStyles).forEach((/**
+         * @param {?} prop
+         * @return {?}
+         */
+        prop => {
+            this._backFill[prop] = this._globalTimelineStyles[prop] || _angular_animations__WEBPACK_IMPORTED_MODULE_0__["AUTO_STYLE"];
+            this._currentKeyframe[prop] = _angular_animations__WEBPACK_IMPORTED_MODULE_0__["AUTO_STYLE"];
+        }));
+        this._currentEmptyStepKeyframe = this._currentKeyframe;
+    }
+    /**
+     * @param {?} input
+     * @param {?} easing
+     * @param {?} errors
+     * @param {?=} options
+     * @return {?}
+     */
+    setStyles(input, easing, errors, options) {
+        if (easing) {
+            this._previousKeyframe['easing'] = easing;
+        }
+        /** @type {?} */
+        const params = (options && options.params) || {};
+        /** @type {?} */
+        const styles = flattenStyles(input, this._globalTimelineStyles);
+        Object.keys(styles).forEach((/**
+         * @param {?} prop
+         * @return {?}
+         */
+        prop => {
+            /** @type {?} */
+            const val = interpolateParams(styles[prop], params, errors);
+            this._pendingStyles[prop] = val;
+            if (!this._localTimelineStyles.hasOwnProperty(prop)) {
+                this._backFill[prop] = this._globalTimelineStyles.hasOwnProperty(prop) ?
+                    this._globalTimelineStyles[prop] :
+                    _angular_animations__WEBPACK_IMPORTED_MODULE_0__["AUTO_STYLE"];
+            }
+            this._updateStyle(prop, val);
+        }));
+    }
+    /**
+     * @return {?}
+     */
+    applyStylesToKeyframe() {
+        /** @type {?} */
+        const styles = this._pendingStyles;
+        /** @type {?} */
+        const props = Object.keys(styles);
+        if (props.length == 0)
+            return;
+        this._pendingStyles = {};
+        props.forEach((/**
+         * @param {?} prop
+         * @return {?}
+         */
+        prop => {
+            /** @type {?} */
+            const val = styles[prop];
+            this._currentKeyframe[prop] = val;
+        }));
+        Object.keys(this._localTimelineStyles).forEach((/**
+         * @param {?} prop
+         * @return {?}
+         */
+        prop => {
+            if (!this._currentKeyframe.hasOwnProperty(prop)) {
+                this._currentKeyframe[prop] = this._localTimelineStyles[prop];
+            }
+        }));
+    }
+    /**
+     * @return {?}
+     */
+    snapshotCurrentStyles() {
+        Object.keys(this._localTimelineStyles).forEach((/**
+         * @param {?} prop
+         * @return {?}
+         */
+        prop => {
+            /** @type {?} */
+            const val = this._localTimelineStyles[prop];
+            this._pendingStyles[prop] = val;
+            this._updateStyle(prop, val);
+        }));
+    }
+    /**
+     * @return {?}
+     */
+    getFinalKeyframe() { return this._keyframes.get(this.duration); }
+    /**
+     * @return {?}
+     */
+    get properties() {
+        /** @type {?} */
+        const properties = [];
+        for (let prop in this._currentKeyframe) {
+            properties.push(prop);
+        }
+        return properties;
+    }
+    /**
+     * @param {?} timeline
+     * @return {?}
+     */
+    mergeTimelineCollectedStyles(timeline) {
+        Object.keys(timeline._styleSummary).forEach((/**
+         * @param {?} prop
+         * @return {?}
+         */
+        prop => {
+            /** @type {?} */
+            const details0 = this._styleSummary[prop];
+            /** @type {?} */
+            const details1 = timeline._styleSummary[prop];
+            if (!details0 || details1.time > details0.time) {
+                this._updateStyle(prop, details1.value);
+            }
+        }));
+    }
+    /**
+     * @return {?}
+     */
+    buildKeyframes() {
+        this.applyStylesToKeyframe();
+        /** @type {?} */
+        const preStyleProps = new Set();
+        /** @type {?} */
+        const postStyleProps = new Set();
+        /** @type {?} */
+        const isEmpty = this._keyframes.size === 1 && this.duration === 0;
+        /** @type {?} */
+        let finalKeyframes = [];
+        this._keyframes.forEach((/**
+         * @param {?} keyframe
+         * @param {?} time
+         * @return {?}
+         */
+        (keyframe, time) => {
+            /** @type {?} */
+            const finalKeyframe = copyStyles(keyframe, true);
+            Object.keys(finalKeyframe).forEach((/**
+             * @param {?} prop
+             * @return {?}
+             */
+            prop => {
+                /** @type {?} */
+                const value = finalKeyframe[prop];
+                if (value == _angular_animations__WEBPACK_IMPORTED_MODULE_0__["ɵPRE_STYLE"]) {
+                    preStyleProps.add(prop);
+                }
+                else if (value == _angular_animations__WEBPACK_IMPORTED_MODULE_0__["AUTO_STYLE"]) {
+                    postStyleProps.add(prop);
+                }
+            }));
+            if (!isEmpty) {
+                finalKeyframe['offset'] = time / this.duration;
+            }
+            finalKeyframes.push(finalKeyframe);
+        }));
+        /** @type {?} */
+        const preProps = preStyleProps.size ? iteratorToArray(preStyleProps.values()) : [];
+        /** @type {?} */
+        const postProps = postStyleProps.size ? iteratorToArray(postStyleProps.values()) : [];
+        // special case for a 0-second animation (which is designed just to place styles onscreen)
+        if (isEmpty) {
+            /** @type {?} */
+            const kf0 = finalKeyframes[0];
+            /** @type {?} */
+            const kf1 = copyObj(kf0);
+            kf0['offset'] = 0;
+            kf1['offset'] = 1;
+            finalKeyframes = [kf0, kf1];
+        }
+        return createTimelineInstruction(this.element, finalKeyframes, preProps, postProps, this.duration, this.startTime, this.easing, false);
+    }
+}
+if (false) {}
+class SubTimelineBuilder extends TimelineBuilder {
+    /**
+     * @param {?} driver
+     * @param {?} element
+     * @param {?} keyframes
+     * @param {?} preStyleProps
+     * @param {?} postStyleProps
+     * @param {?} timings
+     * @param {?=} _stretchStartingKeyframe
+     */
+    constructor(driver, element, keyframes, preStyleProps, postStyleProps, timings, _stretchStartingKeyframe = false) {
+        super(driver, element, timings.delay);
+        this.element = element;
+        this.keyframes = keyframes;
+        this.preStyleProps = preStyleProps;
+        this.postStyleProps = postStyleProps;
+        this._stretchStartingKeyframe = _stretchStartingKeyframe;
+        this.timings = { duration: timings.duration, delay: timings.delay, easing: timings.easing };
+    }
+    /**
+     * @return {?}
+     */
+    containsAnimation() { return this.keyframes.length > 1; }
+    /**
+     * @return {?}
+     */
+    buildKeyframes() {
+        /** @type {?} */
+        let keyframes = this.keyframes;
+        let { delay, duration, easing } = this.timings;
+        if (this._stretchStartingKeyframe && delay) {
+            /** @type {?} */
+            const newKeyframes = [];
+            /** @type {?} */
+            const totalTime = duration + delay;
+            /** @type {?} */
+            const startingGap = delay / totalTime;
+            // the original starting keyframe now starts once the delay is done
+            /** @type {?} */
+            const newFirstKeyframe = copyStyles(keyframes[0], false);
+            newFirstKeyframe['offset'] = 0;
+            newKeyframes.push(newFirstKeyframe);
+            /** @type {?} */
+            const oldFirstKeyframe = copyStyles(keyframes[0], false);
+            oldFirstKeyframe['offset'] = roundOffset(startingGap);
+            newKeyframes.push(oldFirstKeyframe);
+            /*
+                    When the keyframe is stretched then it means that the delay before the animation
+                    starts is gone. Instead the first keyframe is placed at the start of the animation
+                    and it is then copied to where it starts when the original delay is over. This basically
+                    means nothing animates during that delay, but the styles are still renderered. For this
+                    to work the original offset values that exist in the original keyframes must be "warped"
+                    so that they can take the new keyframe + delay into account.
+            
+                    delay=1000, duration=1000, keyframes = 0 .5 1
+            
+                    turns into
+            
+                    delay=0, duration=2000, keyframes = 0 .33 .66 1
+                   */
+            // offsets between 1 ... n -1 are all warped by the keyframe stretch
+            /** @type {?} */
+            const limit = keyframes.length - 1;
+            for (let i = 1; i <= limit; i++) {
+                /** @type {?} */
+                let kf = copyStyles(keyframes[i], false);
+                /** @type {?} */
+                const oldOffset = (/** @type {?} */ (kf['offset']));
+                /** @type {?} */
+                const timeAtKeyframe = delay + oldOffset * duration;
+                kf['offset'] = roundOffset(timeAtKeyframe / totalTime);
+                newKeyframes.push(kf);
+            }
+            // the new starting keyframe should be added at the start
+            duration = totalTime;
+            delay = 0;
+            easing = '';
+            keyframes = newKeyframes;
+        }
+        return createTimelineInstruction(this.element, keyframes, this.preStyleProps, this.postStyleProps, duration, delay, easing, true);
+    }
+}
+if (false) {}
+/**
+ * @param {?} offset
+ * @param {?=} decimalPoints
+ * @return {?}
+ */
+function roundOffset(offset, decimalPoints = 3) {
+    /** @type {?} */
+    const mult = Math.pow(10, decimalPoints - 1);
+    return Math.round(offset * mult) / mult;
+}
+/**
+ * @param {?} input
+ * @param {?} allStyles
+ * @return {?}
+ */
+function flattenStyles(input, allStyles) {
+    /** @type {?} */
+    const styles = {};
+    /** @type {?} */
+    let allProperties;
+    input.forEach((/**
+     * @param {?} token
+     * @return {?}
+     */
+    token => {
+        if (token === '*') {
+            allProperties = allProperties || Object.keys(allStyles);
+            allProperties.forEach((/**
+             * @param {?} prop
+             * @return {?}
+             */
+            prop => { styles[prop] = _angular_animations__WEBPACK_IMPORTED_MODULE_0__["AUTO_STYLE"]; }));
+        }
+        else {
+            copyStyles((/** @type {?} */ (token)), false, styles);
+        }
+    }));
+    return styles;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class Animation {
+    /**
+     * @param {?} _driver
+     * @param {?} input
+     */
+    constructor(_driver, input) {
+        this._driver = _driver;
+        /** @type {?} */
+        const errors = [];
+        /** @type {?} */
+        const ast = buildAnimationAst(_driver, input, errors);
+        if (errors.length) {
+            /** @type {?} */
+            const errorMessage = `animation validation failed:\n${errors.join("\n")}`;
+            throw new Error(errorMessage);
+        }
+        this._animationAst = ast;
+    }
+    /**
+     * @param {?} element
+     * @param {?} startingStyles
+     * @param {?} destinationStyles
+     * @param {?} options
+     * @param {?=} subInstructions
+     * @return {?}
+     */
+    buildTimelines(element, startingStyles, destinationStyles, options, subInstructions) {
+        /** @type {?} */
+        const start = Array.isArray(startingStyles) ? normalizeStyles(startingStyles) :
+            (/** @type {?} */ (startingStyles));
+        /** @type {?} */
+        const dest = Array.isArray(destinationStyles) ? normalizeStyles(destinationStyles) :
+            (/** @type {?} */ (destinationStyles));
+        /** @type {?} */
+        const errors = [];
+        subInstructions = subInstructions || new ElementInstructionMap();
+        /** @type {?} */
+        const result = buildAnimationTimelines(this._driver, element, this._animationAst, ENTER_CLASSNAME, LEAVE_CLASSNAME, start, dest, options, subInstructions, errors);
+        if (errors.length) {
+            /** @type {?} */
+            const errorMessage = `animation building failed:\n${errors.join("\n")}`;
+            throw new Error(errorMessage);
+        }
+        return result;
+    }
+}
+if (false) {}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ */
+/**
+ * \@publicApi
+ * @abstract
+ */
+class AnimationStyleNormalizer {
+}
+if (false) {}
+/**
+ * \@publicApi
+ */
+class NoopAnimationStyleNormalizer {
+    /**
+     * @param {?} propertyName
+     * @param {?} errors
+     * @return {?}
+     */
+    normalizePropertyName(propertyName, errors) { return propertyName; }
+    /**
+     * @param {?} userProvidedProperty
+     * @param {?} normalizedProperty
+     * @param {?} value
+     * @param {?} errors
+     * @return {?}
+     */
+    normalizeStyleValue(userProvidedProperty, normalizedProperty, value, errors) {
+        return (/** @type {?} */ (value));
+    }
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class WebAnimationsStyleNormalizer extends AnimationStyleNormalizer {
+    /**
+     * @param {?} propertyName
+     * @param {?} errors
+     * @return {?}
+     */
+    normalizePropertyName(propertyName, errors) {
+        return dashCaseToCamelCase(propertyName);
+    }
+    /**
+     * @param {?} userProvidedProperty
+     * @param {?} normalizedProperty
+     * @param {?} value
+     * @param {?} errors
+     * @return {?}
+     */
+    normalizeStyleValue(userProvidedProperty, normalizedProperty, value, errors) {
+        /** @type {?} */
+        let unit = '';
+        /** @type {?} */
+        const strVal = value.toString().trim();
+        if (DIMENSIONAL_PROP_MAP[normalizedProperty] && value !== 0 && value !== '0') {
+            if (typeof value === 'number') {
+                unit = 'px';
+            }
+            else {
+                /** @type {?} */
+                const valAndSuffixMatch = value.match(/^[+-]?[\d\.]+([a-z]*)$/);
+                if (valAndSuffixMatch && valAndSuffixMatch[1].length == 0) {
+                    errors.push(`Please provide a CSS unit value for ${userProvidedProperty}:${value}`);
+                }
+            }
+        }
+        return strVal + unit;
+    }
+}
+const ɵ0$1 = /**
+ * @return {?}
+ */
+() => makeBooleanMap('width,height,minWidth,minHeight,maxWidth,maxHeight,left,top,bottom,right,fontSize,outlineWidth,outlineOffset,paddingTop,paddingLeft,paddingBottom,paddingRight,marginTop,marginLeft,marginBottom,marginRight,borderRadius,borderWidth,borderTopWidth,borderLeftWidth,borderRightWidth,borderBottomWidth,textIndent,perspective'
+    .split(','));
+/** @type {?} */
+const DIMENSIONAL_PROP_MAP = ((ɵ0$1))();
+/**
+ * @param {?} keys
+ * @return {?}
+ */
+function makeBooleanMap(keys) {
+    /** @type {?} */
+    const map = {};
+    keys.forEach((/**
+     * @param {?} key
+     * @return {?}
+     */
+    key => map[key] = true));
+    return map;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @record
+ */
+function AnimationTransitionInstruction() { }
+if (false) {}
+/**
+ * @param {?} element
+ * @param {?} triggerName
+ * @param {?} fromState
+ * @param {?} toState
+ * @param {?} isRemovalTransition
+ * @param {?} fromStyles
+ * @param {?} toStyles
+ * @param {?} timelines
+ * @param {?} queriedElements
+ * @param {?} preStyleProps
+ * @param {?} postStyleProps
+ * @param {?} totalTime
+ * @param {?=} errors
+ * @return {?}
+ */
+function createTransitionInstruction(element, triggerName, fromState, toState, isRemovalTransition, fromStyles, toStyles, timelines, queriedElements, preStyleProps, postStyleProps, totalTime, errors) {
+    return {
+        type: 0 /* TransitionAnimation */,
+        element,
+        triggerName,
+        isRemovalTransition,
+        fromState,
+        fromStyles,
+        toState,
+        toStyles,
+        timelines,
+        queriedElements,
+        preStyleProps,
+        postStyleProps,
+        totalTime,
+        errors
+    };
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+const EMPTY_OBJECT = {};
+class AnimationTransitionFactory {
+    /**
+     * @param {?} _triggerName
+     * @param {?} ast
+     * @param {?} _stateStyles
+     */
+    constructor(_triggerName, ast, _stateStyles) {
+        this._triggerName = _triggerName;
+        this.ast = ast;
+        this._stateStyles = _stateStyles;
+    }
+    /**
+     * @param {?} currentState
+     * @param {?} nextState
+     * @param {?} element
+     * @param {?} params
+     * @return {?}
+     */
+    match(currentState, nextState, element, params) {
+        return oneOrMoreTransitionsMatch(this.ast.matchers, currentState, nextState, element, params);
+    }
+    /**
+     * @param {?} stateName
+     * @param {?} params
+     * @param {?} errors
+     * @return {?}
+     */
+    buildStyles(stateName, params, errors) {
+        /** @type {?} */
+        const backupStateStyler = this._stateStyles['*'];
+        /** @type {?} */
+        const stateStyler = this._stateStyles[stateName];
+        /** @type {?} */
+        const backupStyles = backupStateStyler ? backupStateStyler.buildStyles(params, errors) : {};
+        return stateStyler ? stateStyler.buildStyles(params, errors) : backupStyles;
+    }
+    /**
+     * @param {?} driver
+     * @param {?} element
+     * @param {?} currentState
+     * @param {?} nextState
+     * @param {?} enterClassName
+     * @param {?} leaveClassName
+     * @param {?=} currentOptions
+     * @param {?=} nextOptions
+     * @param {?=} subInstructions
+     * @param {?=} skipAstBuild
+     * @return {?}
+     */
+    build(driver, element, currentState, nextState, enterClassName, leaveClassName, currentOptions, nextOptions, subInstructions, skipAstBuild) {
+        /** @type {?} */
+        const errors = [];
+        /** @type {?} */
+        const transitionAnimationParams = this.ast.options && this.ast.options.params || EMPTY_OBJECT;
+        /** @type {?} */
+        const currentAnimationParams = currentOptions && currentOptions.params || EMPTY_OBJECT;
+        /** @type {?} */
+        const currentStateStyles = this.buildStyles(currentState, currentAnimationParams, errors);
+        /** @type {?} */
+        const nextAnimationParams = nextOptions && nextOptions.params || EMPTY_OBJECT;
+        /** @type {?} */
+        const nextStateStyles = this.buildStyles(nextState, nextAnimationParams, errors);
+        /** @type {?} */
+        const queriedElements = new Set();
+        /** @type {?} */
+        const preStyleMap = new Map();
+        /** @type {?} */
+        const postStyleMap = new Map();
+        /** @type {?} */
+        const isRemoval = nextState === 'void';
+        /** @type {?} */
+        const animationOptions = { params: Object.assign({}, transitionAnimationParams, nextAnimationParams) };
+        /** @type {?} */
+        const timelines = skipAstBuild ? [] : buildAnimationTimelines(driver, element, this.ast.animation, enterClassName, leaveClassName, currentStateStyles, nextStateStyles, animationOptions, subInstructions, errors);
+        /** @type {?} */
+        let totalTime = 0;
+        timelines.forEach((/**
+         * @param {?} tl
+         * @return {?}
+         */
+        tl => { totalTime = Math.max(tl.duration + tl.delay, totalTime); }));
+        if (errors.length) {
+            return createTransitionInstruction(element, this._triggerName, currentState, nextState, isRemoval, currentStateStyles, nextStateStyles, [], [], preStyleMap, postStyleMap, totalTime, errors);
+        }
+        timelines.forEach((/**
+         * @param {?} tl
+         * @return {?}
+         */
+        tl => {
+            /** @type {?} */
+            const elm = tl.element;
+            /** @type {?} */
+            const preProps = getOrSetAsInMap(preStyleMap, elm, {});
+            tl.preStyleProps.forEach((/**
+             * @param {?} prop
+             * @return {?}
+             */
+            prop => preProps[prop] = true));
+            /** @type {?} */
+            const postProps = getOrSetAsInMap(postStyleMap, elm, {});
+            tl.postStyleProps.forEach((/**
+             * @param {?} prop
+             * @return {?}
+             */
+            prop => postProps[prop] = true));
+            if (elm !== element) {
+                queriedElements.add(elm);
+            }
+        }));
+        /** @type {?} */
+        const queriedElementsList = iteratorToArray(queriedElements.values());
+        return createTransitionInstruction(element, this._triggerName, currentState, nextState, isRemoval, currentStateStyles, nextStateStyles, timelines, queriedElementsList, preStyleMap, postStyleMap, totalTime);
+    }
+}
+if (false) {}
+/**
+ * @param {?} matchFns
+ * @param {?} currentState
+ * @param {?} nextState
+ * @param {?} element
+ * @param {?} params
+ * @return {?}
+ */
+function oneOrMoreTransitionsMatch(matchFns, currentState, nextState, element, params) {
+    return matchFns.some((/**
+     * @param {?} fn
+     * @return {?}
+     */
+    fn => fn(currentState, nextState, element, params)));
+}
+class AnimationStateStyles {
+    /**
+     * @param {?} styles
+     * @param {?} defaultParams
+     */
+    constructor(styles, defaultParams) {
+        this.styles = styles;
+        this.defaultParams = defaultParams;
+    }
+    /**
+     * @param {?} params
+     * @param {?} errors
+     * @return {?}
+     */
+    buildStyles(params, errors) {
+        /** @type {?} */
+        const finalStyles = {};
+        /** @type {?} */
+        const combinedParams = copyObj(this.defaultParams);
+        Object.keys(params).forEach((/**
+         * @param {?} key
+         * @return {?}
+         */
+        key => {
+            /** @type {?} */
+            const value = params[key];
+            if (value != null) {
+                combinedParams[key] = value;
+            }
+        }));
+        this.styles.styles.forEach((/**
+         * @param {?} value
+         * @return {?}
+         */
+        value => {
+            if (typeof value !== 'string') {
+                /** @type {?} */
+                const styleObj = (/** @type {?} */ (value));
+                Object.keys(styleObj).forEach((/**
+                 * @param {?} prop
+                 * @return {?}
+                 */
+                prop => {
+                    /** @type {?} */
+                    let val = styleObj[prop];
+                    if (val.length > 1) {
+                        val = interpolateParams(val, combinedParams, errors);
+                    }
+                    finalStyles[prop] = val;
+                }));
+            }
+        }));
+        return finalStyles;
+    }
+}
+if (false) {}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * \@publicApi
+ * @param {?} name
+ * @param {?} ast
+ * @return {?}
+ */
+function buildTrigger(name, ast) {
+    return new AnimationTrigger(name, ast);
+}
+/**
+ * \@publicApi
+ */
+class AnimationTrigger {
+    /**
+     * @param {?} name
+     * @param {?} ast
+     */
+    constructor(name, ast) {
+        this.name = name;
+        this.ast = ast;
+        this.transitionFactories = [];
+        this.states = {};
+        ast.states.forEach((/**
+         * @param {?} ast
+         * @return {?}
+         */
+        ast => {
+            /** @type {?} */
+            const defaultParams = (ast.options && ast.options.params) || {};
+            this.states[ast.name] = new AnimationStateStyles(ast.style, defaultParams);
+        }));
+        balanceProperties(this.states, 'true', '1');
+        balanceProperties(this.states, 'false', '0');
+        ast.transitions.forEach((/**
+         * @param {?} ast
+         * @return {?}
+         */
+        ast => {
+            this.transitionFactories.push(new AnimationTransitionFactory(name, ast, this.states));
+        }));
+        this.fallbackTransition = createFallbackTransition(name, this.states);
+    }
+    /**
+     * @return {?}
+     */
+    get containsQueries() { return this.ast.queryCount > 0; }
+    /**
+     * @param {?} currentState
+     * @param {?} nextState
+     * @param {?} element
+     * @param {?} params
+     * @return {?}
+     */
+    matchTransition(currentState, nextState, element, params) {
+        /** @type {?} */
+        const entry = this.transitionFactories.find((/**
+         * @param {?} f
+         * @return {?}
+         */
+        f => f.match(currentState, nextState, element, params)));
+        return entry || null;
+    }
+    /**
+     * @param {?} currentState
+     * @param {?} params
+     * @param {?} errors
+     * @return {?}
+     */
+    matchStyles(currentState, params, errors) {
+        return this.fallbackTransition.buildStyles(currentState, params, errors);
+    }
+}
+if (false) {}
+/**
+ * @param {?} triggerName
+ * @param {?} states
+ * @return {?}
+ */
+function createFallbackTransition(triggerName, states) {
+    /** @type {?} */
+    const matchers = [(/**
+         * @param {?} fromState
+         * @param {?} toState
+         * @return {?}
+         */
+        (fromState, toState) => true)];
+    /** @type {?} */
+    const animation = { type: 2 /* Sequence */, steps: [], options: null };
+    /** @type {?} */
+    const transition = {
+        type: 1 /* Transition */,
+        animation,
+        matchers,
+        options: null,
+        queryCount: 0,
+        depCount: 0
+    };
+    return new AnimationTransitionFactory(triggerName, transition, states);
+}
+/**
+ * @param {?} obj
+ * @param {?} key1
+ * @param {?} key2
+ * @return {?}
+ */
+function balanceProperties(obj, key1, key2) {
+    if (obj.hasOwnProperty(key1)) {
+        if (!obj.hasOwnProperty(key2)) {
+            obj[key2] = obj[key1];
+        }
+    }
+    else if (obj.hasOwnProperty(key2)) {
+        obj[key1] = obj[key2];
+    }
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+const EMPTY_INSTRUCTION_MAP = new ElementInstructionMap();
+class TimelineAnimationEngine {
+    /**
+     * @param {?} bodyNode
+     * @param {?} _driver
+     * @param {?} _normalizer
+     */
+    constructor(bodyNode, _driver, _normalizer) {
+        this.bodyNode = bodyNode;
+        this._driver = _driver;
+        this._normalizer = _normalizer;
+        this._animations = {};
+        this._playersById = {};
+        this.players = [];
+    }
+    /**
+     * @param {?} id
+     * @param {?} metadata
+     * @return {?}
+     */
+    register(id, metadata) {
+        /** @type {?} */
+        const errors = [];
+        /** @type {?} */
+        const ast = buildAnimationAst(this._driver, metadata, errors);
+        if (errors.length) {
+            throw new Error(`Unable to build the animation due to the following errors: ${errors.join("\n")}`);
+        }
+        else {
+            this._animations[id] = ast;
+        }
+    }
+    /**
+     * @private
+     * @param {?} i
+     * @param {?} preStyles
+     * @param {?=} postStyles
+     * @return {?}
+     */
+    _buildPlayer(i, preStyles, postStyles) {
+        /** @type {?} */
+        const element = i.element;
+        /** @type {?} */
+        const keyframes = normalizeKeyframes(this._driver, this._normalizer, element, i.keyframes, preStyles, postStyles);
+        return this._driver.animate(element, keyframes, i.duration, i.delay, i.easing, [], true);
+    }
+    /**
+     * @param {?} id
+     * @param {?} element
+     * @param {?=} options
+     * @return {?}
+     */
+    create(id, element, options = {}) {
+        /** @type {?} */
+        const errors = [];
+        /** @type {?} */
+        const ast = this._animations[id];
+        /** @type {?} */
+        let instructions;
+        /** @type {?} */
+        const autoStylesMap = new Map();
+        if (ast) {
+            instructions = buildAnimationTimelines(this._driver, element, ast, ENTER_CLASSNAME, LEAVE_CLASSNAME, {}, {}, options, EMPTY_INSTRUCTION_MAP, errors);
+            instructions.forEach((/**
+             * @param {?} inst
+             * @return {?}
+             */
+            inst => {
+                /** @type {?} */
+                const styles = getOrSetAsInMap(autoStylesMap, inst.element, {});
+                inst.postStyleProps.forEach((/**
+                 * @param {?} prop
+                 * @return {?}
+                 */
+                prop => styles[prop] = null));
+            }));
+        }
+        else {
+            errors.push('The requested animation doesn\'t exist or has already been destroyed');
+            instructions = [];
+        }
+        if (errors.length) {
+            throw new Error(`Unable to create the animation due to the following errors: ${errors.join("\n")}`);
+        }
+        autoStylesMap.forEach((/**
+         * @param {?} styles
+         * @param {?} element
+         * @return {?}
+         */
+        (styles, element) => {
+            Object.keys(styles).forEach((/**
+             * @param {?} prop
+             * @return {?}
+             */
+            prop => { styles[prop] = this._driver.computeStyle(element, prop, _angular_animations__WEBPACK_IMPORTED_MODULE_0__["AUTO_STYLE"]); }));
+        }));
+        /** @type {?} */
+        const players = instructions.map((/**
+         * @param {?} i
+         * @return {?}
+         */
+        i => {
+            /** @type {?} */
+            const styles = autoStylesMap.get(i.element);
+            return this._buildPlayer(i, {}, styles);
+        }));
+        /** @type {?} */
+        const player = optimizeGroupPlayer(players);
+        this._playersById[id] = player;
+        player.onDestroy((/**
+         * @return {?}
+         */
+        () => this.destroy(id)));
+        this.players.push(player);
+        return player;
+    }
+    /**
+     * @param {?} id
+     * @return {?}
+     */
+    destroy(id) {
+        /** @type {?} */
+        const player = this._getPlayer(id);
+        player.destroy();
+        delete this._playersById[id];
+        /** @type {?} */
+        const index = this.players.indexOf(player);
+        if (index >= 0) {
+            this.players.splice(index, 1);
+        }
+    }
+    /**
+     * @private
+     * @param {?} id
+     * @return {?}
+     */
+    _getPlayer(id) {
+        /** @type {?} */
+        const player = this._playersById[id];
+        if (!player) {
+            throw new Error(`Unable to find the timeline player referenced by ${id}`);
+        }
+        return player;
+    }
+    /**
+     * @param {?} id
+     * @param {?} element
+     * @param {?} eventName
+     * @param {?} callback
+     * @return {?}
+     */
+    listen(id, element, eventName, callback) {
+        // triggerName, fromState, toState are all ignored for timeline animations
+        /** @type {?} */
+        const baseEvent = makeAnimationEvent(element, '', '', '');
+        listenOnPlayer(this._getPlayer(id), eventName, baseEvent, callback);
+        return (/**
+         * @return {?}
+         */
+        () => { });
+    }
+    /**
+     * @param {?} id
+     * @param {?} element
+     * @param {?} command
+     * @param {?} args
+     * @return {?}
+     */
+    command(id, element, command, args) {
+        if (command == 'register') {
+            this.register(id, (/** @type {?} */ (args[0])));
+            return;
+        }
+        if (command == 'create') {
+            /** @type {?} */
+            const options = (/** @type {?} */ ((args[0] || {})));
+            this.create(id, element, options);
+            return;
+        }
+        /** @type {?} */
+        const player = this._getPlayer(id);
+        switch (command) {
+            case 'play':
+                player.play();
+                break;
+            case 'pause':
+                player.pause();
+                break;
+            case 'reset':
+                player.reset();
+                break;
+            case 'restart':
+                player.restart();
+                break;
+            case 'finish':
+                player.finish();
+                break;
+            case 'init':
+                player.init();
+                break;
+            case 'setPosition':
+                player.setPosition(parseFloat((/** @type {?} */ (args[0]))));
+                break;
+            case 'destroy':
+                this.destroy(id);
+                break;
+        }
+    }
+}
+if (false) {}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+const QUEUED_CLASSNAME = 'ng-animate-queued';
+/** @type {?} */
+const QUEUED_SELECTOR = '.ng-animate-queued';
+/** @type {?} */
+const DISABLED_CLASSNAME = 'ng-animate-disabled';
+/** @type {?} */
+const DISABLED_SELECTOR = '.ng-animate-disabled';
+/** @type {?} */
+const STAR_CLASSNAME = 'ng-star-inserted';
+/** @type {?} */
+const STAR_SELECTOR = '.ng-star-inserted';
+/** @type {?} */
+const EMPTY_PLAYER_ARRAY = [];
+/** @type {?} */
+const NULL_REMOVAL_STATE = {
+    namespaceId: '',
+    setForRemoval: false,
+    setForMove: false,
+    hasAnimation: false,
+    removedBeforeQueried: false
+};
+/** @type {?} */
+const NULL_REMOVED_QUERIED_STATE = {
+    namespaceId: '',
+    setForMove: false,
+    setForRemoval: false,
+    hasAnimation: false,
+    removedBeforeQueried: true
+};
+/**
+ * @record
+ */
+function TriggerListener() { }
+if (false) {}
+/**
+ * @record
+ */
+function QueueInstruction() { }
+if (false) {}
+/** @type {?} */
+const REMOVAL_FLAG = '__ng_removed';
+/**
+ * @record
+ */
+function ElementAnimationState() { }
+if (false) {}
+class StateValue {
+    /**
+     * @param {?} input
+     * @param {?=} namespaceId
+     */
+    constructor(input, namespaceId = '') {
+        this.namespaceId = namespaceId;
+        /** @type {?} */
+        const isObj = input && input.hasOwnProperty('value');
+        /** @type {?} */
+        const value = isObj ? input['value'] : input;
+        this.value = normalizeTriggerValue(value);
+        if (isObj) {
+            /** @type {?} */
+            const options = copyObj((/** @type {?} */ (input)));
+            delete options['value'];
+            this.options = (/** @type {?} */ (options));
+        }
+        else {
+            this.options = {};
+        }
+        if (!this.options.params) {
+            this.options.params = {};
+        }
+    }
+    /**
+     * @return {?}
+     */
+    get params() { return (/** @type {?} */ (this.options.params)); }
+    /**
+     * @param {?} options
+     * @return {?}
+     */
+    absorbOptions(options) {
+        /** @type {?} */
+        const newParams = options.params;
+        if (newParams) {
+            /** @type {?} */
+            const oldParams = (/** @type {?} */ (this.options.params));
+            Object.keys(newParams).forEach((/**
+             * @param {?} prop
+             * @return {?}
+             */
+            prop => {
+                if (oldParams[prop] == null) {
+                    oldParams[prop] = newParams[prop];
+                }
+            }));
+        }
+    }
+}
+if (false) {}
+/** @type {?} */
+const VOID_VALUE = 'void';
+/** @type {?} */
+const DEFAULT_STATE_VALUE = new StateValue(VOID_VALUE);
+class AnimationTransitionNamespace {
+    /**
+     * @param {?} id
+     * @param {?} hostElement
+     * @param {?} _engine
+     */
+    constructor(id, hostElement, _engine) {
+        this.id = id;
+        this.hostElement = hostElement;
+        this._engine = _engine;
+        this.players = [];
+        this._triggers = {};
+        this._queue = [];
+        this._elementListeners = new Map();
+        this._hostClassName = 'ng-tns-' + id;
+        addClass(hostElement, this._hostClassName);
+    }
+    /**
+     * @param {?} element
+     * @param {?} name
+     * @param {?} phase
+     * @param {?} callback
+     * @return {?}
+     */
+    listen(element, name, phase, callback) {
+        if (!this._triggers.hasOwnProperty(name)) {
+            throw new Error(`Unable to listen on the animation trigger event "${phase}" because the animation trigger "${name}" doesn\'t exist!`);
+        }
+        if (phase == null || phase.length == 0) {
+            throw new Error(`Unable to listen on the animation trigger "${name}" because the provided event is undefined!`);
+        }
+        if (!isTriggerEventValid(phase)) {
+            throw new Error(`The provided animation trigger event "${phase}" for the animation trigger "${name}" is not supported!`);
+        }
+        /** @type {?} */
+        const listeners = getOrSetAsInMap(this._elementListeners, element, []);
+        /** @type {?} */
+        const data = { name, phase, callback };
+        listeners.push(data);
+        /** @type {?} */
+        const triggersWithStates = getOrSetAsInMap(this._engine.statesByElement, element, {});
+        if (!triggersWithStates.hasOwnProperty(name)) {
+            addClass(element, NG_TRIGGER_CLASSNAME);
+            addClass(element, NG_TRIGGER_CLASSNAME + '-' + name);
+            triggersWithStates[name] = DEFAULT_STATE_VALUE;
+        }
+        return (/**
+         * @return {?}
+         */
+        () => {
+            // the event listener is removed AFTER the flush has occurred such
+            // that leave animations callbacks can fire (otherwise if the node
+            // is removed in between then the listeners would be deregistered)
+            this._engine.afterFlush((/**
+             * @return {?}
+             */
+            () => {
+                /** @type {?} */
+                const index = listeners.indexOf(data);
+                if (index >= 0) {
+                    listeners.splice(index, 1);
+                }
+                if (!this._triggers[name]) {
+                    delete triggersWithStates[name];
+                }
+            }));
+        });
+    }
+    /**
+     * @param {?} name
+     * @param {?} ast
+     * @return {?}
+     */
+    register(name, ast) {
+        if (this._triggers[name]) {
+            // throw
+            return false;
+        }
+        else {
+            this._triggers[name] = ast;
+            return true;
+        }
+    }
+    /**
+     * @private
+     * @param {?} name
+     * @return {?}
+     */
+    _getTrigger(name) {
+        /** @type {?} */
+        const trigger = this._triggers[name];
+        if (!trigger) {
+            throw new Error(`The provided animation trigger "${name}" has not been registered!`);
+        }
+        return trigger;
+    }
+    /**
+     * @param {?} element
+     * @param {?} triggerName
+     * @param {?} value
+     * @param {?=} defaultToFallback
+     * @return {?}
+     */
+    trigger(element, triggerName, value, defaultToFallback = true) {
+        /** @type {?} */
+        const trigger = this._getTrigger(triggerName);
+        /** @type {?} */
+        const player = new TransitionAnimationPlayer(this.id, triggerName, element);
+        /** @type {?} */
+        let triggersWithStates = this._engine.statesByElement.get(element);
+        if (!triggersWithStates) {
+            addClass(element, NG_TRIGGER_CLASSNAME);
+            addClass(element, NG_TRIGGER_CLASSNAME + '-' + triggerName);
+            this._engine.statesByElement.set(element, triggersWithStates = {});
+        }
+        /** @type {?} */
+        let fromState = triggersWithStates[triggerName];
+        /** @type {?} */
+        const toState = new StateValue(value, this.id);
+        /** @type {?} */
+        const isObj = value && value.hasOwnProperty('value');
+        if (!isObj && fromState) {
+            toState.absorbOptions(fromState.options);
+        }
+        triggersWithStates[triggerName] = toState;
+        if (!fromState) {
+            fromState = DEFAULT_STATE_VALUE;
+        }
+        /** @type {?} */
+        const isRemoval = toState.value === VOID_VALUE;
+        // normally this isn't reached by here, however, if an object expression
+        // is passed in then it may be a new object each time. Comparing the value
+        // is important since that will stay the same despite there being a new object.
+        // The removal arc here is special cased because the same element is triggered
+        // twice in the event that it contains animations on the outer/inner portions
+        // of the host container
+        if (!isRemoval && fromState.value === toState.value) {
+            // this means that despite the value not changing, some inner params
+            // have changed which means that the animation final styles need to be applied
+            if (!objEquals(fromState.params, toState.params)) {
+                /** @type {?} */
+                const errors = [];
+                /** @type {?} */
+                const fromStyles = trigger.matchStyles(fromState.value, fromState.params, errors);
+                /** @type {?} */
+                const toStyles = trigger.matchStyles(toState.value, toState.params, errors);
+                if (errors.length) {
+                    this._engine.reportError(errors);
+                }
+                else {
+                    this._engine.afterFlush((/**
+                     * @return {?}
+                     */
+                    () => {
+                        eraseStyles(element, fromStyles);
+                        setStyles(element, toStyles);
+                    }));
+                }
+            }
+            return;
+        }
+        /** @type {?} */
+        const playersOnElement = getOrSetAsInMap(this._engine.playersByElement, element, []);
+        playersOnElement.forEach((/**
+         * @param {?} player
+         * @return {?}
+         */
+        player => {
+            // only remove the player if it is queued on the EXACT same trigger/namespace
+            // we only also deal with queued players here because if the animation has
+            // started then we want to keep the player alive until the flush happens
+            // (which is where the previousPlayers are passed into the new palyer)
+            if (player.namespaceId == this.id && player.triggerName == triggerName && player.queued) {
+                player.destroy();
+            }
+        }));
+        /** @type {?} */
+        let transition = trigger.matchTransition(fromState.value, toState.value, element, toState.params);
+        /** @type {?} */
+        let isFallbackTransition = false;
+        if (!transition) {
+            if (!defaultToFallback)
+                return;
+            transition = trigger.fallbackTransition;
+            isFallbackTransition = true;
+        }
+        this._engine.totalQueuedPlayers++;
+        this._queue.push({ element, triggerName, transition, fromState, toState, player, isFallbackTransition });
+        if (!isFallbackTransition) {
+            addClass(element, QUEUED_CLASSNAME);
+            player.onStart((/**
+             * @return {?}
+             */
+            () => { removeClass(element, QUEUED_CLASSNAME); }));
+        }
+        player.onDone((/**
+         * @return {?}
+         */
+        () => {
+            /** @type {?} */
+            let index = this.players.indexOf(player);
+            if (index >= 0) {
+                this.players.splice(index, 1);
+            }
+            /** @type {?} */
+            const players = this._engine.playersByElement.get(element);
+            if (players) {
+                /** @type {?} */
+                let index = players.indexOf(player);
+                if (index >= 0) {
+                    players.splice(index, 1);
+                }
+            }
+        }));
+        this.players.push(player);
+        playersOnElement.push(player);
+        return player;
+    }
+    /**
+     * @param {?} name
+     * @return {?}
+     */
+    deregister(name) {
+        delete this._triggers[name];
+        this._engine.statesByElement.forEach((/**
+         * @param {?} stateMap
+         * @param {?} element
+         * @return {?}
+         */
+        (stateMap, element) => { delete stateMap[name]; }));
+        this._elementListeners.forEach((/**
+         * @param {?} listeners
+         * @param {?} element
+         * @return {?}
+         */
+        (listeners, element) => {
+            this._elementListeners.set(element, listeners.filter((/**
+             * @param {?} entry
+             * @return {?}
+             */
+            entry => { return entry.name != name; })));
+        }));
+    }
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    clearElementCache(element) {
+        this._engine.statesByElement.delete(element);
+        this._elementListeners.delete(element);
+        /** @type {?} */
+        const elementPlayers = this._engine.playersByElement.get(element);
+        if (elementPlayers) {
+            elementPlayers.forEach((/**
+             * @param {?} player
+             * @return {?}
+             */
+            player => player.destroy()));
+            this._engine.playersByElement.delete(element);
+        }
+    }
+    /**
+     * @private
+     * @param {?} rootElement
+     * @param {?} context
+     * @param {?=} animate
+     * @return {?}
+     */
+    _signalRemovalForInnerTriggers(rootElement, context, animate = false) {
+        // emulate a leave animation for all inner nodes within this node.
+        // If there are no animations found for any of the nodes then clear the cache
+        // for the element.
+        this._engine.driver.query(rootElement, NG_TRIGGER_SELECTOR, true).forEach((/**
+         * @param {?} elm
+         * @return {?}
+         */
+        elm => {
+            // this means that an inner remove() operation has already kicked off
+            // the animation on this element...
+            if (elm[REMOVAL_FLAG])
+                return;
+            /** @type {?} */
+            const namespaces = this._engine.fetchNamespacesByElement(elm);
+            if (namespaces.size) {
+                namespaces.forEach((/**
+                 * @param {?} ns
+                 * @return {?}
+                 */
+                ns => ns.triggerLeaveAnimation(elm, context, false, true)));
+            }
+            else {
+                this.clearElementCache(elm);
+            }
+        }));
+    }
+    /**
+     * @param {?} element
+     * @param {?} context
+     * @param {?=} destroyAfterComplete
+     * @param {?=} defaultToFallback
+     * @return {?}
+     */
+    triggerLeaveAnimation(element, context, destroyAfterComplete, defaultToFallback) {
+        /** @type {?} */
+        const triggerStates = this._engine.statesByElement.get(element);
+        if (triggerStates) {
+            /** @type {?} */
+            const players = [];
+            Object.keys(triggerStates).forEach((/**
+             * @param {?} triggerName
+             * @return {?}
+             */
+            triggerName => {
+                // this check is here in the event that an element is removed
+                // twice (both on the host level and the component level)
+                if (this._triggers[triggerName]) {
+                    /** @type {?} */
+                    const player = this.trigger(element, triggerName, VOID_VALUE, defaultToFallback);
+                    if (player) {
+                        players.push(player);
+                    }
+                }
+            }));
+            if (players.length) {
+                this._engine.markElementAsRemoved(this.id, element, true, context);
+                if (destroyAfterComplete) {
+                    optimizeGroupPlayer(players).onDone((/**
+                     * @return {?}
+                     */
+                    () => this._engine.processLeaveNode(element)));
+                }
+                return true;
+            }
+        }
+        return false;
+    }
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    prepareLeaveAnimationListeners(element) {
+        /** @type {?} */
+        const listeners = this._elementListeners.get(element);
+        if (listeners) {
+            /** @type {?} */
+            const visitedTriggers = new Set();
+            listeners.forEach((/**
+             * @param {?} listener
+             * @return {?}
+             */
+            listener => {
+                /** @type {?} */
+                const triggerName = listener.name;
+                if (visitedTriggers.has(triggerName))
+                    return;
+                visitedTriggers.add(triggerName);
+                /** @type {?} */
+                const trigger = this._triggers[triggerName];
+                /** @type {?} */
+                const transition = trigger.fallbackTransition;
+                /** @type {?} */
+                const elementStates = (/** @type {?} */ (this._engine.statesByElement.get(element)));
+                /** @type {?} */
+                const fromState = elementStates[triggerName] || DEFAULT_STATE_VALUE;
+                /** @type {?} */
+                const toState = new StateValue(VOID_VALUE);
+                /** @type {?} */
+                const player = new TransitionAnimationPlayer(this.id, triggerName, element);
+                this._engine.totalQueuedPlayers++;
+                this._queue.push({
+                    element,
+                    triggerName,
+                    transition,
+                    fromState,
+                    toState,
+                    player,
+                    isFallbackTransition: true
+                });
+            }));
+        }
+    }
+    /**
+     * @param {?} element
+     * @param {?} context
+     * @return {?}
+     */
+    removeNode(element, context) {
+        /** @type {?} */
+        const engine = this._engine;
+        if (element.childElementCount) {
+            this._signalRemovalForInnerTriggers(element, context, true);
+        }
+        // this means that a * => VOID animation was detected and kicked off
+        if (this.triggerLeaveAnimation(element, context, true))
+            return;
+        // find the player that is animating and make sure that the
+        // removal is delayed until that player has completed
+        /** @type {?} */
+        let containsPotentialParentTransition = false;
+        if (engine.totalAnimations) {
+            /** @type {?} */
+            const currentPlayers = engine.players.length ? engine.playersByQueriedElement.get(element) : [];
+            // when this `if statement` does not continue forward it means that
+            // a previous animation query has selected the current element and
+            // is animating it. In this situation want to continue forwards and
+            // allow the element to be queued up for animation later.
+            if (currentPlayers && currentPlayers.length) {
+                containsPotentialParentTransition = true;
+            }
+            else {
+                /** @type {?} */
+                let parent = element;
+                while (parent = parent.parentNode) {
+                    /** @type {?} */
+                    const triggers = engine.statesByElement.get(parent);
+                    if (triggers) {
+                        containsPotentialParentTransition = true;
+                        break;
+                    }
+                }
+            }
+        }
+        // at this stage we know that the element will either get removed
+        // during flush or will be picked up by a parent query. Either way
+        // we need to fire the listeners for this element when it DOES get
+        // removed (once the query parent animation is done or after flush)
+        this.prepareLeaveAnimationListeners(element);
+        // whether or not a parent has an animation we need to delay the deferral of the leave
+        // operation until we have more information (which we do after flush() has been called)
+        if (containsPotentialParentTransition) {
+            engine.markElementAsRemoved(this.id, element, false, context);
+        }
+        else {
+            // we do this after the flush has occurred such
+            // that the callbacks can be fired
+            engine.afterFlush((/**
+             * @return {?}
+             */
+            () => this.clearElementCache(element)));
+            engine.destroyInnerAnimations(element);
+            engine._onRemovalComplete(element, context);
+        }
+    }
+    /**
+     * @param {?} element
+     * @param {?} parent
+     * @return {?}
+     */
+    insertNode(element, parent) { addClass(element, this._hostClassName); }
+    /**
+     * @param {?} microtaskId
+     * @return {?}
+     */
+    drainQueuedTransitions(microtaskId) {
+        /** @type {?} */
+        const instructions = [];
+        this._queue.forEach((/**
+         * @param {?} entry
+         * @return {?}
+         */
+        entry => {
+            /** @type {?} */
+            const player = entry.player;
+            if (player.destroyed)
+                return;
+            /** @type {?} */
+            const element = entry.element;
+            /** @type {?} */
+            const listeners = this._elementListeners.get(element);
+            if (listeners) {
+                listeners.forEach((/**
+                 * @param {?} listener
+                 * @return {?}
+                 */
+                (listener) => {
+                    if (listener.name == entry.triggerName) {
+                        /** @type {?} */
+                        const baseEvent = makeAnimationEvent(element, entry.triggerName, entry.fromState.value, entry.toState.value);
+                        ((/** @type {?} */ (baseEvent)))['_data'] = microtaskId;
+                        listenOnPlayer(entry.player, listener.phase, baseEvent, listener.callback);
+                    }
+                }));
+            }
+            if (player.markedForDestroy) {
+                this._engine.afterFlush((/**
+                 * @return {?}
+                 */
+                () => {
+                    // now we can destroy the element properly since the event listeners have
+                    // been bound to the player
+                    player.destroy();
+                }));
+            }
+            else {
+                instructions.push(entry);
+            }
+        }));
+        this._queue = [];
+        return instructions.sort((/**
+         * @param {?} a
+         * @param {?} b
+         * @return {?}
+         */
+        (a, b) => {
+            // if depCount == 0 them move to front
+            // otherwise if a contains b then move back
+            /** @type {?} */
+            const d0 = a.transition.ast.depCount;
+            /** @type {?} */
+            const d1 = b.transition.ast.depCount;
+            if (d0 == 0 || d1 == 0) {
+                return d0 - d1;
+            }
+            return this._engine.driver.containsElement(a.element, b.element) ? 1 : -1;
+        }));
+    }
+    /**
+     * @param {?} context
+     * @return {?}
+     */
+    destroy(context) {
+        this.players.forEach((/**
+         * @param {?} p
+         * @return {?}
+         */
+        p => p.destroy()));
+        this._signalRemovalForInnerTriggers(this.hostElement, context);
+    }
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    elementContainsData(element) {
+        /** @type {?} */
+        let containsData = false;
+        if (this._elementListeners.has(element))
+            containsData = true;
+        containsData =
+            (this._queue.find((/**
+             * @param {?} entry
+             * @return {?}
+             */
+            entry => entry.element === element)) ? true : false) || containsData;
+        return containsData;
+    }
+}
+if (false) {}
+/**
+ * @record
+ */
+function QueuedTransition() { }
+if (false) {}
+class TransitionAnimationEngine {
+    /**
+     * @param {?} bodyNode
+     * @param {?} driver
+     * @param {?} _normalizer
+     */
+    constructor(bodyNode, driver, _normalizer) {
+        this.bodyNode = bodyNode;
+        this.driver = driver;
+        this._normalizer = _normalizer;
+        this.players = [];
+        this.newHostElements = new Map();
+        this.playersByElement = new Map();
+        this.playersByQueriedElement = new Map();
+        this.statesByElement = new Map();
+        this.disabledNodes = new Set();
+        this.totalAnimations = 0;
+        this.totalQueuedPlayers = 0;
+        this._namespaceLookup = {};
+        this._namespaceList = [];
+        this._flushFns = [];
+        this._whenQuietFns = [];
+        this.namespacesByHostElement = new Map();
+        this.collectedEnterElements = [];
+        this.collectedLeaveElements = [];
+        // this method is designed to be overridden by the code that uses this engine
+        this.onRemovalComplete = (/**
+         * @param {?} element
+         * @param {?} context
+         * @return {?}
+         */
+        (element, context) => { });
+    }
+    /**
+     * \@internal
+     * @param {?} element
+     * @param {?} context
+     * @return {?}
+     */
+    _onRemovalComplete(element, context) { this.onRemovalComplete(element, context); }
+    /**
+     * @return {?}
+     */
+    get queuedPlayers() {
+        /** @type {?} */
+        const players = [];
+        this._namespaceList.forEach((/**
+         * @param {?} ns
+         * @return {?}
+         */
+        ns => {
+            ns.players.forEach((/**
+             * @param {?} player
+             * @return {?}
+             */
+            player => {
+                if (player.queued) {
+                    players.push(player);
+                }
+            }));
+        }));
+        return players;
+    }
+    /**
+     * @param {?} namespaceId
+     * @param {?} hostElement
+     * @return {?}
+     */
+    createNamespace(namespaceId, hostElement) {
+        /** @type {?} */
+        const ns = new AnimationTransitionNamespace(namespaceId, hostElement, this);
+        if (hostElement.parentNode) {
+            this._balanceNamespaceList(ns, hostElement);
+        }
+        else {
+            // defer this later until flush during when the host element has
+            // been inserted so that we know exactly where to place it in
+            // the namespace list
+            this.newHostElements.set(hostElement, ns);
+            // given that this host element is apart of the animation code, it
+            // may or may not be inserted by a parent node that is an of an
+            // animation renderer type. If this happens then we can still have
+            // access to this item when we query for :enter nodes. If the parent
+            // is a renderer then the set data-structure will normalize the entry
+            this.collectEnterElement(hostElement);
+        }
+        return this._namespaceLookup[namespaceId] = ns;
+    }
+    /**
+     * @private
+     * @param {?} ns
+     * @param {?} hostElement
+     * @return {?}
+     */
+    _balanceNamespaceList(ns, hostElement) {
+        /** @type {?} */
+        const limit = this._namespaceList.length - 1;
+        if (limit >= 0) {
+            /** @type {?} */
+            let found = false;
+            for (let i = limit; i >= 0; i--) {
+                /** @type {?} */
+                const nextNamespace = this._namespaceList[i];
+                if (this.driver.containsElement(nextNamespace.hostElement, hostElement)) {
+                    this._namespaceList.splice(i + 1, 0, ns);
+                    found = true;
+                    break;
+                }
+            }
+            if (!found) {
+                this._namespaceList.splice(0, 0, ns);
+            }
+        }
+        else {
+            this._namespaceList.push(ns);
+        }
+        this.namespacesByHostElement.set(hostElement, ns);
+        return ns;
+    }
+    /**
+     * @param {?} namespaceId
+     * @param {?} hostElement
+     * @return {?}
+     */
+    register(namespaceId, hostElement) {
+        /** @type {?} */
+        let ns = this._namespaceLookup[namespaceId];
+        if (!ns) {
+            ns = this.createNamespace(namespaceId, hostElement);
+        }
+        return ns;
+    }
+    /**
+     * @param {?} namespaceId
+     * @param {?} name
+     * @param {?} trigger
+     * @return {?}
+     */
+    registerTrigger(namespaceId, name, trigger) {
+        /** @type {?} */
+        let ns = this._namespaceLookup[namespaceId];
+        if (ns && ns.register(name, trigger)) {
+            this.totalAnimations++;
+        }
+    }
+    /**
+     * @param {?} namespaceId
+     * @param {?} context
+     * @return {?}
+     */
+    destroy(namespaceId, context) {
+        if (!namespaceId)
+            return;
+        /** @type {?} */
+        const ns = this._fetchNamespace(namespaceId);
+        this.afterFlush((/**
+         * @return {?}
+         */
+        () => {
+            this.namespacesByHostElement.delete(ns.hostElement);
+            delete this._namespaceLookup[namespaceId];
+            /** @type {?} */
+            const index = this._namespaceList.indexOf(ns);
+            if (index >= 0) {
+                this._namespaceList.splice(index, 1);
+            }
+        }));
+        this.afterFlushAnimationsDone((/**
+         * @return {?}
+         */
+        () => ns.destroy(context)));
+    }
+    /**
+     * @private
+     * @param {?} id
+     * @return {?}
+     */
+    _fetchNamespace(id) { return this._namespaceLookup[id]; }
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    fetchNamespacesByElement(element) {
+        // normally there should only be one namespace per element, however
+        // if @triggers are placed on both the component element and then
+        // its host element (within the component code) then there will be
+        // two namespaces returned. We use a set here to simply the dedupe
+        // of namespaces incase there are multiple triggers both the elm and host
+        /** @type {?} */
+        const namespaces = new Set();
+        /** @type {?} */
+        const elementStates = this.statesByElement.get(element);
+        if (elementStates) {
+            /** @type {?} */
+            const keys = Object.keys(elementStates);
+            for (let i = 0; i < keys.length; i++) {
+                /** @type {?} */
+                const nsId = elementStates[keys[i]].namespaceId;
+                if (nsId) {
+                    /** @type {?} */
+                    const ns = this._fetchNamespace(nsId);
+                    if (ns) {
+                        namespaces.add(ns);
+                    }
+                }
+            }
+        }
+        return namespaces;
+    }
+    /**
+     * @param {?} namespaceId
+     * @param {?} element
+     * @param {?} name
+     * @param {?} value
+     * @return {?}
+     */
+    trigger(namespaceId, element, name, value) {
+        if (isElementNode(element)) {
+            /** @type {?} */
+            const ns = this._fetchNamespace(namespaceId);
+            if (ns) {
+                ns.trigger(element, name, value);
+                return true;
+            }
+        }
+        return false;
+    }
+    /**
+     * @param {?} namespaceId
+     * @param {?} element
+     * @param {?} parent
+     * @param {?} insertBefore
+     * @return {?}
+     */
+    insertNode(namespaceId, element, parent, insertBefore) {
+        if (!isElementNode(element))
+            return;
+        // special case for when an element is removed and reinserted (move operation)
+        // when this occurs we do not want to use the element for deletion later
+        /** @type {?} */
+        const details = (/** @type {?} */ (element[REMOVAL_FLAG]));
+        if (details && details.setForRemoval) {
+            details.setForRemoval = false;
+            details.setForMove = true;
+            /** @type {?} */
+            const index = this.collectedLeaveElements.indexOf(element);
+            if (index >= 0) {
+                this.collectedLeaveElements.splice(index, 1);
+            }
+        }
+        // in the event that the namespaceId is blank then the caller
+        // code does not contain any animation code in it, but it is
+        // just being called so that the node is marked as being inserted
+        if (namespaceId) {
+            /** @type {?} */
+            const ns = this._fetchNamespace(namespaceId);
+            // This if-statement is a workaround for router issue #21947.
+            // The router sometimes hits a race condition where while a route
+            // is being instantiated a new navigation arrives, triggering leave
+            // animation of DOM that has not been fully initialized, until this
+            // is resolved, we need to handle the scenario when DOM is not in a
+            // consistent state during the animation.
+            if (ns) {
+                ns.insertNode(element, parent);
+            }
+        }
+        // only *directives and host elements are inserted before
+        if (insertBefore) {
+            this.collectEnterElement(element);
+        }
+    }
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    collectEnterElement(element) { this.collectedEnterElements.push(element); }
+    /**
+     * @param {?} element
+     * @param {?} value
+     * @return {?}
+     */
+    markElementAsDisabled(element, value) {
+        if (value) {
+            if (!this.disabledNodes.has(element)) {
+                this.disabledNodes.add(element);
+                addClass(element, DISABLED_CLASSNAME);
+            }
+        }
+        else if (this.disabledNodes.has(element)) {
+            this.disabledNodes.delete(element);
+            removeClass(element, DISABLED_CLASSNAME);
+        }
+    }
+    /**
+     * @param {?} namespaceId
+     * @param {?} element
+     * @param {?} isHostElement
+     * @param {?} context
+     * @return {?}
+     */
+    removeNode(namespaceId, element, isHostElement, context) {
+        if (isElementNode(element)) {
+            /** @type {?} */
+            const ns = namespaceId ? this._fetchNamespace(namespaceId) : null;
+            if (ns) {
+                ns.removeNode(element, context);
+            }
+            else {
+                this.markElementAsRemoved(namespaceId, element, false, context);
+            }
+            if (isHostElement) {
+                /** @type {?} */
+                const hostNS = this.namespacesByHostElement.get(element);
+                if (hostNS && hostNS.id !== namespaceId) {
+                    hostNS.removeNode(element, context);
+                }
+            }
+        }
+        else {
+            this._onRemovalComplete(element, context);
+        }
+    }
+    /**
+     * @param {?} namespaceId
+     * @param {?} element
+     * @param {?=} hasAnimation
+     * @param {?=} context
+     * @return {?}
+     */
+    markElementAsRemoved(namespaceId, element, hasAnimation, context) {
+        this.collectedLeaveElements.push(element);
+        element[REMOVAL_FLAG] = {
+            namespaceId,
+            setForRemoval: context, hasAnimation,
+            removedBeforeQueried: false
+        };
+    }
+    /**
+     * @param {?} namespaceId
+     * @param {?} element
+     * @param {?} name
+     * @param {?} phase
+     * @param {?} callback
+     * @return {?}
+     */
+    listen(namespaceId, element, name, phase, callback) {
+        if (isElementNode(element)) {
+            return this._fetchNamespace(namespaceId).listen(element, name, phase, callback);
+        }
+        return (/**
+         * @return {?}
+         */
+        () => { });
+    }
+    /**
+     * @private
+     * @param {?} entry
+     * @param {?} subTimelines
+     * @param {?} enterClassName
+     * @param {?} leaveClassName
+     * @param {?=} skipBuildAst
+     * @return {?}
+     */
+    _buildInstruction(entry, subTimelines, enterClassName, leaveClassName, skipBuildAst) {
+        return entry.transition.build(this.driver, entry.element, entry.fromState.value, entry.toState.value, enterClassName, leaveClassName, entry.fromState.options, entry.toState.options, subTimelines, skipBuildAst);
+    }
+    /**
+     * @param {?} containerElement
+     * @return {?}
+     */
+    destroyInnerAnimations(containerElement) {
+        /** @type {?} */
+        let elements = this.driver.query(containerElement, NG_TRIGGER_SELECTOR, true);
+        elements.forEach((/**
+         * @param {?} element
+         * @return {?}
+         */
+        element => this.destroyActiveAnimationsForElement(element)));
+        if (this.playersByQueriedElement.size == 0)
+            return;
+        elements = this.driver.query(containerElement, NG_ANIMATING_SELECTOR, true);
+        elements.forEach((/**
+         * @param {?} element
+         * @return {?}
+         */
+        element => this.finishActiveQueriedAnimationOnElement(element)));
+    }
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    destroyActiveAnimationsForElement(element) {
+        /** @type {?} */
+        const players = this.playersByElement.get(element);
+        if (players) {
+            players.forEach((/**
+             * @param {?} player
+             * @return {?}
+             */
+            player => {
+                // special case for when an element is set for destruction, but hasn't started.
+                // in this situation we want to delay the destruction until the flush occurs
+                // so that any event listeners attached to the player are triggered.
+                if (player.queued) {
+                    player.markedForDestroy = true;
+                }
+                else {
+                    player.destroy();
+                }
+            }));
+        }
+    }
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    finishActiveQueriedAnimationOnElement(element) {
+        /** @type {?} */
+        const players = this.playersByQueriedElement.get(element);
+        if (players) {
+            players.forEach((/**
+             * @param {?} player
+             * @return {?}
+             */
+            player => player.finish()));
+        }
+    }
+    /**
+     * @return {?}
+     */
+    whenRenderingDone() {
+        return new Promise((/**
+         * @param {?} resolve
+         * @return {?}
+         */
+        resolve => {
+            if (this.players.length) {
+                return optimizeGroupPlayer(this.players).onDone((/**
+                 * @return {?}
+                 */
+                () => resolve()));
+            }
+            else {
+                resolve();
+            }
+        }));
+    }
+    /**
+     * @param {?} element
+     * @return {?}
+     */
+    processLeaveNode(element) {
+        /** @type {?} */
+        const details = (/** @type {?} */ (element[REMOVAL_FLAG]));
+        if (details && details.setForRemoval) {
+            // this will prevent it from removing it twice
+            element[REMOVAL_FLAG] = NULL_REMOVAL_STATE;
+            if (details.namespaceId) {
+                this.destroyInnerAnimations(element);
+                /** @type {?} */
+                const ns = this._fetchNamespace(details.namespaceId);
+                if (ns) {
+                    ns.clearElementCache(element);
+                }
+            }
+            this._onRemovalComplete(element, details.setForRemoval);
+        }
+        if (this.driver.matchesElement(element, DISABLED_SELECTOR)) {
+            this.markElementAsDisabled(element, false);
+        }
+        this.driver.query(element, DISABLED_SELECTOR, true).forEach((/**
+         * @param {?} node
+         * @return {?}
+         */
+        node => {
+            this.markElementAsDisabled(node, false);
+        }));
+    }
+    /**
+     * @param {?=} microtaskId
+     * @return {?}
+     */
+    flush(microtaskId = -1) {
+        /** @type {?} */
+        let players = [];
+        if (this.newHostElements.size) {
+            this.newHostElements.forEach((/**
+             * @param {?} ns
+             * @param {?} element
+             * @return {?}
+             */
+            (ns, element) => this._balanceNamespaceList(ns, element)));
+            this.newHostElements.clear();
+        }
+        if (this.totalAnimations && this.collectedEnterElements.length) {
+            for (let i = 0; i < this.collectedEnterElements.length; i++) {
+                /** @type {?} */
+                const elm = this.collectedEnterElements[i];
+                addClass(elm, STAR_CLASSNAME);
+            }
+        }
+        if (this._namespaceList.length &&
+            (this.totalQueuedPlayers || this.collectedLeaveElements.length)) {
+            /** @type {?} */
+            const cleanupFns = [];
+            try {
+                players = this._flushAnimations(cleanupFns, microtaskId);
+            }
+            finally {
+                for (let i = 0; i < cleanupFns.length; i++) {
+                    cleanupFns[i]();
+                }
+            }
+        }
+        else {
+            for (let i = 0; i < this.collectedLeaveElements.length; i++) {
+                /** @type {?} */
+                const element = this.collectedLeaveElements[i];
+                this.processLeaveNode(element);
+            }
+        }
+        this.totalQueuedPlayers = 0;
+        this.collectedEnterElements.length = 0;
+        this.collectedLeaveElements.length = 0;
+        this._flushFns.forEach((/**
+         * @param {?} fn
+         * @return {?}
+         */
+        fn => fn()));
+        this._flushFns = [];
+        if (this._whenQuietFns.length) {
+            // we move these over to a variable so that
+            // if any new callbacks are registered in another
+            // flush they do not populate the existing set
+            /** @type {?} */
+            const quietFns = this._whenQuietFns;
+            this._whenQuietFns = [];
+            if (players.length) {
+                optimizeGroupPlayer(players).onDone((/**
+                 * @return {?}
+                 */
+                () => { quietFns.forEach((/**
+                 * @param {?} fn
+                 * @return {?}
+                 */
+                fn => fn())); }));
+            }
+            else {
+                quietFns.forEach((/**
+                 * @param {?} fn
+                 * @return {?}
+                 */
+                fn => fn()));
+            }
+        }
+    }
+    /**
+     * @param {?} errors
+     * @return {?}
+     */
+    reportError(errors) {
+        throw new Error(`Unable to process animations due to the following failed trigger transitions\n ${errors.join('\n')}`);
+    }
+    /**
+     * @private
+     * @param {?} cleanupFns
+     * @param {?} microtaskId
+     * @return {?}
+     */
+    _flushAnimations(cleanupFns, microtaskId) {
+        /** @type {?} */
+        const subTimelines = new ElementInstructionMap();
+        /** @type {?} */
+        const skippedPlayers = [];
+        /** @type {?} */
+        const skippedPlayersMap = new Map();
+        /** @type {?} */
+        const queuedInstructions = [];
+        /** @type {?} */
+        const queriedElements = new Map();
+        /** @type {?} */
+        const allPreStyleElements = new Map();
+        /** @type {?} */
+        const allPostStyleElements = new Map();
+        /** @type {?} */
+        const disabledElementsSet = new Set();
+        this.disabledNodes.forEach((/**
+         * @param {?} node
+         * @return {?}
+         */
+        node => {
+            disabledElementsSet.add(node);
+            /** @type {?} */
+            const nodesThatAreDisabled = this.driver.query(node, QUEUED_SELECTOR, true);
+            for (let i = 0; i < nodesThatAreDisabled.length; i++) {
+                disabledElementsSet.add(nodesThatAreDisabled[i]);
+            }
+        }));
+        /** @type {?} */
+        const bodyNode = this.bodyNode;
+        /** @type {?} */
+        const allTriggerElements = Array.from(this.statesByElement.keys());
+        /** @type {?} */
+        const enterNodeMap = buildRootMap(allTriggerElements, this.collectedEnterElements);
+        // this must occur before the instructions are built below such that
+        // the :enter queries match the elements (since the timeline queries
+        // are fired during instruction building).
+        /** @type {?} */
+        const enterNodeMapIds = new Map();
+        /** @type {?} */
+        let i = 0;
+        enterNodeMap.forEach((/**
+         * @param {?} nodes
+         * @param {?} root
+         * @return {?}
+         */
+        (nodes, root) => {
+            /** @type {?} */
+            const className = ENTER_CLASSNAME + i++;
+            enterNodeMapIds.set(root, className);
+            nodes.forEach((/**
+             * @param {?} node
+             * @return {?}
+             */
+            node => addClass(node, className)));
+        }));
+        /** @type {?} */
+        const allLeaveNodes = [];
+        /** @type {?} */
+        const mergedLeaveNodes = new Set();
+        /** @type {?} */
+        const leaveNodesWithoutAnimations = new Set();
+        for (let i = 0; i < this.collectedLeaveElements.length; i++) {
+            /** @type {?} */
+            const element = this.collectedLeaveElements[i];
+            /** @type {?} */
+            const details = (/** @type {?} */ (element[REMOVAL_FLAG]));
+            if (details && details.setForRemoval) {
+                allLeaveNodes.push(element);
+                mergedLeaveNodes.add(element);
+                if (details.hasAnimation) {
+                    this.driver.query(element, STAR_SELECTOR, true).forEach((/**
+                     * @param {?} elm
+                     * @return {?}
+                     */
+                    elm => mergedLeaveNodes.add(elm)));
+                }
+                else {
+                    leaveNodesWithoutAnimations.add(element);
+                }
+            }
+        }
+        /** @type {?} */
+        const leaveNodeMapIds = new Map();
+        /** @type {?} */
+        const leaveNodeMap = buildRootMap(allTriggerElements, Array.from(mergedLeaveNodes));
+        leaveNodeMap.forEach((/**
+         * @param {?} nodes
+         * @param {?} root
+         * @return {?}
+         */
+        (nodes, root) => {
+            /** @type {?} */
+            const className = LEAVE_CLASSNAME + i++;
+            leaveNodeMapIds.set(root, className);
+            nodes.forEach((/**
+             * @param {?} node
+             * @return {?}
+             */
+            node => addClass(node, className)));
+        }));
+        cleanupFns.push((/**
+         * @return {?}
+         */
+        () => {
+            enterNodeMap.forEach((/**
+             * @param {?} nodes
+             * @param {?} root
+             * @return {?}
+             */
+            (nodes, root) => {
+                /** @type {?} */
+                const className = (/** @type {?} */ (enterNodeMapIds.get(root)));
+                nodes.forEach((/**
+                 * @param {?} node
+                 * @return {?}
+                 */
+                node => removeClass(node, className)));
+            }));
+            leaveNodeMap.forEach((/**
+             * @param {?} nodes
+             * @param {?} root
+             * @return {?}
+             */
+            (nodes, root) => {
+                /** @type {?} */
+                const className = (/** @type {?} */ (leaveNodeMapIds.get(root)));
+                nodes.forEach((/**
+                 * @param {?} node
+                 * @return {?}
+                 */
+                node => removeClass(node, className)));
+            }));
+            allLeaveNodes.forEach((/**
+             * @param {?} element
+             * @return {?}
+             */
+            element => { this.processLeaveNode(element); }));
+        }));
+        /** @type {?} */
+        const allPlayers = [];
+        /** @type {?} */
+        const erroneousTransitions = [];
+        for (let i = this._namespaceList.length - 1; i >= 0; i--) {
+            /** @type {?} */
+            const ns = this._namespaceList[i];
+            ns.drainQueuedTransitions(microtaskId).forEach((/**
+             * @param {?} entry
+             * @return {?}
+             */
+            entry => {
+                /** @type {?} */
+                const player = entry.player;
+                /** @type {?} */
+                const element = entry.element;
+                allPlayers.push(player);
+                if (this.collectedEnterElements.length) {
+                    /** @type {?} */
+                    const details = (/** @type {?} */ (element[REMOVAL_FLAG]));
+                    // move animations are currently not supported...
+                    if (details && details.setForMove) {
+                        player.destroy();
+                        return;
+                    }
+                }
+                /** @type {?} */
+                const nodeIsOrphaned = !bodyNode || !this.driver.containsElement(bodyNode, element);
+                /** @type {?} */
+                const leaveClassName = (/** @type {?} */ (leaveNodeMapIds.get(element)));
+                /** @type {?} */
+                const enterClassName = (/** @type {?} */ (enterNodeMapIds.get(element)));
+                /** @type {?} */
+                const instruction = (/** @type {?} */ (this._buildInstruction(entry, subTimelines, enterClassName, leaveClassName, nodeIsOrphaned)));
+                if (instruction.errors && instruction.errors.length) {
+                    erroneousTransitions.push(instruction);
+                    return;
+                }
+                // even though the element may not be apart of the DOM, it may
+                // still be added at a later point (due to the mechanics of content
+                // projection and/or dynamic component insertion) therefore it's
+                // important we still style the element.
+                if (nodeIsOrphaned) {
+                    player.onStart((/**
+                     * @return {?}
+                     */
+                    () => eraseStyles(element, instruction.fromStyles)));
+                    player.onDestroy((/**
+                     * @return {?}
+                     */
+                    () => setStyles(element, instruction.toStyles)));
+                    skippedPlayers.push(player);
+                    return;
+                }
+                // if a unmatched transition is queued to go then it SHOULD NOT render
+                // an animation and cancel the previously running animations.
+                if (entry.isFallbackTransition) {
+                    player.onStart((/**
+                     * @return {?}
+                     */
+                    () => eraseStyles(element, instruction.fromStyles)));
+                    player.onDestroy((/**
+                     * @return {?}
+                     */
+                    () => setStyles(element, instruction.toStyles)));
+                    skippedPlayers.push(player);
+                    return;
+                }
+                // this means that if a parent animation uses this animation as a sub trigger
+                // then it will instruct the timeline builder to not add a player delay, but
+                // instead stretch the first keyframe gap up until the animation starts. The
+                // reason this is important is to prevent extra initialization styles from being
+                // required by the user in the animation.
+                instruction.timelines.forEach((/**
+                 * @param {?} tl
+                 * @return {?}
+                 */
+                tl => tl.stretchStartingKeyframe = true));
+                subTimelines.append(element, instruction.timelines);
+                /** @type {?} */
+                const tuple = { instruction, player, element };
+                queuedInstructions.push(tuple);
+                instruction.queriedElements.forEach((/**
+                 * @param {?} element
+                 * @return {?}
+                 */
+                element => getOrSetAsInMap(queriedElements, element, []).push(player)));
+                instruction.preStyleProps.forEach((/**
+                 * @param {?} stringMap
+                 * @param {?} element
+                 * @return {?}
+                 */
+                (stringMap, element) => {
+                    /** @type {?} */
+                    const props = Object.keys(stringMap);
+                    if (props.length) {
+                        /** @type {?} */
+                        let setVal = (/** @type {?} */ (allPreStyleElements.get(element)));
+                        if (!setVal) {
+                            allPreStyleElements.set(element, setVal = new Set());
+                        }
+                        props.forEach((/**
+                         * @param {?} prop
+                         * @return {?}
+                         */
+                        prop => setVal.add(prop)));
+                    }
+                }));
+                instruction.postStyleProps.forEach((/**
+                 * @param {?} stringMap
+                 * @param {?} element
+                 * @return {?}
+                 */
+                (stringMap, element) => {
+                    /** @type {?} */
+                    const props = Object.keys(stringMap);
+                    /** @type {?} */
+                    let setVal = (/** @type {?} */ (allPostStyleElements.get(element)));
+                    if (!setVal) {
+                        allPostStyleElements.set(element, setVal = new Set());
+                    }
+                    props.forEach((/**
+                     * @param {?} prop
+                     * @return {?}
+                     */
+                    prop => setVal.add(prop)));
+                }));
+            }));
+        }
+        if (erroneousTransitions.length) {
+            /** @type {?} */
+            const errors = [];
+            erroneousTransitions.forEach((/**
+             * @param {?} instruction
+             * @return {?}
+             */
+            instruction => {
+                errors.push(`@${instruction.triggerName} has failed due to:\n`);
+                (/** @type {?} */ (instruction.errors)).forEach((/**
+                 * @param {?} error
+                 * @return {?}
+                 */
+                error => errors.push(`- ${error}\n`)));
+            }));
+            allPlayers.forEach((/**
+             * @param {?} player
+             * @return {?}
+             */
+            player => player.destroy()));
+            this.reportError(errors);
+        }
+        /** @type {?} */
+        const allPreviousPlayersMap = new Map();
+        // this map works to tell which element in the DOM tree is contained by
+        // which animation. Further down below this map will get populated once
+        // the players are built and in doing so it can efficiently figure out
+        // if a sub player is skipped due to a parent player having priority.
+        /** @type {?} */
+        const animationElementMap = new Map();
+        queuedInstructions.forEach((/**
+         * @param {?} entry
+         * @return {?}
+         */
+        entry => {
+            /** @type {?} */
+            const element = entry.element;
+            if (subTimelines.has(element)) {
+                animationElementMap.set(element, element);
+                this._beforeAnimationBuild(entry.player.namespaceId, entry.instruction, allPreviousPlayersMap);
+            }
+        }));
+        skippedPlayers.forEach((/**
+         * @param {?} player
+         * @return {?}
+         */
+        player => {
+            /** @type {?} */
+            const element = player.element;
+            /** @type {?} */
+            const previousPlayers = this._getPreviousPlayers(element, false, player.namespaceId, player.triggerName, null);
+            previousPlayers.forEach((/**
+             * @param {?} prevPlayer
+             * @return {?}
+             */
+            prevPlayer => {
+                getOrSetAsInMap(allPreviousPlayersMap, element, []).push(prevPlayer);
+                prevPlayer.destroy();
+            }));
+        }));
+        // this is a special case for nodes that will be removed (either by)
+        // having their own leave animations or by being queried in a container
+        // that will be removed once a parent animation is complete. The idea
+        // here is that * styles must be identical to ! styles because of
+        // backwards compatibility (* is also filled in by default in many places).
+        // Otherwise * styles will return an empty value or auto since the element
+        // that is being getComputedStyle'd will not be visible (since * = destination)
+        /** @type {?} */
+        const replaceNodes = allLeaveNodes.filter((/**
+         * @param {?} node
+         * @return {?}
+         */
+        node => {
+            return replacePostStylesAsPre(node, allPreStyleElements, allPostStyleElements);
+        }));
+        // POST STAGE: fill the * styles
+        /** @type {?} */
+        const postStylesMap = new Map();
+        /** @type {?} */
+        const allLeaveQueriedNodes = cloakAndComputeStyles(postStylesMap, this.driver, leaveNodesWithoutAnimations, allPostStyleElements, _angular_animations__WEBPACK_IMPORTED_MODULE_0__["AUTO_STYLE"]);
+        allLeaveQueriedNodes.forEach((/**
+         * @param {?} node
+         * @return {?}
+         */
+        node => {
+            if (replacePostStylesAsPre(node, allPreStyleElements, allPostStyleElements)) {
+                replaceNodes.push(node);
+            }
+        }));
+        // PRE STAGE: fill the ! styles
+        /** @type {?} */
+        const preStylesMap = new Map();
+        enterNodeMap.forEach((/**
+         * @param {?} nodes
+         * @param {?} root
+         * @return {?}
+         */
+        (nodes, root) => {
+            cloakAndComputeStyles(preStylesMap, this.driver, new Set(nodes), allPreStyleElements, _angular_animations__WEBPACK_IMPORTED_MODULE_0__["ɵPRE_STYLE"]);
+        }));
+        replaceNodes.forEach((/**
+         * @param {?} node
+         * @return {?}
+         */
+        node => {
+            /** @type {?} */
+            const post = postStylesMap.get(node);
+            /** @type {?} */
+            const pre = preStylesMap.get(node);
+            postStylesMap.set(node, (/** @type {?} */ (Object.assign({}, post, pre))));
+        }));
+        /** @type {?} */
+        const rootPlayers = [];
+        /** @type {?} */
+        const subPlayers = [];
+        /** @type {?} */
+        const NO_PARENT_ANIMATION_ELEMENT_DETECTED = {};
+        queuedInstructions.forEach((/**
+         * @param {?} entry
+         * @return {?}
+         */
+        entry => {
+            const { element, player, instruction } = entry;
+            // this means that it was never consumed by a parent animation which
+            // means that it is independent and therefore should be set for animation
+            if (subTimelines.has(element)) {
+                if (disabledElementsSet.has(element)) {
+                    player.onDestroy((/**
+                     * @return {?}
+                     */
+                    () => setStyles(element, instruction.toStyles)));
+                    player.disabled = true;
+                    player.overrideTotalTime(instruction.totalTime);
+                    skippedPlayers.push(player);
+                    return;
+                }
+                // this will flow up the DOM and query the map to figure out
+                // if a parent animation has priority over it. In the situation
+                // that a parent is detected then it will cancel the loop. If
+                // nothing is detected, or it takes a few hops to find a parent,
+                // then it will fill in the missing nodes and signal them as having
+                // a detected parent (or a NO_PARENT value via a special constant).
+                /** @type {?} */
+                let parentWithAnimation = NO_PARENT_ANIMATION_ELEMENT_DETECTED;
+                if (animationElementMap.size > 1) {
+                    /** @type {?} */
+                    let elm = element;
+                    /** @type {?} */
+                    const parentsToAdd = [];
+                    while (elm = elm.parentNode) {
+                        /** @type {?} */
+                        const detectedParent = animationElementMap.get(elm);
+                        if (detectedParent) {
+                            parentWithAnimation = detectedParent;
+                            break;
+                        }
+                        parentsToAdd.push(elm);
+                    }
+                    parentsToAdd.forEach((/**
+                     * @param {?} parent
+                     * @return {?}
+                     */
+                    parent => animationElementMap.set(parent, parentWithAnimation)));
+                }
+                /** @type {?} */
+                const innerPlayer = this._buildAnimation(player.namespaceId, instruction, allPreviousPlayersMap, skippedPlayersMap, preStylesMap, postStylesMap);
+                player.setRealPlayer(innerPlayer);
+                if (parentWithAnimation === NO_PARENT_ANIMATION_ELEMENT_DETECTED) {
+                    rootPlayers.push(player);
+                }
+                else {
+                    /** @type {?} */
+                    const parentPlayers = this.playersByElement.get(parentWithAnimation);
+                    if (parentPlayers && parentPlayers.length) {
+                        player.parentPlayer = optimizeGroupPlayer(parentPlayers);
+                    }
+                    skippedPlayers.push(player);
+                }
+            }
+            else {
+                eraseStyles(element, instruction.fromStyles);
+                player.onDestroy((/**
+                 * @return {?}
+                 */
+                () => setStyles(element, instruction.toStyles)));
+                // there still might be a ancestor player animating this
+                // element therefore we will still add it as a sub player
+                // even if its animation may be disabled
+                subPlayers.push(player);
+                if (disabledElementsSet.has(element)) {
+                    skippedPlayers.push(player);
+                }
+            }
+        }));
+        // find all of the sub players' corresponding inner animation player
+        subPlayers.forEach((/**
+         * @param {?} player
+         * @return {?}
+         */
+        player => {
+            // even if any players are not found for a sub animation then it
+            // will still complete itself after the next tick since it's Noop
+            /** @type {?} */
+            const playersForElement = skippedPlayersMap.get(player.element);
+            if (playersForElement && playersForElement.length) {
+                /** @type {?} */
+                const innerPlayer = optimizeGroupPlayer(playersForElement);
+                player.setRealPlayer(innerPlayer);
+            }
+        }));
+        // the reason why we don't actually play the animation is
+        // because all that a skipped player is designed to do is to
+        // fire the start/done transition callback events
+        skippedPlayers.forEach((/**
+         * @param {?} player
+         * @return {?}
+         */
+        player => {
+            if (player.parentPlayer) {
+                player.syncPlayerEvents(player.parentPlayer);
+            }
+            else {
+                player.destroy();
+            }
+        }));
+        // run through all of the queued removals and see if they
+        // were picked up by a query. If not then perform the removal
+        // operation right away unless a parent animation is ongoing.
+        for (let i = 0; i < allLeaveNodes.length; i++) {
+            /** @type {?} */
+            const element = allLeaveNodes[i];
+            /** @type {?} */
+            const details = (/** @type {?} */ (element[REMOVAL_FLAG]));
+            removeClass(element, LEAVE_CLASSNAME);
+            // this means the element has a removal animation that is being
+            // taken care of and therefore the inner elements will hang around
+            // until that animation is over (or the parent queried animation)
+            if (details && details.hasAnimation)
+                continue;
+            /** @type {?} */
+            let players = [];
+            // if this element is queried or if it contains queried children
+            // then we want for the element not to be removed from the page
+            // until the queried animations have finished
+            if (queriedElements.size) {
+                /** @type {?} */
+                let queriedPlayerResults = queriedElements.get(element);
+                if (queriedPlayerResults && queriedPlayerResults.length) {
+                    players.push(...queriedPlayerResults);
+                }
+                /** @type {?} */
+                let queriedInnerElements = this.driver.query(element, NG_ANIMATING_SELECTOR, true);
+                for (let j = 0; j < queriedInnerElements.length; j++) {
+                    /** @type {?} */
+                    let queriedPlayers = queriedElements.get(queriedInnerElements[j]);
+                    if (queriedPlayers && queriedPlayers.length) {
+                        players.push(...queriedPlayers);
+                    }
+                }
+            }
+            /** @type {?} */
+            const activePlayers = players.filter((/**
+             * @param {?} p
+             * @return {?}
+             */
+            p => !p.destroyed));
+            if (activePlayers.length) {
+                removeNodesAfterAnimationDone(this, element, activePlayers);
+            }
+            else {
+                this.processLeaveNode(element);
+            }
+        }
+        // this is required so the cleanup method doesn't remove them
+        allLeaveNodes.length = 0;
+        rootPlayers.forEach((/**
+         * @param {?} player
+         * @return {?}
+         */
+        player => {
+            this.players.push(player);
+            player.onDone((/**
+             * @return {?}
+             */
+            () => {
+                player.destroy();
+                /** @type {?} */
+                const index = this.players.indexOf(player);
+                this.players.splice(index, 1);
+            }));
+            player.play();
+        }));
+        return rootPlayers;
+    }
+    /**
+     * @param {?} namespaceId
+     * @param {?} element
+     * @return {?}
+     */
+    elementContainsData(namespaceId, element) {
+        /** @type {?} */
+        let containsData = false;
+        /** @type {?} */
+        const details = (/** @type {?} */ (element[REMOVAL_FLAG]));
+        if (details && details.setForRemoval)
+            containsData = true;
+        if (this.playersByElement.has(element))
+            containsData = true;
+        if (this.playersByQueriedElement.has(element))
+            containsData = true;
+        if (this.statesByElement.has(element))
+            containsData = true;
+        return this._fetchNamespace(namespaceId).elementContainsData(element) || containsData;
+    }
+    /**
+     * @param {?} callback
+     * @return {?}
+     */
+    afterFlush(callback) { this._flushFns.push(callback); }
+    /**
+     * @param {?} callback
+     * @return {?}
+     */
+    afterFlushAnimationsDone(callback) { this._whenQuietFns.push(callback); }
+    /**
+     * @private
+     * @param {?} element
+     * @param {?} isQueriedElement
+     * @param {?=} namespaceId
+     * @param {?=} triggerName
+     * @param {?=} toStateValue
+     * @return {?}
+     */
+    _getPreviousPlayers(element, isQueriedElement, namespaceId, triggerName, toStateValue) {
+        /** @type {?} */
+        let players = [];
+        if (isQueriedElement) {
+            /** @type {?} */
+            const queriedElementPlayers = this.playersByQueriedElement.get(element);
+            if (queriedElementPlayers) {
+                players = queriedElementPlayers;
+            }
+        }
+        else {
+            /** @type {?} */
+            const elementPlayers = this.playersByElement.get(element);
+            if (elementPlayers) {
+                /** @type {?} */
+                const isRemovalAnimation = !toStateValue || toStateValue == VOID_VALUE;
+                elementPlayers.forEach((/**
+                 * @param {?} player
+                 * @return {?}
+                 */
+                player => {
+                    if (player.queued)
+                        return;
+                    if (!isRemovalAnimation && player.triggerName != triggerName)
+                        return;
+                    players.push(player);
+                }));
+            }
+        }
+        if (namespaceId || triggerName) {
+            players = players.filter((/**
+             * @param {?} player
+             * @return {?}
+             */
+            player => {
+                if (namespaceId && namespaceId != player.namespaceId)
+                    return false;
+                if (triggerName && triggerName != player.triggerName)
+                    return false;
+                return true;
+            }));
+        }
+        return players;
+    }
+    /**
+     * @private
+     * @param {?} namespaceId
+     * @param {?} instruction
+     * @param {?} allPreviousPlayersMap
+     * @return {?}
+     */
+    _beforeAnimationBuild(namespaceId, instruction, allPreviousPlayersMap) {
+        /** @type {?} */
+        const triggerName = instruction.triggerName;
+        /** @type {?} */
+        const rootElement = instruction.element;
+        // when a removal animation occurs, ALL previous players are collected
+        // and destroyed (even if they are outside of the current namespace)
+        /** @type {?} */
+        const targetNameSpaceId = instruction.isRemovalTransition ? undefined : namespaceId;
+        /** @type {?} */
+        const targetTriggerName = instruction.isRemovalTransition ? undefined : triggerName;
+        for (const timelineInstruction of instruction.timelines) {
+            /** @type {?} */
+            const element = timelineInstruction.element;
+            /** @type {?} */
+            const isQueriedElement = element !== rootElement;
+            /** @type {?} */
+            const players = getOrSetAsInMap(allPreviousPlayersMap, element, []);
+            /** @type {?} */
+            const previousPlayers = this._getPreviousPlayers(element, isQueriedElement, targetNameSpaceId, targetTriggerName, instruction.toState);
+            previousPlayers.forEach((/**
+             * @param {?} player
+             * @return {?}
+             */
+            player => {
+                /** @type {?} */
+                const realPlayer = (/** @type {?} */ (player.getRealPlayer()));
+                if (realPlayer.beforeDestroy) {
+                    realPlayer.beforeDestroy();
+                }
+                player.destroy();
+                players.push(player);
+            }));
+        }
+        // this needs to be done so that the PRE/POST styles can be
+        // computed properly without interfering with the previous animation
+        eraseStyles(rootElement, instruction.fromStyles);
+    }
+    /**
+     * @private
+     * @param {?} namespaceId
+     * @param {?} instruction
+     * @param {?} allPreviousPlayersMap
+     * @param {?} skippedPlayersMap
+     * @param {?} preStylesMap
+     * @param {?} postStylesMap
+     * @return {?}
+     */
+    _buildAnimation(namespaceId, instruction, allPreviousPlayersMap, skippedPlayersMap, preStylesMap, postStylesMap) {
+        /** @type {?} */
+        const triggerName = instruction.triggerName;
+        /** @type {?} */
+        const rootElement = instruction.element;
+        // we first run this so that the previous animation player
+        // data can be passed into the successive animation players
+        /** @type {?} */
+        const allQueriedPlayers = [];
+        /** @type {?} */
+        const allConsumedElements = new Set();
+        /** @type {?} */
+        const allSubElements = new Set();
+        /** @type {?} */
+        const allNewPlayers = instruction.timelines.map((/**
+         * @param {?} timelineInstruction
+         * @return {?}
+         */
+        timelineInstruction => {
+            /** @type {?} */
+            const element = timelineInstruction.element;
+            allConsumedElements.add(element);
+            // FIXME (matsko): make sure to-be-removed animations are removed properly
+            /** @type {?} */
+            const details = element[REMOVAL_FLAG];
+            if (details && details.removedBeforeQueried)
+                return new _angular_animations__WEBPACK_IMPORTED_MODULE_0__["NoopAnimationPlayer"](timelineInstruction.duration, timelineInstruction.delay);
+            /** @type {?} */
+            const isQueriedElement = element !== rootElement;
+            /** @type {?} */
+            const previousPlayers = flattenGroupPlayers((allPreviousPlayersMap.get(element) || EMPTY_PLAYER_ARRAY)
+                .map((/**
+             * @param {?} p
+             * @return {?}
+             */
+            p => p.getRealPlayer())))
+                .filter((/**
+             * @param {?} p
+             * @return {?}
+             */
+            p => {
+                // the `element` is not apart of the AnimationPlayer definition, but
+                // Mock/WebAnimations
+                // use the element within their implementation. This will be added in Angular5 to
+                // AnimationPlayer
+                /** @type {?} */
+                const pp = (/** @type {?} */ (p));
+                return pp.element ? pp.element === element : false;
+            }));
+            /** @type {?} */
+            const preStyles = preStylesMap.get(element);
+            /** @type {?} */
+            const postStyles = postStylesMap.get(element);
+            /** @type {?} */
+            const keyframes = normalizeKeyframes(this.driver, this._normalizer, element, timelineInstruction.keyframes, preStyles, postStyles);
+            /** @type {?} */
+            const player = this._buildPlayer(timelineInstruction, keyframes, previousPlayers);
+            // this means that this particular player belongs to a sub trigger. It is
+            // important that we match this player up with the corresponding (@trigger.listener)
+            if (timelineInstruction.subTimeline && skippedPlayersMap) {
+                allSubElements.add(element);
+            }
+            if (isQueriedElement) {
+                /** @type {?} */
+                const wrappedPlayer = new TransitionAnimationPlayer(namespaceId, triggerName, element);
+                wrappedPlayer.setRealPlayer(player);
+                allQueriedPlayers.push(wrappedPlayer);
+            }
+            return player;
+        }));
+        allQueriedPlayers.forEach((/**
+         * @param {?} player
+         * @return {?}
+         */
+        player => {
+            getOrSetAsInMap(this.playersByQueriedElement, player.element, []).push(player);
+            player.onDone((/**
+             * @return {?}
+             */
+            () => deleteOrUnsetInMap(this.playersByQueriedElement, player.element, player)));
+        }));
+        allConsumedElements.forEach((/**
+         * @param {?} element
+         * @return {?}
+         */
+        element => addClass(element, NG_ANIMATING_CLASSNAME)));
+        /** @type {?} */
+        const player = optimizeGroupPlayer(allNewPlayers);
+        player.onDestroy((/**
+         * @return {?}
+         */
+        () => {
+            allConsumedElements.forEach((/**
+             * @param {?} element
+             * @return {?}
+             */
+            element => removeClass(element, NG_ANIMATING_CLASSNAME)));
+            setStyles(rootElement, instruction.toStyles);
+        }));
+        // this basically makes all of the callbacks for sub element animations
+        // be dependent on the upper players for when they finish
+        allSubElements.forEach((/**
+         * @param {?} element
+         * @return {?}
+         */
+        element => { getOrSetAsInMap(skippedPlayersMap, element, []).push(player); }));
+        return player;
+    }
+    /**
+     * @private
+     * @param {?} instruction
+     * @param {?} keyframes
+     * @param {?} previousPlayers
+     * @return {?}
+     */
+    _buildPlayer(instruction, keyframes, previousPlayers) {
+        if (keyframes.length > 0) {
+            return this.driver.animate(instruction.element, keyframes, instruction.duration, instruction.delay, instruction.easing, previousPlayers);
+        }
+        // special case for when an empty transition|definition is provided
+        // ... there is no point in rendering an empty animation
+        return new _angular_animations__WEBPACK_IMPORTED_MODULE_0__["NoopAnimationPlayer"](instruction.duration, instruction.delay);
+    }
+}
+if (false) {}
+class TransitionAnimationPlayer {
+    /**
+     * @param {?} namespaceId
+     * @param {?} triggerName
+     * @param {?} element
+     */
+    constructor(namespaceId, triggerName, element) {
+        this.namespaceId = namespaceId;
+        this.triggerName = triggerName;
+        this.element = element;
+        this._player = new _angular_animations__WEBPACK_IMPORTED_MODULE_0__["NoopAnimationPlayer"]();
+        this._containsRealPlayer = false;
+        this._queuedCallbacks = {};
+        this.destroyed = false;
+        this.markedForDestroy = false;
+        this.disabled = false;
+        this.queued = true;
+        this.totalTime = 0;
+    }
+    /**
+     * @param {?} player
+     * @return {?}
+     */
+    setRealPlayer(player) {
+        if (this._containsRealPlayer)
+            return;
+        this._player = player;
+        Object.keys(this._queuedCallbacks).forEach((/**
+         * @param {?} phase
+         * @return {?}
+         */
+        phase => {
+            this._queuedCallbacks[phase].forEach((/**
+             * @param {?} callback
+             * @return {?}
+             */
+            callback => listenOnPlayer(player, phase, undefined, callback)));
+        }));
+        this._queuedCallbacks = {};
+        this._containsRealPlayer = true;
+        this.overrideTotalTime(player.totalTime);
+        ((/** @type {?} */ (this))).queued = false;
+    }
+    /**
+     * @return {?}
+     */
+    getRealPlayer() { return this._player; }
+    /**
+     * @param {?} totalTime
+     * @return {?}
+     */
+    overrideTotalTime(totalTime) { ((/** @type {?} */ (this))).totalTime = totalTime; }
+    /**
+     * @param {?} player
+     * @return {?}
+     */
+    syncPlayerEvents(player) {
+        /** @type {?} */
+        const p = (/** @type {?} */ (this._player));
+        if (p.triggerCallback) {
+            player.onStart((/**
+             * @return {?}
+             */
+            () => (/** @type {?} */ (p.triggerCallback))('start')));
+        }
+        player.onDone((/**
+         * @return {?}
+         */
+        () => this.finish()));
+        player.onDestroy((/**
+         * @return {?}
+         */
+        () => this.destroy()));
+    }
+    /**
+     * @private
+     * @param {?} name
+     * @param {?} callback
+     * @return {?}
+     */
+    _queueEvent(name, callback) {
+        getOrSetAsInMap(this._queuedCallbacks, name, []).push(callback);
+    }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    onDone(fn) {
+        if (this.queued) {
+            this._queueEvent('done', fn);
+        }
+        this._player.onDone(fn);
+    }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    onStart(fn) {
+        if (this.queued) {
+            this._queueEvent('start', fn);
+        }
+        this._player.onStart(fn);
+    }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    onDestroy(fn) {
+        if (this.queued) {
+            this._queueEvent('destroy', fn);
+        }
+        this._player.onDestroy(fn);
+    }
+    /**
+     * @return {?}
+     */
+    init() { this._player.init(); }
+    /**
+     * @return {?}
+     */
+    hasStarted() { return this.queued ? false : this._player.hasStarted(); }
+    /**
+     * @return {?}
+     */
+    play() { !this.queued && this._player.play(); }
+    /**
+     * @return {?}
+     */
+    pause() { !this.queued && this._player.pause(); }
+    /**
+     * @return {?}
+     */
+    restart() { !this.queued && this._player.restart(); }
+    /**
+     * @return {?}
+     */
+    finish() { this._player.finish(); }
+    /**
+     * @return {?}
+     */
+    destroy() {
+        ((/** @type {?} */ (this))).destroyed = true;
+        this._player.destroy();
+    }
+    /**
+     * @return {?}
+     */
+    reset() { !this.queued && this._player.reset(); }
+    /**
+     * @param {?} p
+     * @return {?}
+     */
+    setPosition(p) {
+        if (!this.queued) {
+            this._player.setPosition(p);
+        }
+    }
+    /**
+     * @return {?}
+     */
+    getPosition() { return this.queued ? 0 : this._player.getPosition(); }
+    /**
+     * \@internal
+     * @param {?} phaseName
+     * @return {?}
+     */
+    triggerCallback(phaseName) {
+        /** @type {?} */
+        const p = (/** @type {?} */ (this._player));
+        if (p.triggerCallback) {
+            p.triggerCallback(phaseName);
+        }
+    }
+}
+if (false) {}
+/**
+ * @param {?} map
+ * @param {?} key
+ * @param {?} value
+ * @return {?}
+ */
+function deleteOrUnsetInMap(map, key, value) {
+    /** @type {?} */
+    let currentValues;
+    if (map instanceof Map) {
+        currentValues = map.get(key);
+        if (currentValues) {
+            if (currentValues.length) {
+                /** @type {?} */
+                const index = currentValues.indexOf(value);
+                currentValues.splice(index, 1);
+            }
+            if (currentValues.length == 0) {
+                map.delete(key);
+            }
+        }
+    }
+    else {
+        currentValues = map[key];
+        if (currentValues) {
+            if (currentValues.length) {
+                /** @type {?} */
+                const index = currentValues.indexOf(value);
+                currentValues.splice(index, 1);
+            }
+            if (currentValues.length == 0) {
+                delete map[key];
+            }
+        }
+    }
+    return currentValues;
+}
+/**
+ * @param {?} value
+ * @return {?}
+ */
+function normalizeTriggerValue(value) {
+    // we use `!= null` here because it's the most simple
+    // way to test against a "falsy" value without mixing
+    // in empty strings or a zero value. DO NOT OPTIMIZE.
+    return value != null ? value : null;
+}
+/**
+ * @param {?} node
+ * @return {?}
+ */
+function isElementNode(node) {
+    return node && node['nodeType'] === 1;
+}
+/**
+ * @param {?} eventName
+ * @return {?}
+ */
+function isTriggerEventValid(eventName) {
+    return eventName == 'start' || eventName == 'done';
+}
+/**
+ * @param {?} element
+ * @param {?=} value
+ * @return {?}
+ */
+function cloakElement(element, value) {
+    /** @type {?} */
+    const oldValue = element.style.display;
+    element.style.display = value != null ? value : 'none';
+    return oldValue;
+}
+/**
+ * @param {?} valuesMap
+ * @param {?} driver
+ * @param {?} elements
+ * @param {?} elementPropsMap
+ * @param {?} defaultStyle
+ * @return {?}
+ */
+function cloakAndComputeStyles(valuesMap, driver, elements, elementPropsMap, defaultStyle) {
+    /** @type {?} */
+    const cloakVals = [];
+    elements.forEach((/**
+     * @param {?} element
+     * @return {?}
+     */
+    element => cloakVals.push(cloakElement(element))));
+    /** @type {?} */
+    const failedElements = [];
+    elementPropsMap.forEach((/**
+     * @param {?} props
+     * @param {?} element
+     * @return {?}
+     */
+    (props, element) => {
+        /** @type {?} */
+        const styles = {};
+        props.forEach((/**
+         * @param {?} prop
+         * @return {?}
+         */
+        prop => {
+            /** @type {?} */
+            const value = styles[prop] = driver.computeStyle(element, prop, defaultStyle);
+            // there is no easy way to detect this because a sub element could be removed
+            // by a parent animation element being detached.
+            if (!value || value.length == 0) {
+                element[REMOVAL_FLAG] = NULL_REMOVED_QUERIED_STATE;
+                failedElements.push(element);
+            }
+        }));
+        valuesMap.set(element, styles);
+    }));
+    // we use a index variable here since Set.forEach(a, i) does not return
+    // an index value for the closure (but instead just the value)
+    /** @type {?} */
+    let i = 0;
+    elements.forEach((/**
+     * @param {?} element
+     * @return {?}
+     */
+    element => cloakElement(element, cloakVals[i++])));
+    return failedElements;
+}
+/*
+Since the Angular renderer code will return a collection of inserted
+nodes in all areas of a DOM tree, it's up to this algorithm to figure
+out which nodes are roots for each animation @trigger.
+
+By placing each inserted node into a Set and traversing upwards, it
+is possible to find the @trigger elements and well any direct *star
+insertion nodes, if a @trigger root is found then the enter element
+is placed into the Map[@trigger] spot.
+ */
+/**
+ * @param {?} roots
+ * @param {?} nodes
+ * @return {?}
+ */
+function buildRootMap(roots, nodes) {
+    /** @type {?} */
+    const rootMap = new Map();
+    roots.forEach((/**
+     * @param {?} root
+     * @return {?}
+     */
+    root => rootMap.set(root, [])));
+    if (nodes.length == 0)
+        return rootMap;
+    /** @type {?} */
+    const NULL_NODE = 1;
+    /** @type {?} */
+    const nodeSet = new Set(nodes);
+    /** @type {?} */
+    const localRootMap = new Map();
+    /**
+     * @param {?} node
+     * @return {?}
+     */
+    function getRoot(node) {
+        if (!node)
+            return NULL_NODE;
+        /** @type {?} */
+        let root = localRootMap.get(node);
+        if (root)
+            return root;
+        /** @type {?} */
+        const parent = node.parentNode;
+        if (rootMap.has(parent)) { // ngIf inside @trigger
+            root = parent;
+        }
+        else if (nodeSet.has(parent)) { // ngIf inside ngIf
+            root = NULL_NODE;
+        }
+        else { // recurse upwards
+            root = getRoot(parent);
+        }
+        localRootMap.set(node, root);
+        return root;
+    }
+    nodes.forEach((/**
+     * @param {?} node
+     * @return {?}
+     */
+    node => {
+        /** @type {?} */
+        const root = getRoot(node);
+        if (root !== NULL_NODE) {
+            (/** @type {?} */ (rootMap.get(root))).push(node);
+        }
+    }));
+    return rootMap;
+}
+/** @type {?} */
+const CLASSES_CACHE_KEY = '$$classes';
+/**
+ * @param {?} element
+ * @param {?} className
+ * @return {?}
+ */
+function containsClass(element, className) {
+    if (element.classList) {
+        return element.classList.contains(className);
+    }
+    else {
+        /** @type {?} */
+        const classes = element[CLASSES_CACHE_KEY];
+        return classes && classes[className];
+    }
+}
+/**
+ * @param {?} element
+ * @param {?} className
+ * @return {?}
+ */
+function addClass(element, className) {
+    if (element.classList) {
+        element.classList.add(className);
+    }
+    else {
+        /** @type {?} */
+        let classes = element[CLASSES_CACHE_KEY];
+        if (!classes) {
+            classes = element[CLASSES_CACHE_KEY] = {};
+        }
+        classes[className] = true;
+    }
+}
+/**
+ * @param {?} element
+ * @param {?} className
+ * @return {?}
+ */
+function removeClass(element, className) {
+    if (element.classList) {
+        element.classList.remove(className);
+    }
+    else {
+        /** @type {?} */
+        let classes = element[CLASSES_CACHE_KEY];
+        if (classes) {
+            delete classes[className];
+        }
+    }
+}
+/**
+ * @param {?} engine
+ * @param {?} element
+ * @param {?} players
+ * @return {?}
+ */
+function removeNodesAfterAnimationDone(engine, element, players) {
+    optimizeGroupPlayer(players).onDone((/**
+     * @return {?}
+     */
+    () => engine.processLeaveNode(element)));
+}
+/**
+ * @param {?} players
+ * @return {?}
+ */
+function flattenGroupPlayers(players) {
+    /** @type {?} */
+    const finalPlayers = [];
+    _flattenGroupPlayersRecur(players, finalPlayers);
+    return finalPlayers;
+}
+/**
+ * @param {?} players
+ * @param {?} finalPlayers
+ * @return {?}
+ */
+function _flattenGroupPlayersRecur(players, finalPlayers) {
+    for (let i = 0; i < players.length; i++) {
+        /** @type {?} */
+        const player = players[i];
+        if (player instanceof _angular_animations__WEBPACK_IMPORTED_MODULE_0__["ɵAnimationGroupPlayer"]) {
+            _flattenGroupPlayersRecur(player.players, finalPlayers);
+        }
+        else {
+            finalPlayers.push((/** @type {?} */ (player)));
+        }
+    }
+}
+/**
+ * @param {?} a
+ * @param {?} b
+ * @return {?}
+ */
+function objEquals(a, b) {
+    /** @type {?} */
+    const k1 = Object.keys(a);
+    /** @type {?} */
+    const k2 = Object.keys(b);
+    if (k1.length != k2.length)
+        return false;
+    for (let i = 0; i < k1.length; i++) {
+        /** @type {?} */
+        const prop = k1[i];
+        if (!b.hasOwnProperty(prop) || a[prop] !== b[prop])
+            return false;
+    }
+    return true;
+}
+/**
+ * @param {?} element
+ * @param {?} allPreStyleElements
+ * @param {?} allPostStyleElements
+ * @return {?}
+ */
+function replacePostStylesAsPre(element, allPreStyleElements, allPostStyleElements) {
+    /** @type {?} */
+    const postEntry = allPostStyleElements.get(element);
+    if (!postEntry)
+        return false;
+    /** @type {?} */
+    let preEntry = allPreStyleElements.get(element);
+    if (preEntry) {
+        postEntry.forEach((/**
+         * @param {?} data
+         * @return {?}
+         */
+        data => (/** @type {?} */ (preEntry)).add(data)));
+    }
+    else {
+        allPreStyleElements.set(element, postEntry);
+    }
+    allPostStyleElements.delete(element);
+    return true;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class AnimationEngine {
+    /**
+     * @param {?} bodyNode
+     * @param {?} _driver
+     * @param {?} normalizer
+     */
+    constructor(bodyNode, _driver, normalizer) {
+        this.bodyNode = bodyNode;
+        this._driver = _driver;
+        this._triggerCache = {};
+        // this method is designed to be overridden by the code that uses this engine
+        this.onRemovalComplete = (/**
+         * @param {?} element
+         * @param {?} context
+         * @return {?}
+         */
+        (element, context) => { });
+        this._transitionEngine = new TransitionAnimationEngine(bodyNode, _driver, normalizer);
+        this._timelineEngine = new TimelineAnimationEngine(bodyNode, _driver, normalizer);
+        this._transitionEngine.onRemovalComplete = (/**
+         * @param {?} element
+         * @param {?} context
+         * @return {?}
+         */
+        (element, context) => this.onRemovalComplete(element, context));
+    }
+    /**
+     * @param {?} componentId
+     * @param {?} namespaceId
+     * @param {?} hostElement
+     * @param {?} name
+     * @param {?} metadata
+     * @return {?}
+     */
+    registerTrigger(componentId, namespaceId, hostElement, name, metadata) {
+        /** @type {?} */
+        const cacheKey = componentId + '-' + name;
+        /** @type {?} */
+        let trigger = this._triggerCache[cacheKey];
+        if (!trigger) {
+            /** @type {?} */
+            const errors = [];
+            /** @type {?} */
+            const ast = (/** @type {?} */ (buildAnimationAst(this._driver, (/** @type {?} */ (metadata)), errors)));
+            if (errors.length) {
+                throw new Error(`The animation trigger "${name}" has failed to build due to the following errors:\n - ${errors.join("\n - ")}`);
+            }
+            trigger = buildTrigger(name, ast);
+            this._triggerCache[cacheKey] = trigger;
+        }
+        this._transitionEngine.registerTrigger(namespaceId, name, trigger);
+    }
+    /**
+     * @param {?} namespaceId
+     * @param {?} hostElement
+     * @return {?}
+     */
+    register(namespaceId, hostElement) {
+        this._transitionEngine.register(namespaceId, hostElement);
+    }
+    /**
+     * @param {?} namespaceId
+     * @param {?} context
+     * @return {?}
+     */
+    destroy(namespaceId, context) {
+        this._transitionEngine.destroy(namespaceId, context);
+    }
+    /**
+     * @param {?} namespaceId
+     * @param {?} element
+     * @param {?} parent
+     * @param {?} insertBefore
+     * @return {?}
+     */
+    onInsert(namespaceId, element, parent, insertBefore) {
+        this._transitionEngine.insertNode(namespaceId, element, parent, insertBefore);
+    }
+    /**
+     * @param {?} namespaceId
+     * @param {?} element
+     * @param {?} context
+     * @param {?=} isHostElement
+     * @return {?}
+     */
+    onRemove(namespaceId, element, context, isHostElement) {
+        this._transitionEngine.removeNode(namespaceId, element, isHostElement || false, context);
+    }
+    /**
+     * @param {?} element
+     * @param {?} disable
+     * @return {?}
+     */
+    disableAnimations(element, disable) {
+        this._transitionEngine.markElementAsDisabled(element, disable);
+    }
+    /**
+     * @param {?} namespaceId
+     * @param {?} element
+     * @param {?} property
+     * @param {?} value
+     * @return {?}
+     */
+    process(namespaceId, element, property, value) {
+        if (property.charAt(0) == '@') {
+            const [id, action] = parseTimelineCommand(property);
+            /** @type {?} */
+            const args = (/** @type {?} */ (value));
+            this._timelineEngine.command(id, element, action, args);
+        }
+        else {
+            this._transitionEngine.trigger(namespaceId, element, property, value);
+        }
+    }
+    /**
+     * @param {?} namespaceId
+     * @param {?} element
+     * @param {?} eventName
+     * @param {?} eventPhase
+     * @param {?} callback
+     * @return {?}
+     */
+    listen(namespaceId, element, eventName, eventPhase, callback) {
+        // @@listen
+        if (eventName.charAt(0) == '@') {
+            const [id, action] = parseTimelineCommand(eventName);
+            return this._timelineEngine.listen(id, element, action, callback);
+        }
+        return this._transitionEngine.listen(namespaceId, element, eventName, eventPhase, callback);
+    }
+    /**
+     * @param {?=} microtaskId
+     * @return {?}
+     */
+    flush(microtaskId = -1) { this._transitionEngine.flush(microtaskId); }
+    /**
+     * @return {?}
+     */
+    get players() {
+        return ((/** @type {?} */ (this._transitionEngine.players)))
+            .concat((/** @type {?} */ (this._timelineEngine.players)));
+    }
+    /**
+     * @return {?}
+     */
+    whenRenderingDone() { return this._transitionEngine.whenRenderingDone(); }
+}
+if (false) {}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Returns an instance of `SpecialCasedStyles` if and when any special (non animateable) styles are
+ * detected.
+ *
+ * In CSS there exist properties that cannot be animated within a keyframe animation
+ * (whether it be via CSS keyframes or web-animations) and the animation implementation
+ * will ignore them. This function is designed to detect those special cased styles and
+ * return a container that will be executed at the start and end of the animation.
+ *
+ * @param {?} element
+ * @param {?} styles
+ * @return {?} an instance of `SpecialCasedStyles` if any special styles are detected otherwise `null`
+ */
+function packageNonAnimatableStyles(element, styles) {
+    /** @type {?} */
+    let startStyles = null;
+    /** @type {?} */
+    let endStyles = null;
+    if (Array.isArray(styles) && styles.length) {
+        startStyles = filterNonAnimatableStyles(styles[0]);
+        if (styles.length > 1) {
+            endStyles = filterNonAnimatableStyles(styles[styles.length - 1]);
+        }
+    }
+    else if (styles) {
+        startStyles = filterNonAnimatableStyles(styles);
+    }
+    return (startStyles || endStyles) ? new SpecialCasedStyles(element, startStyles, endStyles) :
+        null;
+}
+/**
+ * Designed to be executed during a keyframe-based animation to apply any special-cased styles.
+ *
+ * When started (when the `start()` method is run) then the provided `startStyles`
+ * will be applied. When finished (when the `finish()` method is called) the
+ * `endStyles` will be applied as well any any starting styles. Finally when
+ * `destroy()` is called then all styles will be removed.
+ */
+class SpecialCasedStyles {
+    /**
+     * @param {?} _element
+     * @param {?} _startStyles
+     * @param {?} _endStyles
+     */
+    constructor(_element, _startStyles, _endStyles) {
+        this._element = _element;
+        this._startStyles = _startStyles;
+        this._endStyles = _endStyles;
+        this._state = 0 /* Pending */;
+        /** @type {?} */
+        let initialStyles = SpecialCasedStyles.initialStylesByElement.get(_element);
+        if (!initialStyles) {
+            SpecialCasedStyles.initialStylesByElement.set(_element, initialStyles = {});
+        }
+        this._initialStyles = initialStyles;
+    }
+    /**
+     * @return {?}
+     */
+    start() {
+        if (this._state < 1 /* Started */) {
+            if (this._startStyles) {
+                setStyles(this._element, this._startStyles, this._initialStyles);
+            }
+            this._state = 1 /* Started */;
+        }
+    }
+    /**
+     * @return {?}
+     */
+    finish() {
+        this.start();
+        if (this._state < 2 /* Finished */) {
+            setStyles(this._element, this._initialStyles);
+            if (this._endStyles) {
+                setStyles(this._element, this._endStyles);
+                this._endStyles = null;
+            }
+            this._state = 1 /* Started */;
+        }
+    }
+    /**
+     * @return {?}
+     */
+    destroy() {
+        this.finish();
+        if (this._state < 3 /* Destroyed */) {
+            SpecialCasedStyles.initialStylesByElement.delete(this._element);
+            if (this._startStyles) {
+                eraseStyles(this._element, this._startStyles);
+                this._endStyles = null;
+            }
+            if (this._endStyles) {
+                eraseStyles(this._element, this._endStyles);
+                this._endStyles = null;
+            }
+            setStyles(this._element, this._initialStyles);
+            this._state = 3 /* Destroyed */;
+        }
+    }
+}
+SpecialCasedStyles.initialStylesByElement = new WeakMap();
+if (false) {}
+/** @enum {number} */
+const SpecialCasedStylesState = {
+    Pending: 0,
+    Started: 1,
+    Finished: 2,
+    Destroyed: 3,
+};
+/**
+ * @param {?} styles
+ * @return {?}
+ */
+function filterNonAnimatableStyles(styles) {
+    /** @type {?} */
+    let result = null;
+    /** @type {?} */
+    const props = Object.keys(styles);
+    for (let i = 0; i < props.length; i++) {
+        /** @type {?} */
+        const prop = props[i];
+        if (isNonAnimatableStyle(prop)) {
+            result = result || {};
+            result[prop] = styles[prop];
+        }
+    }
+    return result;
+}
+/**
+ * @param {?} prop
+ * @return {?}
+ */
+function isNonAnimatableStyle(prop) {
+    return prop === 'display' || prop === 'position';
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * @license
+ * Copyright Google Inc. All Rights Reserved.
+ *
+ * Use of this source code is governed by an MIT-style license that can be
+ * found in the LICENSE file at https://angular.io/license
+ * @type {?}
+ */
+const ELAPSED_TIME_MAX_DECIMAL_PLACES = 3;
+/** @type {?} */
+const ANIMATION_PROP = 'animation';
+/** @type {?} */
+const ANIMATIONEND_EVENT = 'animationend';
+/** @type {?} */
+const ONE_SECOND$1 = 1000;
+class ElementAnimationStyleHandler {
+    /**
+     * @param {?} _element
+     * @param {?} _name
+     * @param {?} _duration
+     * @param {?} _delay
+     * @param {?} _easing
+     * @param {?} _fillMode
+     * @param {?} _onDoneFn
+     */
+    constructor(_element, _name, _duration, _delay, _easing, _fillMode, _onDoneFn) {
+        this._element = _element;
+        this._name = _name;
+        this._duration = _duration;
+        this._delay = _delay;
+        this._easing = _easing;
+        this._fillMode = _fillMode;
+        this._onDoneFn = _onDoneFn;
+        this._finished = false;
+        this._destroyed = false;
+        this._startTime = 0;
+        this._position = 0;
+        this._eventFn = (/**
+         * @param {?} e
+         * @return {?}
+         */
+        (e) => this._handleCallback(e));
+    }
+    /**
+     * @return {?}
+     */
+    apply() {
+        applyKeyframeAnimation(this._element, `${this._duration}ms ${this._easing} ${this._delay}ms 1 normal ${this._fillMode} ${this._name}`);
+        addRemoveAnimationEvent(this._element, this._eventFn, false);
+        this._startTime = Date.now();
+    }
+    /**
+     * @return {?}
+     */
+    pause() { playPauseAnimation(this._element, this._name, 'paused'); }
+    /**
+     * @return {?}
+     */
+    resume() { playPauseAnimation(this._element, this._name, 'running'); }
+    /**
+     * @param {?} position
+     * @return {?}
+     */
+    setPosition(position) {
+        /** @type {?} */
+        const index = findIndexForAnimation(this._element, this._name);
+        this._position = position * this._duration;
+        setAnimationStyle(this._element, 'Delay', `-${this._position}ms`, index);
+    }
+    /**
+     * @return {?}
+     */
+    getPosition() { return this._position; }
+    /**
+     * @private
+     * @param {?} event
+     * @return {?}
+     */
+    _handleCallback(event) {
+        /** @type {?} */
+        const timestamp = event._ngTestManualTimestamp || Date.now();
+        /** @type {?} */
+        const elapsedTime = parseFloat(event.elapsedTime.toFixed(ELAPSED_TIME_MAX_DECIMAL_PLACES)) * ONE_SECOND$1;
+        if (event.animationName == this._name &&
+            Math.max(timestamp - this._startTime, 0) >= this._delay && elapsedTime >= this._duration) {
+            this.finish();
+        }
+    }
+    /**
+     * @return {?}
+     */
+    finish() {
+        if (this._finished)
+            return;
+        this._finished = true;
+        this._onDoneFn();
+        addRemoveAnimationEvent(this._element, this._eventFn, true);
+    }
+    /**
+     * @return {?}
+     */
+    destroy() {
+        if (this._destroyed)
+            return;
+        this._destroyed = true;
+        this.finish();
+        removeKeyframeAnimation(this._element, this._name);
+    }
+}
+if (false) {}
+/**
+ * @param {?} element
+ * @param {?} name
+ * @param {?} status
+ * @return {?}
+ */
+function playPauseAnimation(element, name, status) {
+    /** @type {?} */
+    const index = findIndexForAnimation(element, name);
+    setAnimationStyle(element, 'PlayState', status, index);
+}
+/**
+ * @param {?} element
+ * @param {?} value
+ * @return {?}
+ */
+function applyKeyframeAnimation(element, value) {
+    /** @type {?} */
+    const anim = getAnimationStyle(element, '').trim();
+    /** @type {?} */
+    let index = 0;
+    if (anim.length) {
+        index = countChars(anim, ',') + 1;
+        value = `${anim}, ${value}`;
+    }
+    setAnimationStyle(element, '', value);
+    return index;
+}
+/**
+ * @param {?} element
+ * @param {?} name
+ * @return {?}
+ */
+function removeKeyframeAnimation(element, name) {
+    /** @type {?} */
+    const anim = getAnimationStyle(element, '');
+    /** @type {?} */
+    const tokens = anim.split(',');
+    /** @type {?} */
+    const index = findMatchingTokenIndex(tokens, name);
+    if (index >= 0) {
+        tokens.splice(index, 1);
+        /** @type {?} */
+        const newValue = tokens.join(',');
+        setAnimationStyle(element, '', newValue);
+    }
+}
+/**
+ * @param {?} element
+ * @param {?} value
+ * @return {?}
+ */
+function findIndexForAnimation(element, value) {
+    /** @type {?} */
+    const anim = getAnimationStyle(element, '');
+    if (anim.indexOf(',') > 0) {
+        /** @type {?} */
+        const tokens = anim.split(',');
+        return findMatchingTokenIndex(tokens, value);
+    }
+    return findMatchingTokenIndex([anim], value);
+}
+/**
+ * @param {?} tokens
+ * @param {?} searchToken
+ * @return {?}
+ */
+function findMatchingTokenIndex(tokens, searchToken) {
+    for (let i = 0; i < tokens.length; i++) {
+        if (tokens[i].indexOf(searchToken) >= 0) {
+            return i;
+        }
+    }
+    return -1;
+}
+/**
+ * @param {?} element
+ * @param {?} fn
+ * @param {?} doRemove
+ * @return {?}
+ */
+function addRemoveAnimationEvent(element, fn, doRemove) {
+    doRemove ? element.removeEventListener(ANIMATIONEND_EVENT, fn) :
+        element.addEventListener(ANIMATIONEND_EVENT, fn);
+}
+/**
+ * @param {?} element
+ * @param {?} name
+ * @param {?} value
+ * @param {?=} index
+ * @return {?}
+ */
+function setAnimationStyle(element, name, value, index) {
+    /** @type {?} */
+    const prop = ANIMATION_PROP + name;
+    if (index != null) {
+        /** @type {?} */
+        const oldValue = element.style[prop];
+        if (oldValue.length) {
+            /** @type {?} */
+            const tokens = oldValue.split(',');
+            tokens[index] = value;
+            value = tokens.join(',');
+        }
+    }
+    element.style[prop] = value;
+}
+/**
+ * @param {?} element
+ * @param {?} name
+ * @return {?}
+ */
+function getAnimationStyle(element, name) {
+    return element.style[ANIMATION_PROP + name];
+}
+/**
+ * @param {?} value
+ * @param {?} char
+ * @return {?}
+ */
+function countChars(value, char) {
+    /** @type {?} */
+    let count = 0;
+    for (let i = 0; i < value.length; i++) {
+        /** @type {?} */
+        const c = value.charAt(i);
+        if (c === char)
+            count++;
+    }
+    return count;
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+const DEFAULT_FILL_MODE = 'forwards';
+/** @type {?} */
+const DEFAULT_EASING = 'linear';
+/** @enum {number} */
+const AnimatorControlState = {
+    INITIALIZED: 1, STARTED: 2, FINISHED: 3, DESTROYED: 4,
+};
+class CssKeyframesPlayer {
+    /**
+     * @param {?} element
+     * @param {?} keyframes
+     * @param {?} animationName
+     * @param {?} _duration
+     * @param {?} _delay
+     * @param {?} easing
+     * @param {?} _finalStyles
+     * @param {?=} _specialStyles
+     */
+    constructor(element, keyframes, animationName, _duration, _delay, easing, _finalStyles, _specialStyles) {
+        this.element = element;
+        this.keyframes = keyframes;
+        this.animationName = animationName;
+        this._duration = _duration;
+        this._delay = _delay;
+        this._finalStyles = _finalStyles;
+        this._specialStyles = _specialStyles;
+        this._onDoneFns = [];
+        this._onStartFns = [];
+        this._onDestroyFns = [];
+        this._started = false;
+        this.currentSnapshot = {};
+        this._state = 0;
+        this.easing = easing || DEFAULT_EASING;
+        this.totalTime = _duration + _delay;
+        this._buildStyler();
+    }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    onStart(fn) { this._onStartFns.push(fn); }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    onDone(fn) { this._onDoneFns.push(fn); }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    onDestroy(fn) { this._onDestroyFns.push(fn); }
+    /**
+     * @return {?}
+     */
+    destroy() {
+        this.init();
+        if (this._state >= 4 /* DESTROYED */)
+            return;
+        this._state = 4 /* DESTROYED */;
+        this._styler.destroy();
+        this._flushStartFns();
+        this._flushDoneFns();
+        if (this._specialStyles) {
+            this._specialStyles.destroy();
+        }
+        this._onDestroyFns.forEach((/**
+         * @param {?} fn
+         * @return {?}
+         */
+        fn => fn()));
+        this._onDestroyFns = [];
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    _flushDoneFns() {
+        this._onDoneFns.forEach((/**
+         * @param {?} fn
+         * @return {?}
+         */
+        fn => fn()));
+        this._onDoneFns = [];
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    _flushStartFns() {
+        this._onStartFns.forEach((/**
+         * @param {?} fn
+         * @return {?}
+         */
+        fn => fn()));
+        this._onStartFns = [];
+    }
+    /**
+     * @return {?}
+     */
+    finish() {
+        this.init();
+        if (this._state >= 3 /* FINISHED */)
+            return;
+        this._state = 3 /* FINISHED */;
+        this._styler.finish();
+        this._flushStartFns();
+        if (this._specialStyles) {
+            this._specialStyles.finish();
+        }
+        this._flushDoneFns();
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    setPosition(value) { this._styler.setPosition(value); }
+    /**
+     * @return {?}
+     */
+    getPosition() { return this._styler.getPosition(); }
+    /**
+     * @return {?}
+     */
+    hasStarted() { return this._state >= 2 /* STARTED */; }
+    /**
+     * @return {?}
+     */
+    init() {
+        if (this._state >= 1 /* INITIALIZED */)
+            return;
+        this._state = 1 /* INITIALIZED */;
+        /** @type {?} */
+        const elm = this.element;
+        this._styler.apply();
+        if (this._delay) {
+            this._styler.pause();
+        }
+    }
+    /**
+     * @return {?}
+     */
+    play() {
+        this.init();
+        if (!this.hasStarted()) {
+            this._flushStartFns();
+            this._state = 2 /* STARTED */;
+            if (this._specialStyles) {
+                this._specialStyles.start();
+            }
+        }
+        this._styler.resume();
+    }
+    /**
+     * @return {?}
+     */
+    pause() {
+        this.init();
+        this._styler.pause();
+    }
+    /**
+     * @return {?}
+     */
+    restart() {
+        this.reset();
+        this.play();
+    }
+    /**
+     * @return {?}
+     */
+    reset() {
+        this._styler.destroy();
+        this._buildStyler();
+        this._styler.apply();
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    _buildStyler() {
+        this._styler = new ElementAnimationStyleHandler(this.element, this.animationName, this._duration, this._delay, this.easing, DEFAULT_FILL_MODE, (/**
+         * @return {?}
+         */
+        () => this.finish()));
+    }
+    /**
+     * \@internal
+     * @param {?} phaseName
+     * @return {?}
+     */
+    triggerCallback(phaseName) {
+        /** @type {?} */
+        const methods = phaseName == 'start' ? this._onStartFns : this._onDoneFns;
+        methods.forEach((/**
+         * @param {?} fn
+         * @return {?}
+         */
+        fn => fn()));
+        methods.length = 0;
+    }
+    /**
+     * @return {?}
+     */
+    beforeDestroy() {
+        this.init();
+        /** @type {?} */
+        const styles = {};
+        if (this.hasStarted()) {
+            /** @type {?} */
+            const finished = this._state >= 3 /* FINISHED */;
+            Object.keys(this._finalStyles).forEach((/**
+             * @param {?} prop
+             * @return {?}
+             */
+            prop => {
+                if (prop != 'offset') {
+                    styles[prop] = finished ? this._finalStyles[prop] : computeStyle(this.element, prop);
+                }
+            }));
+        }
+        this.currentSnapshot = styles;
+    }
+}
+if (false) {}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class DirectStylePlayer extends _angular_animations__WEBPACK_IMPORTED_MODULE_0__["NoopAnimationPlayer"] {
+    /**
+     * @param {?} element
+     * @param {?} styles
+     */
+    constructor(element, styles) {
+        super();
+        this.element = element;
+        this._startingStyles = {};
+        this.__initialized = false;
+        this._styles = hypenatePropsObject(styles);
+    }
+    /**
+     * @return {?}
+     */
+    init() {
+        if (this.__initialized || !this._startingStyles)
+            return;
+        this.__initialized = true;
+        Object.keys(this._styles).forEach((/**
+         * @param {?} prop
+         * @return {?}
+         */
+        prop => {
+            (/** @type {?} */ (this._startingStyles))[prop] = this.element.style[prop];
+        }));
+        super.init();
+    }
+    /**
+     * @return {?}
+     */
+    play() {
+        if (!this._startingStyles)
+            return;
+        this.init();
+        Object.keys(this._styles)
+            .forEach((/**
+         * @param {?} prop
+         * @return {?}
+         */
+        prop => this.element.style.setProperty(prop, this._styles[prop])));
+        super.play();
+    }
+    /**
+     * @return {?}
+     */
+    destroy() {
+        if (!this._startingStyles)
+            return;
+        Object.keys(this._startingStyles).forEach((/**
+         * @param {?} prop
+         * @return {?}
+         */
+        prop => {
+            /** @type {?} */
+            const value = (/** @type {?} */ (this._startingStyles))[prop];
+            if (value) {
+                this.element.style.setProperty(prop, value);
+            }
+            else {
+                this.element.style.removeProperty(prop);
+            }
+        }));
+        this._startingStyles = null;
+        super.destroy();
+    }
+}
+if (false) {}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+const KEYFRAMES_NAME_PREFIX = 'gen_css_kf_';
+/** @type {?} */
+const TAB_SPACE = ' ';
+class CssKeyframesDriver {
+    constructor() {
+        this._count = 0;
+        this._head = document.querySelector('head');
+        this._warningIssued = false;
+    }
+    /**
+     * @param {?} prop
+     * @return {?}
+     */
+    validateStyleProperty(prop) { return validateStyleProperty(prop); }
+    /**
+     * @param {?} element
+     * @param {?} selector
+     * @return {?}
+     */
+    matchesElement(element, selector) {
+        return matchesElement(element, selector);
+    }
+    /**
+     * @param {?} elm1
+     * @param {?} elm2
+     * @return {?}
+     */
+    containsElement(elm1, elm2) { return containsElement(elm1, elm2); }
+    /**
+     * @param {?} element
+     * @param {?} selector
+     * @param {?} multi
+     * @return {?}
+     */
+    query(element, selector, multi) {
+        return invokeQuery(element, selector, multi);
+    }
+    /**
+     * @param {?} element
+     * @param {?} prop
+     * @param {?=} defaultValue
+     * @return {?}
+     */
+    computeStyle(element, prop, defaultValue) {
+        return (/** @type {?} */ (((/** @type {?} */ (window.getComputedStyle(element))))[prop]));
+    }
+    /**
+     * @param {?} element
+     * @param {?} name
+     * @param {?} keyframes
+     * @return {?}
+     */
+    buildKeyframeElement(element, name, keyframes) {
+        keyframes = keyframes.map((/**
+         * @param {?} kf
+         * @return {?}
+         */
+        kf => hypenatePropsObject(kf)));
+        /** @type {?} */
+        let keyframeStr = `@keyframes ${name} {\n`;
+        /** @type {?} */
+        let tab = '';
+        keyframes.forEach((/**
+         * @param {?} kf
+         * @return {?}
+         */
+        kf => {
+            tab = TAB_SPACE;
+            /** @type {?} */
+            const offset = parseFloat(kf['offset']);
+            keyframeStr += `${tab}${offset * 100}% {\n`;
+            tab += TAB_SPACE;
+            Object.keys(kf).forEach((/**
+             * @param {?} prop
+             * @return {?}
+             */
+            prop => {
+                /** @type {?} */
+                const value = kf[prop];
+                switch (prop) {
+                    case 'offset':
+                        return;
+                    case 'easing':
+                        if (value) {
+                            keyframeStr += `${tab}animation-timing-function: ${value};\n`;
+                        }
+                        return;
+                    default:
+                        keyframeStr += `${tab}${prop}: ${value};\n`;
+                        return;
+                }
+            }));
+            keyframeStr += `${tab}}\n`;
+        }));
+        keyframeStr += `}\n`;
+        /** @type {?} */
+        const kfElm = document.createElement('style');
+        kfElm.innerHTML = keyframeStr;
+        return kfElm;
+    }
+    /**
+     * @param {?} element
+     * @param {?} keyframes
+     * @param {?} duration
+     * @param {?} delay
+     * @param {?} easing
+     * @param {?=} previousPlayers
+     * @param {?=} scrubberAccessRequested
+     * @return {?}
+     */
+    animate(element, keyframes, duration, delay, easing, previousPlayers = [], scrubberAccessRequested) {
+        if (scrubberAccessRequested) {
+            this._notifyFaultyScrubber();
+        }
+        /** @type {?} */
+        const previousCssKeyframePlayers = (/** @type {?} */ (previousPlayers.filter((/**
+         * @param {?} player
+         * @return {?}
+         */
+        player => player instanceof CssKeyframesPlayer))));
+        /** @type {?} */
+        const previousStyles = {};
+        if (allowPreviousPlayerStylesMerge(duration, delay)) {
+            previousCssKeyframePlayers.forEach((/**
+             * @param {?} player
+             * @return {?}
+             */
+            player => {
+                /** @type {?} */
+                let styles = player.currentSnapshot;
+                Object.keys(styles).forEach((/**
+                 * @param {?} prop
+                 * @return {?}
+                 */
+                prop => previousStyles[prop] = styles[prop]));
+            }));
+        }
+        keyframes = balancePreviousStylesIntoKeyframes(element, keyframes, previousStyles);
+        /** @type {?} */
+        const finalStyles = flattenKeyframesIntoStyles(keyframes);
+        // if there is no animation then there is no point in applying
+        // styles and waiting for an event to get fired. This causes lag.
+        // It's better to just directly apply the styles to the element
+        // via the direct styling animation player.
+        if (duration == 0) {
+            return new DirectStylePlayer(element, finalStyles);
+        }
+        /** @type {?} */
+        const animationName = `${KEYFRAMES_NAME_PREFIX}${this._count++}`;
+        /** @type {?} */
+        const kfElm = this.buildKeyframeElement(element, animationName, keyframes);
+        (/** @type {?} */ (document.querySelector('head'))).appendChild(kfElm);
+        /** @type {?} */
+        const specialStyles = packageNonAnimatableStyles(element, keyframes);
+        /** @type {?} */
+        const player = new CssKeyframesPlayer(element, keyframes, animationName, duration, delay, easing, finalStyles, specialStyles);
+        player.onDestroy((/**
+         * @return {?}
+         */
+        () => removeElement(kfElm)));
+        return player;
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    _notifyFaultyScrubber() {
+        if (!this._warningIssued) {
+            console.warn('@angular/animations: please load the web-animations.js polyfill to allow programmatic access...\n', '  visit http://bit.ly/IWukam to learn more about using the web-animation-js polyfill.');
+            this._warningIssued = true;
+        }
+    }
+}
+if (false) {}
+/**
+ * @param {?} keyframes
+ * @return {?}
+ */
+function flattenKeyframesIntoStyles(keyframes) {
+    /** @type {?} */
+    let flatKeyframes = {};
+    if (keyframes) {
+        /** @type {?} */
+        const kfs = Array.isArray(keyframes) ? keyframes : [keyframes];
+        kfs.forEach((/**
+         * @param {?} kf
+         * @return {?}
+         */
+        kf => {
+            Object.keys(kf).forEach((/**
+             * @param {?} prop
+             * @return {?}
+             */
+            prop => {
+                if (prop == 'offset' || prop == 'easing')
+                    return;
+                flatKeyframes[prop] = kf[prop];
+            }));
+        }));
+    }
+    return flatKeyframes;
+}
+/**
+ * @param {?} node
+ * @return {?}
+ */
+function removeElement(node) {
+    node.parentNode.removeChild(node);
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class WebAnimationsPlayer {
+    /**
+     * @param {?} element
+     * @param {?} keyframes
+     * @param {?} options
+     * @param {?=} _specialStyles
+     */
+    constructor(element, keyframes, options, _specialStyles) {
+        this.element = element;
+        this.keyframes = keyframes;
+        this.options = options;
+        this._specialStyles = _specialStyles;
+        this._onDoneFns = [];
+        this._onStartFns = [];
+        this._onDestroyFns = [];
+        this._initialized = false;
+        this._finished = false;
+        this._started = false;
+        this._destroyed = false;
+        this.time = 0;
+        this.parentPlayer = null;
+        this.currentSnapshot = {};
+        this._duration = (/** @type {?} */ (options['duration']));
+        this._delay = (/** @type {?} */ (options['delay'])) || 0;
+        this.time = this._duration + this._delay;
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    _onFinish() {
+        if (!this._finished) {
+            this._finished = true;
+            this._onDoneFns.forEach((/**
+             * @param {?} fn
+             * @return {?}
+             */
+            fn => fn()));
+            this._onDoneFns = [];
+        }
+    }
+    /**
+     * @return {?}
+     */
+    init() {
+        this._buildPlayer();
+        this._preparePlayerBeforeStart();
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    _buildPlayer() {
+        if (this._initialized)
+            return;
+        this._initialized = true;
+        /** @type {?} */
+        const keyframes = this.keyframes;
+        ((/** @type {?} */ (this))).domPlayer =
+            this._triggerWebAnimation(this.element, keyframes, this.options);
+        this._finalKeyframe = keyframes.length ? keyframes[keyframes.length - 1] : {};
+        this.domPlayer.addEventListener('finish', (/**
+         * @return {?}
+         */
+        () => this._onFinish()));
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    _preparePlayerBeforeStart() {
+        // this is required so that the player doesn't start to animate right away
+        if (this._delay) {
+            this._resetDomPlayerState();
+        }
+        else {
+            this.domPlayer.pause();
+        }
+    }
+    /**
+     * \@internal
+     * @param {?} element
+     * @param {?} keyframes
+     * @param {?} options
+     * @return {?}
+     */
+    _triggerWebAnimation(element, keyframes, options) {
+        // jscompiler doesn't seem to know animate is a native property because it's not fully
+        // supported yet across common browsers (we polyfill it for Edge/Safari) [CL #143630929]
+        return (/** @type {?} */ (element['animate'](keyframes, options)));
+    }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    onStart(fn) { this._onStartFns.push(fn); }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    onDone(fn) { this._onDoneFns.push(fn); }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    onDestroy(fn) { this._onDestroyFns.push(fn); }
+    /**
+     * @return {?}
+     */
+    play() {
+        this._buildPlayer();
+        if (!this.hasStarted()) {
+            this._onStartFns.forEach((/**
+             * @param {?} fn
+             * @return {?}
+             */
+            fn => fn()));
+            this._onStartFns = [];
+            this._started = true;
+            if (this._specialStyles) {
+                this._specialStyles.start();
+            }
+        }
+        this.domPlayer.play();
+    }
+    /**
+     * @return {?}
+     */
+    pause() {
+        this.init();
+        this.domPlayer.pause();
+    }
+    /**
+     * @return {?}
+     */
+    finish() {
+        this.init();
+        if (this._specialStyles) {
+            this._specialStyles.finish();
+        }
+        this._onFinish();
+        this.domPlayer.finish();
+    }
+    /**
+     * @return {?}
+     */
+    reset() {
+        this._resetDomPlayerState();
+        this._destroyed = false;
+        this._finished = false;
+        this._started = false;
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    _resetDomPlayerState() {
+        if (this.domPlayer) {
+            this.domPlayer.cancel();
+        }
+    }
+    /**
+     * @return {?}
+     */
+    restart() {
+        this.reset();
+        this.play();
+    }
+    /**
+     * @return {?}
+     */
+    hasStarted() { return this._started; }
+    /**
+     * @return {?}
+     */
+    destroy() {
+        if (!this._destroyed) {
+            this._destroyed = true;
+            this._resetDomPlayerState();
+            this._onFinish();
+            if (this._specialStyles) {
+                this._specialStyles.destroy();
+            }
+            this._onDestroyFns.forEach((/**
+             * @param {?} fn
+             * @return {?}
+             */
+            fn => fn()));
+            this._onDestroyFns = [];
+        }
+    }
+    /**
+     * @param {?} p
+     * @return {?}
+     */
+    setPosition(p) { this.domPlayer.currentTime = p * this.time; }
+    /**
+     * @return {?}
+     */
+    getPosition() { return this.domPlayer.currentTime / this.time; }
+    /**
+     * @return {?}
+     */
+    get totalTime() { return this._delay + this._duration; }
+    /**
+     * @return {?}
+     */
+    beforeDestroy() {
+        /** @type {?} */
+        const styles = {};
+        if (this.hasStarted()) {
+            Object.keys(this._finalKeyframe).forEach((/**
+             * @param {?} prop
+             * @return {?}
+             */
+            prop => {
+                if (prop != 'offset') {
+                    styles[prop] =
+                        this._finished ? this._finalKeyframe[prop] : computeStyle(this.element, prop);
+                }
+            }));
+        }
+        this.currentSnapshot = styles;
+    }
+    /**
+     * \@internal
+     * @param {?} phaseName
+     * @return {?}
+     */
+    triggerCallback(phaseName) {
+        /** @type {?} */
+        const methods = phaseName == 'start' ? this._onStartFns : this._onDoneFns;
+        methods.forEach((/**
+         * @param {?} fn
+         * @return {?}
+         */
+        fn => fn()));
+        methods.length = 0;
+    }
+}
+if (false) {}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class WebAnimationsDriver {
+    constructor() {
+        this._isNativeImpl = /\{\s*\[native\s+code\]\s*\}/.test(getElementAnimateFn().toString());
+        this._cssKeyframesDriver = new CssKeyframesDriver();
+    }
+    /**
+     * @param {?} prop
+     * @return {?}
+     */
+    validateStyleProperty(prop) { return validateStyleProperty(prop); }
+    /**
+     * @param {?} element
+     * @param {?} selector
+     * @return {?}
+     */
+    matchesElement(element, selector) {
+        return matchesElement(element, selector);
+    }
+    /**
+     * @param {?} elm1
+     * @param {?} elm2
+     * @return {?}
+     */
+    containsElement(elm1, elm2) { return containsElement(elm1, elm2); }
+    /**
+     * @param {?} element
+     * @param {?} selector
+     * @param {?} multi
+     * @return {?}
+     */
+    query(element, selector, multi) {
+        return invokeQuery(element, selector, multi);
+    }
+    /**
+     * @param {?} element
+     * @param {?} prop
+     * @param {?=} defaultValue
+     * @return {?}
+     */
+    computeStyle(element, prop, defaultValue) {
+        return (/** @type {?} */ (((/** @type {?} */ (window.getComputedStyle(element))))[prop]));
+    }
+    /**
+     * @param {?} supported
+     * @return {?}
+     */
+    overrideWebAnimationsSupport(supported) { this._isNativeImpl = supported; }
+    /**
+     * @param {?} element
+     * @param {?} keyframes
+     * @param {?} duration
+     * @param {?} delay
+     * @param {?} easing
+     * @param {?=} previousPlayers
+     * @param {?=} scrubberAccessRequested
+     * @return {?}
+     */
+    animate(element, keyframes, duration, delay, easing, previousPlayers = [], scrubberAccessRequested) {
+        /** @type {?} */
+        const useKeyframes = !scrubberAccessRequested && !this._isNativeImpl;
+        if (useKeyframes) {
+            return this._cssKeyframesDriver.animate(element, keyframes, duration, delay, easing, previousPlayers);
+        }
+        /** @type {?} */
+        const fill = delay == 0 ? 'both' : 'forwards';
+        /** @type {?} */
+        const playerOptions = { duration, delay, fill };
+        // we check for this to avoid having a null|undefined value be present
+        // for the easing (which results in an error for certain browsers #9752)
+        if (easing) {
+            playerOptions['easing'] = easing;
+        }
+        /** @type {?} */
+        const previousStyles = {};
+        /** @type {?} */
+        const previousWebAnimationPlayers = (/** @type {?} */ (previousPlayers.filter((/**
+         * @param {?} player
+         * @return {?}
+         */
+        player => player instanceof WebAnimationsPlayer))));
+        if (allowPreviousPlayerStylesMerge(duration, delay)) {
+            previousWebAnimationPlayers.forEach((/**
+             * @param {?} player
+             * @return {?}
+             */
+            player => {
+                /** @type {?} */
+                let styles = player.currentSnapshot;
+                Object.keys(styles).forEach((/**
+                 * @param {?} prop
+                 * @return {?}
+                 */
+                prop => previousStyles[prop] = styles[prop]));
+            }));
+        }
+        keyframes = keyframes.map((/**
+         * @param {?} styles
+         * @return {?}
+         */
+        styles => copyStyles(styles, false)));
+        keyframes = balancePreviousStylesIntoKeyframes(element, keyframes, previousStyles);
+        /** @type {?} */
+        const specialStyles = packageNonAnimatableStyles(element, keyframes);
+        return new WebAnimationsPlayer(element, keyframes, playerOptions, specialStyles);
+    }
+}
+if (false) {}
+/**
+ * @return {?}
+ */
+function supportsWebAnimations() {
+    return typeof getElementAnimateFn() === 'function';
+}
+/**
+ * @return {?}
+ */
+function getElementAnimateFn() {
+    return (isBrowser() && ((/** @type {?} */ (Element))).prototype['animate']) || {};
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * Generated bundle index. Do not edit.
+ */
+
+
+//# sourceMappingURL=browser.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/@angular/common/fesm2015/common.js":
 /*!*********************************************************!*\
   !*** ./node_modules/@angular/common/fesm2015/common.js ***!
@@ -77404,6 +86934,800 @@ const platformBrowserDynamic = Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__
 
 /***/ }),
 
+/***/ "./node_modules/@angular/platform-browser/fesm2015/animations.js":
+/*!***********************************************************************!*\
+  !*** ./node_modules/@angular/platform-browser/fesm2015/animations.js ***!
+  \***********************************************************************/
+/*! exports provided: ɵangular_packages_platform_browser_animations_animations_f, ɵangular_packages_platform_browser_animations_animations_d, ɵangular_packages_platform_browser_animations_animations_e, ɵangular_packages_platform_browser_animations_animations_b, ɵangular_packages_platform_browser_animations_animations_c, ɵangular_packages_platform_browser_animations_animations_a, BrowserAnimationsModule, NoopAnimationsModule, ANIMATION_MODULE_TYPE, ɵBrowserAnimationBuilder, ɵBrowserAnimationFactory, ɵAnimationRenderer, ɵAnimationRendererFactory, ɵInjectableAnimationEngine */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵangular_packages_platform_browser_animations_animations_f", function() { return BaseAnimationRenderer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵangular_packages_platform_browser_animations_animations_d", function() { return BROWSER_ANIMATIONS_PROVIDERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵangular_packages_platform_browser_animations_animations_e", function() { return BROWSER_NOOP_ANIMATIONS_PROVIDERS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵangular_packages_platform_browser_animations_animations_b", function() { return instantiateDefaultStyleNormalizer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵangular_packages_platform_browser_animations_animations_c", function() { return instantiateRendererFactory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵangular_packages_platform_browser_animations_animations_a", function() { return instantiateSupportedAnimationDriver; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BrowserAnimationsModule", function() { return BrowserAnimationsModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NoopAnimationsModule", function() { return NoopAnimationsModule; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ANIMATION_MODULE_TYPE", function() { return ANIMATION_MODULE_TYPE; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵBrowserAnimationBuilder", function() { return BrowserAnimationBuilder; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵBrowserAnimationFactory", function() { return BrowserAnimationFactory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵAnimationRenderer", function() { return AnimationRenderer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵAnimationRendererFactory", function() { return AnimationRendererFactory; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ɵInjectableAnimationEngine", function() { return InjectableAnimationEngine; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/platform-browser */ "./node_modules/@angular/platform-browser/fesm2015/platform-browser.js");
+/* harmony import */ var _angular_animations__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/animations */ "./node_modules/@angular/animations/fesm2015/animations.js");
+/* harmony import */ var _angular_animations_browser__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @angular/animations/browser */ "./node_modules/@angular/animations/fesm2015/browser.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/common */ "./node_modules/@angular/common/fesm2015/common.js");
+/**
+ * @license Angular v8.2.14
+ * (c) 2010-2019 Google LLC. https://angular.io/
+ * License: MIT
+ */
+
+
+
+
+
+
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class BrowserAnimationBuilder extends _angular_animations__WEBPACK_IMPORTED_MODULE_2__["AnimationBuilder"] {
+    /**
+     * @param {?} rootRenderer
+     * @param {?} doc
+     */
+    constructor(rootRenderer, doc) {
+        super();
+        this._nextAnimationId = 0;
+        /** @type {?} */
+        const typeData = (/** @type {?} */ ({
+            id: '0',
+            encapsulation: _angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewEncapsulation"].None,
+            styles: [],
+            data: { animation: [] }
+        }));
+        this._renderer = (/** @type {?} */ (rootRenderer.createRenderer(doc.body, typeData)));
+    }
+    /**
+     * @param {?} animation
+     * @return {?}
+     */
+    build(animation) {
+        /** @type {?} */
+        const id = this._nextAnimationId.toString();
+        this._nextAnimationId++;
+        /** @type {?} */
+        const entry = Array.isArray(animation) ? Object(_angular_animations__WEBPACK_IMPORTED_MODULE_2__["sequence"])(animation) : animation;
+        issueAnimationCommand(this._renderer, null, id, 'register', [entry]);
+        return new BrowserAnimationFactory(id, this._renderer);
+    }
+}
+BrowserAnimationBuilder.decorators = [
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"] }
+];
+/** @nocollapse */
+BrowserAnimationBuilder.ctorParameters = () => [
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["RendererFactory2"] },
+    { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"], args: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["DOCUMENT"],] }] }
+];
+if (false) {}
+class BrowserAnimationFactory extends _angular_animations__WEBPACK_IMPORTED_MODULE_2__["AnimationFactory"] {
+    /**
+     * @param {?} _id
+     * @param {?} _renderer
+     */
+    constructor(_id, _renderer) {
+        super();
+        this._id = _id;
+        this._renderer = _renderer;
+    }
+    /**
+     * @param {?} element
+     * @param {?=} options
+     * @return {?}
+     */
+    create(element, options) {
+        return new RendererAnimationPlayer(this._id, element, options || {}, this._renderer);
+    }
+}
+if (false) {}
+class RendererAnimationPlayer {
+    /**
+     * @param {?} id
+     * @param {?} element
+     * @param {?} options
+     * @param {?} _renderer
+     */
+    constructor(id, element, options, _renderer) {
+        this.id = id;
+        this.element = element;
+        this._renderer = _renderer;
+        this.parentPlayer = null;
+        this._started = false;
+        this.totalTime = 0;
+        this._command('create', options);
+    }
+    /**
+     * @private
+     * @param {?} eventName
+     * @param {?} callback
+     * @return {?}
+     */
+    _listen(eventName, callback) {
+        return this._renderer.listen(this.element, `@@${this.id}:${eventName}`, callback);
+    }
+    /**
+     * @private
+     * @param {?} command
+     * @param {...?} args
+     * @return {?}
+     */
+    _command(command, ...args) {
+        return issueAnimationCommand(this._renderer, this.element, this.id, command, args);
+    }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    onDone(fn) { this._listen('done', fn); }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    onStart(fn) { this._listen('start', fn); }
+    /**
+     * @param {?} fn
+     * @return {?}
+     */
+    onDestroy(fn) { this._listen('destroy', fn); }
+    /**
+     * @return {?}
+     */
+    init() { this._command('init'); }
+    /**
+     * @return {?}
+     */
+    hasStarted() { return this._started; }
+    /**
+     * @return {?}
+     */
+    play() {
+        this._command('play');
+        this._started = true;
+    }
+    /**
+     * @return {?}
+     */
+    pause() { this._command('pause'); }
+    /**
+     * @return {?}
+     */
+    restart() { this._command('restart'); }
+    /**
+     * @return {?}
+     */
+    finish() { this._command('finish'); }
+    /**
+     * @return {?}
+     */
+    destroy() { this._command('destroy'); }
+    /**
+     * @return {?}
+     */
+    reset() { this._command('reset'); }
+    /**
+     * @param {?} p
+     * @return {?}
+     */
+    setPosition(p) { this._command('setPosition', p); }
+    /**
+     * @return {?}
+     */
+    getPosition() { return 0; }
+}
+if (false) {}
+/**
+ * @param {?} renderer
+ * @param {?} element
+ * @param {?} id
+ * @param {?} command
+ * @param {?} args
+ * @return {?}
+ */
+function issueAnimationCommand(renderer, element, id, command, args) {
+    return renderer.setProperty(element, `@@${id}:${command}`, args);
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+const ANIMATION_PREFIX = '@';
+/** @type {?} */
+const DISABLE_ANIMATIONS_FLAG = '@.disabled';
+class AnimationRendererFactory {
+    /**
+     * @param {?} delegate
+     * @param {?} engine
+     * @param {?} _zone
+     */
+    constructor(delegate, engine, _zone) {
+        this.delegate = delegate;
+        this.engine = engine;
+        this._zone = _zone;
+        this._currentId = 0;
+        this._microtaskId = 1;
+        this._animationCallbacksBuffer = [];
+        this._rendererCache = new Map();
+        this._cdRecurDepth = 0;
+        this.promise = Promise.resolve(0);
+        engine.onRemovalComplete = (/**
+         * @param {?} element
+         * @param {?} delegate
+         * @return {?}
+         */
+        (element, delegate) => {
+            // Note: if an component element has a leave animation, and the component
+            // a host leave animation, the view engine will call `removeChild` for the parent
+            // component renderer as well as for the child component renderer.
+            // Therefore, we need to check if we already removed the element.
+            if (delegate && delegate.parentNode(element)) {
+                delegate.removeChild(element.parentNode, element);
+            }
+        });
+    }
+    /**
+     * @param {?} hostElement
+     * @param {?} type
+     * @return {?}
+     */
+    createRenderer(hostElement, type) {
+        /** @type {?} */
+        const EMPTY_NAMESPACE_ID = '';
+        // cache the delegates to find out which cached delegate can
+        // be used by which cached renderer
+        /** @type {?} */
+        const delegate = this.delegate.createRenderer(hostElement, type);
+        if (!hostElement || !type || !type.data || !type.data['animation']) {
+            /** @type {?} */
+            let renderer = this._rendererCache.get(delegate);
+            if (!renderer) {
+                renderer = new BaseAnimationRenderer(EMPTY_NAMESPACE_ID, delegate, this.engine);
+                // only cache this result when the base renderer is used
+                this._rendererCache.set(delegate, renderer);
+            }
+            return renderer;
+        }
+        /** @type {?} */
+        const componentId = type.id;
+        /** @type {?} */
+        const namespaceId = type.id + '-' + this._currentId;
+        this._currentId++;
+        this.engine.register(namespaceId, hostElement);
+        /** @type {?} */
+        const animationTriggers = (/** @type {?} */ (type.data['animation']));
+        animationTriggers.forEach((/**
+         * @param {?} trigger
+         * @return {?}
+         */
+        trigger => this.engine.registerTrigger(componentId, namespaceId, hostElement, trigger.name, trigger)));
+        return new AnimationRenderer(this, namespaceId, delegate, this.engine);
+    }
+    /**
+     * @return {?}
+     */
+    begin() {
+        this._cdRecurDepth++;
+        if (this.delegate.begin) {
+            this.delegate.begin();
+        }
+    }
+    /**
+     * @private
+     * @return {?}
+     */
+    _scheduleCountTask() {
+        // always use promise to schedule microtask instead of use Zone
+        this.promise.then((/**
+         * @return {?}
+         */
+        () => { this._microtaskId++; }));
+    }
+    /**
+     * \@internal
+     * @param {?} count
+     * @param {?} fn
+     * @param {?} data
+     * @return {?}
+     */
+    scheduleListenerCallback(count, fn, data) {
+        if (count >= 0 && count < this._microtaskId) {
+            this._zone.run((/**
+             * @return {?}
+             */
+            () => fn(data)));
+            return;
+        }
+        if (this._animationCallbacksBuffer.length == 0) {
+            Promise.resolve(null).then((/**
+             * @return {?}
+             */
+            () => {
+                this._zone.run((/**
+                 * @return {?}
+                 */
+                () => {
+                    this._animationCallbacksBuffer.forEach((/**
+                     * @param {?} tuple
+                     * @return {?}
+                     */
+                    tuple => {
+                        const [fn, data] = tuple;
+                        fn(data);
+                    }));
+                    this._animationCallbacksBuffer = [];
+                }));
+            }));
+        }
+        this._animationCallbacksBuffer.push([fn, data]);
+    }
+    /**
+     * @return {?}
+     */
+    end() {
+        this._cdRecurDepth--;
+        // this is to prevent animations from running twice when an inner
+        // component does CD when a parent component instead has inserted it
+        if (this._cdRecurDepth == 0) {
+            this._zone.runOutsideAngular((/**
+             * @return {?}
+             */
+            () => {
+                this._scheduleCountTask();
+                this.engine.flush(this._microtaskId);
+            }));
+        }
+        if (this.delegate.end) {
+            this.delegate.end();
+        }
+    }
+    /**
+     * @return {?}
+     */
+    whenRenderingDone() { return this.engine.whenRenderingDone(); }
+}
+AnimationRendererFactory.decorators = [
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"] }
+];
+/** @nocollapse */
+AnimationRendererFactory.ctorParameters = () => [
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["RendererFactory2"] },
+    { type: _angular_animations_browser__WEBPACK_IMPORTED_MODULE_3__["ɵAnimationEngine"] },
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"] }
+];
+if (false) {}
+class BaseAnimationRenderer {
+    /**
+     * @param {?} namespaceId
+     * @param {?} delegate
+     * @param {?} engine
+     */
+    constructor(namespaceId, delegate, engine) {
+        this.namespaceId = namespaceId;
+        this.delegate = delegate;
+        this.engine = engine;
+        this.destroyNode = this.delegate.destroyNode ? (/**
+         * @param {?} n
+         * @return {?}
+         */
+        (n) => (/** @type {?} */ (delegate.destroyNode))(n)) : null;
+    }
+    /**
+     * @return {?}
+     */
+    get data() { return this.delegate.data; }
+    /**
+     * @return {?}
+     */
+    destroy() {
+        this.engine.destroy(this.namespaceId, this.delegate);
+        this.delegate.destroy();
+    }
+    /**
+     * @param {?} name
+     * @param {?=} namespace
+     * @return {?}
+     */
+    createElement(name, namespace) {
+        return this.delegate.createElement(name, namespace);
+    }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    createComment(value) { return this.delegate.createComment(value); }
+    /**
+     * @param {?} value
+     * @return {?}
+     */
+    createText(value) { return this.delegate.createText(value); }
+    /**
+     * @param {?} parent
+     * @param {?} newChild
+     * @return {?}
+     */
+    appendChild(parent, newChild) {
+        this.delegate.appendChild(parent, newChild);
+        this.engine.onInsert(this.namespaceId, newChild, parent, false);
+    }
+    /**
+     * @param {?} parent
+     * @param {?} newChild
+     * @param {?} refChild
+     * @return {?}
+     */
+    insertBefore(parent, newChild, refChild) {
+        this.delegate.insertBefore(parent, newChild, refChild);
+        this.engine.onInsert(this.namespaceId, newChild, parent, true);
+    }
+    /**
+     * @param {?} parent
+     * @param {?} oldChild
+     * @param {?} isHostElement
+     * @return {?}
+     */
+    removeChild(parent, oldChild, isHostElement) {
+        this.engine.onRemove(this.namespaceId, oldChild, this.delegate, isHostElement);
+    }
+    /**
+     * @param {?} selectorOrNode
+     * @param {?=} preserveContent
+     * @return {?}
+     */
+    selectRootElement(selectorOrNode, preserveContent) {
+        return this.delegate.selectRootElement(selectorOrNode, preserveContent);
+    }
+    /**
+     * @param {?} node
+     * @return {?}
+     */
+    parentNode(node) { return this.delegate.parentNode(node); }
+    /**
+     * @param {?} node
+     * @return {?}
+     */
+    nextSibling(node) { return this.delegate.nextSibling(node); }
+    /**
+     * @param {?} el
+     * @param {?} name
+     * @param {?} value
+     * @param {?=} namespace
+     * @return {?}
+     */
+    setAttribute(el, name, value, namespace) {
+        this.delegate.setAttribute(el, name, value, namespace);
+    }
+    /**
+     * @param {?} el
+     * @param {?} name
+     * @param {?=} namespace
+     * @return {?}
+     */
+    removeAttribute(el, name, namespace) {
+        this.delegate.removeAttribute(el, name, namespace);
+    }
+    /**
+     * @param {?} el
+     * @param {?} name
+     * @return {?}
+     */
+    addClass(el, name) { this.delegate.addClass(el, name); }
+    /**
+     * @param {?} el
+     * @param {?} name
+     * @return {?}
+     */
+    removeClass(el, name) { this.delegate.removeClass(el, name); }
+    /**
+     * @param {?} el
+     * @param {?} style
+     * @param {?} value
+     * @param {?=} flags
+     * @return {?}
+     */
+    setStyle(el, style, value, flags) {
+        this.delegate.setStyle(el, style, value, flags);
+    }
+    /**
+     * @param {?} el
+     * @param {?} style
+     * @param {?=} flags
+     * @return {?}
+     */
+    removeStyle(el, style, flags) {
+        this.delegate.removeStyle(el, style, flags);
+    }
+    /**
+     * @param {?} el
+     * @param {?} name
+     * @param {?} value
+     * @return {?}
+     */
+    setProperty(el, name, value) {
+        if (name.charAt(0) == ANIMATION_PREFIX && name == DISABLE_ANIMATIONS_FLAG) {
+            this.disableAnimations(el, !!value);
+        }
+        else {
+            this.delegate.setProperty(el, name, value);
+        }
+    }
+    /**
+     * @param {?} node
+     * @param {?} value
+     * @return {?}
+     */
+    setValue(node, value) { this.delegate.setValue(node, value); }
+    /**
+     * @param {?} target
+     * @param {?} eventName
+     * @param {?} callback
+     * @return {?}
+     */
+    listen(target, eventName, callback) {
+        return this.delegate.listen(target, eventName, callback);
+    }
+    /**
+     * @protected
+     * @param {?} element
+     * @param {?} value
+     * @return {?}
+     */
+    disableAnimations(element, value) {
+        this.engine.disableAnimations(element, value);
+    }
+}
+if (false) {}
+class AnimationRenderer extends BaseAnimationRenderer {
+    /**
+     * @param {?} factory
+     * @param {?} namespaceId
+     * @param {?} delegate
+     * @param {?} engine
+     */
+    constructor(factory, namespaceId, delegate, engine) {
+        super(namespaceId, delegate, engine);
+        this.factory = factory;
+        this.namespaceId = namespaceId;
+    }
+    /**
+     * @param {?} el
+     * @param {?} name
+     * @param {?} value
+     * @return {?}
+     */
+    setProperty(el, name, value) {
+        if (name.charAt(0) == ANIMATION_PREFIX) {
+            if (name.charAt(1) == '.' && name == DISABLE_ANIMATIONS_FLAG) {
+                value = value === undefined ? true : !!value;
+                this.disableAnimations(el, (/** @type {?} */ (value)));
+            }
+            else {
+                this.engine.process(this.namespaceId, el, name.substr(1), value);
+            }
+        }
+        else {
+            this.delegate.setProperty(el, name, value);
+        }
+    }
+    /**
+     * @param {?} target
+     * @param {?} eventName
+     * @param {?} callback
+     * @return {?}
+     */
+    listen(target, eventName, callback) {
+        if (eventName.charAt(0) == ANIMATION_PREFIX) {
+            /** @type {?} */
+            const element = resolveElementFromTarget(target);
+            /** @type {?} */
+            let name = eventName.substr(1);
+            /** @type {?} */
+            let phase = '';
+            // @listener.phase is for trigger animation callbacks
+            // @@listener is for animation builder callbacks
+            if (name.charAt(0) != ANIMATION_PREFIX) {
+                [name, phase] = parseTriggerCallbackName(name);
+            }
+            return this.engine.listen(this.namespaceId, element, name, phase, (/**
+             * @param {?} event
+             * @return {?}
+             */
+            event => {
+                /** @type {?} */
+                const countId = ((/** @type {?} */ (event)))['_data'] || -1;
+                this.factory.scheduleListenerCallback(countId, callback, event);
+            }));
+        }
+        return this.delegate.listen(target, eventName, callback);
+    }
+}
+if (false) {}
+/**
+ * @param {?} target
+ * @return {?}
+ */
+function resolveElementFromTarget(target) {
+    switch (target) {
+        case 'body':
+            return document.body;
+        case 'document':
+            return document;
+        case 'window':
+            return window;
+        default:
+            return target;
+    }
+}
+/**
+ * @param {?} triggerName
+ * @return {?}
+ */
+function parseTriggerCallbackName(triggerName) {
+    /** @type {?} */
+    const dotIndex = triggerName.indexOf('.');
+    /** @type {?} */
+    const trigger = triggerName.substring(0, dotIndex);
+    /** @type {?} */
+    const phase = triggerName.substr(dotIndex + 1);
+    return [trigger, phase];
+}
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class InjectableAnimationEngine extends _angular_animations_browser__WEBPACK_IMPORTED_MODULE_3__["ɵAnimationEngine"] {
+    /**
+     * @param {?} doc
+     * @param {?} driver
+     * @param {?} normalizer
+     */
+    constructor(doc, driver, normalizer) {
+        super(doc.body, driver, normalizer);
+    }
+}
+InjectableAnimationEngine.decorators = [
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"] }
+];
+/** @nocollapse */
+InjectableAnimationEngine.ctorParameters = () => [
+    { type: undefined, decorators: [{ type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["Inject"], args: [_angular_common__WEBPACK_IMPORTED_MODULE_4__["DOCUMENT"],] }] },
+    { type: _angular_animations_browser__WEBPACK_IMPORTED_MODULE_3__["AnimationDriver"] },
+    { type: _angular_animations_browser__WEBPACK_IMPORTED_MODULE_3__["ɵAnimationStyleNormalizer"] }
+];
+/**
+ * @return {?}
+ */
+function instantiateSupportedAnimationDriver() {
+    return Object(_angular_animations_browser__WEBPACK_IMPORTED_MODULE_3__["ɵsupportsWebAnimations"])() ? new _angular_animations_browser__WEBPACK_IMPORTED_MODULE_3__["ɵWebAnimationsDriver"]() : new _angular_animations_browser__WEBPACK_IMPORTED_MODULE_3__["ɵCssKeyframesDriver"]();
+}
+/**
+ * @return {?}
+ */
+function instantiateDefaultStyleNormalizer() {
+    return new _angular_animations_browser__WEBPACK_IMPORTED_MODULE_3__["ɵWebAnimationsStyleNormalizer"]();
+}
+/**
+ * @param {?} renderer
+ * @param {?} engine
+ * @param {?} zone
+ * @return {?}
+ */
+function instantiateRendererFactory(renderer, engine, zone) {
+    return new AnimationRendererFactory(renderer, engine, zone);
+}
+/**
+ * \@publicApi
+ * @type {?}
+ */
+const ANIMATION_MODULE_TYPE = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["InjectionToken"]('AnimationModuleType');
+/** @type {?} */
+const SHARED_ANIMATION_PROVIDERS = [
+    { provide: _angular_animations__WEBPACK_IMPORTED_MODULE_2__["AnimationBuilder"], useClass: BrowserAnimationBuilder },
+    { provide: _angular_animations_browser__WEBPACK_IMPORTED_MODULE_3__["ɵAnimationStyleNormalizer"], useFactory: instantiateDefaultStyleNormalizer },
+    { provide: _angular_animations_browser__WEBPACK_IMPORTED_MODULE_3__["ɵAnimationEngine"], useClass: InjectableAnimationEngine }, {
+        provide: _angular_core__WEBPACK_IMPORTED_MODULE_0__["RendererFactory2"],
+        useFactory: instantiateRendererFactory,
+        deps: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["ɵDomRendererFactory2"], _angular_animations_browser__WEBPACK_IMPORTED_MODULE_3__["ɵAnimationEngine"], _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgZone"]]
+    }
+];
+/**
+ * Separate providers from the actual module so that we can do a local modification in Google3 to
+ * include them in the BrowserModule.
+ * @type {?}
+ */
+const BROWSER_ANIMATIONS_PROVIDERS = [
+    { provide: _angular_animations_browser__WEBPACK_IMPORTED_MODULE_3__["AnimationDriver"], useFactory: instantiateSupportedAnimationDriver },
+    { provide: ANIMATION_MODULE_TYPE, useValue: 'BrowserAnimations' }, ...SHARED_ANIMATION_PROVIDERS
+];
+/**
+ * Separate providers from the actual module so that we can do a local modification in Google3 to
+ * include them in the BrowserTestingModule.
+ * @type {?}
+ */
+const BROWSER_NOOP_ANIMATIONS_PROVIDERS = [
+    { provide: _angular_animations_browser__WEBPACK_IMPORTED_MODULE_3__["AnimationDriver"], useClass: _angular_animations_browser__WEBPACK_IMPORTED_MODULE_3__["ɵNoopAnimationDriver"] },
+    { provide: ANIMATION_MODULE_TYPE, useValue: 'NoopAnimations' }, ...SHARED_ANIMATION_PROVIDERS
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Exports `BrowserModule` with additional [dependency-injection providers](guide/glossary#provider)
+ * for use with animations. See [Animations](guide/animations).
+ * \@publicApi
+ */
+class BrowserAnimationsModule {
+}
+BrowserAnimationsModule.decorators = [
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"], args: [{
+                exports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"]],
+                providers: BROWSER_ANIMATIONS_PROVIDERS,
+            },] }
+];
+/**
+ * A null player that must be imported to allow disabling of animations.
+ * \@publicApi
+ */
+class NoopAnimationsModule {
+}
+NoopAnimationsModule.decorators = [
+    { type: _angular_core__WEBPACK_IMPORTED_MODULE_0__["NgModule"], args: [{
+                exports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"]],
+                providers: BROWSER_NOOP_ANIMATIONS_PROVIDERS,
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+
+/**
+ * Generated bundle index. Do not edit.
+ */
+
+
+//# sourceMappingURL=animations.js.map
+
+
+/***/ }),
+
 /***/ "./node_modules/@angular/platform-browser/fesm2015/platform-browser.js":
 /*!*****************************************************************************!*\
   !*** ./node_modules/@angular/platform-browser/fesm2015/platform-browser.js ***!
@@ -81464,6 +91788,2657 @@ const VERSION = new _angular_core__WEBPACK_IMPORTED_MODULE_1__["Version"]('8.2.1
 
 
 //# sourceMappingURL=platform-browser.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/hammerjs/hammer.js":
+/*!*****************************************!*\
+  !*** ./node_modules/hammerjs/hammer.js ***!
+  \*****************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var __WEBPACK_AMD_DEFINE_RESULT__;/*! Hammer.JS - v2.0.7 - 2016-04-22
+ * http://hammerjs.github.io/
+ *
+ * Copyright (c) 2016 Jorik Tangelder;
+ * Licensed under the MIT license */
+(function(window, document, exportName, undefined) {
+  'use strict';
+
+var VENDOR_PREFIXES = ['', 'webkit', 'Moz', 'MS', 'ms', 'o'];
+var TEST_ELEMENT = document.createElement('div');
+
+var TYPE_FUNCTION = 'function';
+
+var round = Math.round;
+var abs = Math.abs;
+var now = Date.now;
+
+/**
+ * set a timeout with a given scope
+ * @param {Function} fn
+ * @param {Number} timeout
+ * @param {Object} context
+ * @returns {number}
+ */
+function setTimeoutContext(fn, timeout, context) {
+    return setTimeout(bindFn(fn, context), timeout);
+}
+
+/**
+ * if the argument is an array, we want to execute the fn on each entry
+ * if it aint an array we don't want to do a thing.
+ * this is used by all the methods that accept a single and array argument.
+ * @param {*|Array} arg
+ * @param {String} fn
+ * @param {Object} [context]
+ * @returns {Boolean}
+ */
+function invokeArrayArg(arg, fn, context) {
+    if (Array.isArray(arg)) {
+        each(arg, context[fn], context);
+        return true;
+    }
+    return false;
+}
+
+/**
+ * walk objects and arrays
+ * @param {Object} obj
+ * @param {Function} iterator
+ * @param {Object} context
+ */
+function each(obj, iterator, context) {
+    var i;
+
+    if (!obj) {
+        return;
+    }
+
+    if (obj.forEach) {
+        obj.forEach(iterator, context);
+    } else if (obj.length !== undefined) {
+        i = 0;
+        while (i < obj.length) {
+            iterator.call(context, obj[i], i, obj);
+            i++;
+        }
+    } else {
+        for (i in obj) {
+            obj.hasOwnProperty(i) && iterator.call(context, obj[i], i, obj);
+        }
+    }
+}
+
+/**
+ * wrap a method with a deprecation warning and stack trace
+ * @param {Function} method
+ * @param {String} name
+ * @param {String} message
+ * @returns {Function} A new function wrapping the supplied method.
+ */
+function deprecate(method, name, message) {
+    var deprecationMessage = 'DEPRECATED METHOD: ' + name + '\n' + message + ' AT \n';
+    return function() {
+        var e = new Error('get-stack-trace');
+        var stack = e && e.stack ? e.stack.replace(/^[^\(]+?[\n$]/gm, '')
+            .replace(/^\s+at\s+/gm, '')
+            .replace(/^Object.<anonymous>\s*\(/gm, '{anonymous}()@') : 'Unknown Stack Trace';
+
+        var log = window.console && (window.console.warn || window.console.log);
+        if (log) {
+            log.call(window.console, deprecationMessage, stack);
+        }
+        return method.apply(this, arguments);
+    };
+}
+
+/**
+ * extend object.
+ * means that properties in dest will be overwritten by the ones in src.
+ * @param {Object} target
+ * @param {...Object} objects_to_assign
+ * @returns {Object} target
+ */
+var assign;
+if (typeof Object.assign !== 'function') {
+    assign = function assign(target) {
+        if (target === undefined || target === null) {
+            throw new TypeError('Cannot convert undefined or null to object');
+        }
+
+        var output = Object(target);
+        for (var index = 1; index < arguments.length; index++) {
+            var source = arguments[index];
+            if (source !== undefined && source !== null) {
+                for (var nextKey in source) {
+                    if (source.hasOwnProperty(nextKey)) {
+                        output[nextKey] = source[nextKey];
+                    }
+                }
+            }
+        }
+        return output;
+    };
+} else {
+    assign = Object.assign;
+}
+
+/**
+ * extend object.
+ * means that properties in dest will be overwritten by the ones in src.
+ * @param {Object} dest
+ * @param {Object} src
+ * @param {Boolean} [merge=false]
+ * @returns {Object} dest
+ */
+var extend = deprecate(function extend(dest, src, merge) {
+    var keys = Object.keys(src);
+    var i = 0;
+    while (i < keys.length) {
+        if (!merge || (merge && dest[keys[i]] === undefined)) {
+            dest[keys[i]] = src[keys[i]];
+        }
+        i++;
+    }
+    return dest;
+}, 'extend', 'Use `assign`.');
+
+/**
+ * merge the values from src in the dest.
+ * means that properties that exist in dest will not be overwritten by src
+ * @param {Object} dest
+ * @param {Object} src
+ * @returns {Object} dest
+ */
+var merge = deprecate(function merge(dest, src) {
+    return extend(dest, src, true);
+}, 'merge', 'Use `assign`.');
+
+/**
+ * simple class inheritance
+ * @param {Function} child
+ * @param {Function} base
+ * @param {Object} [properties]
+ */
+function inherit(child, base, properties) {
+    var baseP = base.prototype,
+        childP;
+
+    childP = child.prototype = Object.create(baseP);
+    childP.constructor = child;
+    childP._super = baseP;
+
+    if (properties) {
+        assign(childP, properties);
+    }
+}
+
+/**
+ * simple function bind
+ * @param {Function} fn
+ * @param {Object} context
+ * @returns {Function}
+ */
+function bindFn(fn, context) {
+    return function boundFn() {
+        return fn.apply(context, arguments);
+    };
+}
+
+/**
+ * let a boolean value also be a function that must return a boolean
+ * this first item in args will be used as the context
+ * @param {Boolean|Function} val
+ * @param {Array} [args]
+ * @returns {Boolean}
+ */
+function boolOrFn(val, args) {
+    if (typeof val == TYPE_FUNCTION) {
+        return val.apply(args ? args[0] || undefined : undefined, args);
+    }
+    return val;
+}
+
+/**
+ * use the val2 when val1 is undefined
+ * @param {*} val1
+ * @param {*} val2
+ * @returns {*}
+ */
+function ifUndefined(val1, val2) {
+    return (val1 === undefined) ? val2 : val1;
+}
+
+/**
+ * addEventListener with multiple events at once
+ * @param {EventTarget} target
+ * @param {String} types
+ * @param {Function} handler
+ */
+function addEventListeners(target, types, handler) {
+    each(splitStr(types), function(type) {
+        target.addEventListener(type, handler, false);
+    });
+}
+
+/**
+ * removeEventListener with multiple events at once
+ * @param {EventTarget} target
+ * @param {String} types
+ * @param {Function} handler
+ */
+function removeEventListeners(target, types, handler) {
+    each(splitStr(types), function(type) {
+        target.removeEventListener(type, handler, false);
+    });
+}
+
+/**
+ * find if a node is in the given parent
+ * @method hasParent
+ * @param {HTMLElement} node
+ * @param {HTMLElement} parent
+ * @return {Boolean} found
+ */
+function hasParent(node, parent) {
+    while (node) {
+        if (node == parent) {
+            return true;
+        }
+        node = node.parentNode;
+    }
+    return false;
+}
+
+/**
+ * small indexOf wrapper
+ * @param {String} str
+ * @param {String} find
+ * @returns {Boolean} found
+ */
+function inStr(str, find) {
+    return str.indexOf(find) > -1;
+}
+
+/**
+ * split string on whitespace
+ * @param {String} str
+ * @returns {Array} words
+ */
+function splitStr(str) {
+    return str.trim().split(/\s+/g);
+}
+
+/**
+ * find if a array contains the object using indexOf or a simple polyFill
+ * @param {Array} src
+ * @param {String} find
+ * @param {String} [findByKey]
+ * @return {Boolean|Number} false when not found, or the index
+ */
+function inArray(src, find, findByKey) {
+    if (src.indexOf && !findByKey) {
+        return src.indexOf(find);
+    } else {
+        var i = 0;
+        while (i < src.length) {
+            if ((findByKey && src[i][findByKey] == find) || (!findByKey && src[i] === find)) {
+                return i;
+            }
+            i++;
+        }
+        return -1;
+    }
+}
+
+/**
+ * convert array-like objects to real arrays
+ * @param {Object} obj
+ * @returns {Array}
+ */
+function toArray(obj) {
+    return Array.prototype.slice.call(obj, 0);
+}
+
+/**
+ * unique array with objects based on a key (like 'id') or just by the array's value
+ * @param {Array} src [{id:1},{id:2},{id:1}]
+ * @param {String} [key]
+ * @param {Boolean} [sort=False]
+ * @returns {Array} [{id:1},{id:2}]
+ */
+function uniqueArray(src, key, sort) {
+    var results = [];
+    var values = [];
+    var i = 0;
+
+    while (i < src.length) {
+        var val = key ? src[i][key] : src[i];
+        if (inArray(values, val) < 0) {
+            results.push(src[i]);
+        }
+        values[i] = val;
+        i++;
+    }
+
+    if (sort) {
+        if (!key) {
+            results = results.sort();
+        } else {
+            results = results.sort(function sortUniqueArray(a, b) {
+                return a[key] > b[key];
+            });
+        }
+    }
+
+    return results;
+}
+
+/**
+ * get the prefixed property
+ * @param {Object} obj
+ * @param {String} property
+ * @returns {String|Undefined} prefixed
+ */
+function prefixed(obj, property) {
+    var prefix, prop;
+    var camelProp = property[0].toUpperCase() + property.slice(1);
+
+    var i = 0;
+    while (i < VENDOR_PREFIXES.length) {
+        prefix = VENDOR_PREFIXES[i];
+        prop = (prefix) ? prefix + camelProp : property;
+
+        if (prop in obj) {
+            return prop;
+        }
+        i++;
+    }
+    return undefined;
+}
+
+/**
+ * get a unique id
+ * @returns {number} uniqueId
+ */
+var _uniqueId = 1;
+function uniqueId() {
+    return _uniqueId++;
+}
+
+/**
+ * get the window object of an element
+ * @param {HTMLElement} element
+ * @returns {DocumentView|Window}
+ */
+function getWindowForElement(element) {
+    var doc = element.ownerDocument || element;
+    return (doc.defaultView || doc.parentWindow || window);
+}
+
+var MOBILE_REGEX = /mobile|tablet|ip(ad|hone|od)|android/i;
+
+var SUPPORT_TOUCH = ('ontouchstart' in window);
+var SUPPORT_POINTER_EVENTS = prefixed(window, 'PointerEvent') !== undefined;
+var SUPPORT_ONLY_TOUCH = SUPPORT_TOUCH && MOBILE_REGEX.test(navigator.userAgent);
+
+var INPUT_TYPE_TOUCH = 'touch';
+var INPUT_TYPE_PEN = 'pen';
+var INPUT_TYPE_MOUSE = 'mouse';
+var INPUT_TYPE_KINECT = 'kinect';
+
+var COMPUTE_INTERVAL = 25;
+
+var INPUT_START = 1;
+var INPUT_MOVE = 2;
+var INPUT_END = 4;
+var INPUT_CANCEL = 8;
+
+var DIRECTION_NONE = 1;
+var DIRECTION_LEFT = 2;
+var DIRECTION_RIGHT = 4;
+var DIRECTION_UP = 8;
+var DIRECTION_DOWN = 16;
+
+var DIRECTION_HORIZONTAL = DIRECTION_LEFT | DIRECTION_RIGHT;
+var DIRECTION_VERTICAL = DIRECTION_UP | DIRECTION_DOWN;
+var DIRECTION_ALL = DIRECTION_HORIZONTAL | DIRECTION_VERTICAL;
+
+var PROPS_XY = ['x', 'y'];
+var PROPS_CLIENT_XY = ['clientX', 'clientY'];
+
+/**
+ * create new input type manager
+ * @param {Manager} manager
+ * @param {Function} callback
+ * @returns {Input}
+ * @constructor
+ */
+function Input(manager, callback) {
+    var self = this;
+    this.manager = manager;
+    this.callback = callback;
+    this.element = manager.element;
+    this.target = manager.options.inputTarget;
+
+    // smaller wrapper around the handler, for the scope and the enabled state of the manager,
+    // so when disabled the input events are completely bypassed.
+    this.domHandler = function(ev) {
+        if (boolOrFn(manager.options.enable, [manager])) {
+            self.handler(ev);
+        }
+    };
+
+    this.init();
+
+}
+
+Input.prototype = {
+    /**
+     * should handle the inputEvent data and trigger the callback
+     * @virtual
+     */
+    handler: function() { },
+
+    /**
+     * bind the events
+     */
+    init: function() {
+        this.evEl && addEventListeners(this.element, this.evEl, this.domHandler);
+        this.evTarget && addEventListeners(this.target, this.evTarget, this.domHandler);
+        this.evWin && addEventListeners(getWindowForElement(this.element), this.evWin, this.domHandler);
+    },
+
+    /**
+     * unbind the events
+     */
+    destroy: function() {
+        this.evEl && removeEventListeners(this.element, this.evEl, this.domHandler);
+        this.evTarget && removeEventListeners(this.target, this.evTarget, this.domHandler);
+        this.evWin && removeEventListeners(getWindowForElement(this.element), this.evWin, this.domHandler);
+    }
+};
+
+/**
+ * create new input type manager
+ * called by the Manager constructor
+ * @param {Hammer} manager
+ * @returns {Input}
+ */
+function createInputInstance(manager) {
+    var Type;
+    var inputClass = manager.options.inputClass;
+
+    if (inputClass) {
+        Type = inputClass;
+    } else if (SUPPORT_POINTER_EVENTS) {
+        Type = PointerEventInput;
+    } else if (SUPPORT_ONLY_TOUCH) {
+        Type = TouchInput;
+    } else if (!SUPPORT_TOUCH) {
+        Type = MouseInput;
+    } else {
+        Type = TouchMouseInput;
+    }
+    return new (Type)(manager, inputHandler);
+}
+
+/**
+ * handle input events
+ * @param {Manager} manager
+ * @param {String} eventType
+ * @param {Object} input
+ */
+function inputHandler(manager, eventType, input) {
+    var pointersLen = input.pointers.length;
+    var changedPointersLen = input.changedPointers.length;
+    var isFirst = (eventType & INPUT_START && (pointersLen - changedPointersLen === 0));
+    var isFinal = (eventType & (INPUT_END | INPUT_CANCEL) && (pointersLen - changedPointersLen === 0));
+
+    input.isFirst = !!isFirst;
+    input.isFinal = !!isFinal;
+
+    if (isFirst) {
+        manager.session = {};
+    }
+
+    // source event is the normalized value of the domEvents
+    // like 'touchstart, mouseup, pointerdown'
+    input.eventType = eventType;
+
+    // compute scale, rotation etc
+    computeInputData(manager, input);
+
+    // emit secret event
+    manager.emit('hammer.input', input);
+
+    manager.recognize(input);
+    manager.session.prevInput = input;
+}
+
+/**
+ * extend the data with some usable properties like scale, rotate, velocity etc
+ * @param {Object} manager
+ * @param {Object} input
+ */
+function computeInputData(manager, input) {
+    var session = manager.session;
+    var pointers = input.pointers;
+    var pointersLength = pointers.length;
+
+    // store the first input to calculate the distance and direction
+    if (!session.firstInput) {
+        session.firstInput = simpleCloneInputData(input);
+    }
+
+    // to compute scale and rotation we need to store the multiple touches
+    if (pointersLength > 1 && !session.firstMultiple) {
+        session.firstMultiple = simpleCloneInputData(input);
+    } else if (pointersLength === 1) {
+        session.firstMultiple = false;
+    }
+
+    var firstInput = session.firstInput;
+    var firstMultiple = session.firstMultiple;
+    var offsetCenter = firstMultiple ? firstMultiple.center : firstInput.center;
+
+    var center = input.center = getCenter(pointers);
+    input.timeStamp = now();
+    input.deltaTime = input.timeStamp - firstInput.timeStamp;
+
+    input.angle = getAngle(offsetCenter, center);
+    input.distance = getDistance(offsetCenter, center);
+
+    computeDeltaXY(session, input);
+    input.offsetDirection = getDirection(input.deltaX, input.deltaY);
+
+    var overallVelocity = getVelocity(input.deltaTime, input.deltaX, input.deltaY);
+    input.overallVelocityX = overallVelocity.x;
+    input.overallVelocityY = overallVelocity.y;
+    input.overallVelocity = (abs(overallVelocity.x) > abs(overallVelocity.y)) ? overallVelocity.x : overallVelocity.y;
+
+    input.scale = firstMultiple ? getScale(firstMultiple.pointers, pointers) : 1;
+    input.rotation = firstMultiple ? getRotation(firstMultiple.pointers, pointers) : 0;
+
+    input.maxPointers = !session.prevInput ? input.pointers.length : ((input.pointers.length >
+        session.prevInput.maxPointers) ? input.pointers.length : session.prevInput.maxPointers);
+
+    computeIntervalInputData(session, input);
+
+    // find the correct target
+    var target = manager.element;
+    if (hasParent(input.srcEvent.target, target)) {
+        target = input.srcEvent.target;
+    }
+    input.target = target;
+}
+
+function computeDeltaXY(session, input) {
+    var center = input.center;
+    var offset = session.offsetDelta || {};
+    var prevDelta = session.prevDelta || {};
+    var prevInput = session.prevInput || {};
+
+    if (input.eventType === INPUT_START || prevInput.eventType === INPUT_END) {
+        prevDelta = session.prevDelta = {
+            x: prevInput.deltaX || 0,
+            y: prevInput.deltaY || 0
+        };
+
+        offset = session.offsetDelta = {
+            x: center.x,
+            y: center.y
+        };
+    }
+
+    input.deltaX = prevDelta.x + (center.x - offset.x);
+    input.deltaY = prevDelta.y + (center.y - offset.y);
+}
+
+/**
+ * velocity is calculated every x ms
+ * @param {Object} session
+ * @param {Object} input
+ */
+function computeIntervalInputData(session, input) {
+    var last = session.lastInterval || input,
+        deltaTime = input.timeStamp - last.timeStamp,
+        velocity, velocityX, velocityY, direction;
+
+    if (input.eventType != INPUT_CANCEL && (deltaTime > COMPUTE_INTERVAL || last.velocity === undefined)) {
+        var deltaX = input.deltaX - last.deltaX;
+        var deltaY = input.deltaY - last.deltaY;
+
+        var v = getVelocity(deltaTime, deltaX, deltaY);
+        velocityX = v.x;
+        velocityY = v.y;
+        velocity = (abs(v.x) > abs(v.y)) ? v.x : v.y;
+        direction = getDirection(deltaX, deltaY);
+
+        session.lastInterval = input;
+    } else {
+        // use latest velocity info if it doesn't overtake a minimum period
+        velocity = last.velocity;
+        velocityX = last.velocityX;
+        velocityY = last.velocityY;
+        direction = last.direction;
+    }
+
+    input.velocity = velocity;
+    input.velocityX = velocityX;
+    input.velocityY = velocityY;
+    input.direction = direction;
+}
+
+/**
+ * create a simple clone from the input used for storage of firstInput and firstMultiple
+ * @param {Object} input
+ * @returns {Object} clonedInputData
+ */
+function simpleCloneInputData(input) {
+    // make a simple copy of the pointers because we will get a reference if we don't
+    // we only need clientXY for the calculations
+    var pointers = [];
+    var i = 0;
+    while (i < input.pointers.length) {
+        pointers[i] = {
+            clientX: round(input.pointers[i].clientX),
+            clientY: round(input.pointers[i].clientY)
+        };
+        i++;
+    }
+
+    return {
+        timeStamp: now(),
+        pointers: pointers,
+        center: getCenter(pointers),
+        deltaX: input.deltaX,
+        deltaY: input.deltaY
+    };
+}
+
+/**
+ * get the center of all the pointers
+ * @param {Array} pointers
+ * @return {Object} center contains `x` and `y` properties
+ */
+function getCenter(pointers) {
+    var pointersLength = pointers.length;
+
+    // no need to loop when only one touch
+    if (pointersLength === 1) {
+        return {
+            x: round(pointers[0].clientX),
+            y: round(pointers[0].clientY)
+        };
+    }
+
+    var x = 0, y = 0, i = 0;
+    while (i < pointersLength) {
+        x += pointers[i].clientX;
+        y += pointers[i].clientY;
+        i++;
+    }
+
+    return {
+        x: round(x / pointersLength),
+        y: round(y / pointersLength)
+    };
+}
+
+/**
+ * calculate the velocity between two points. unit is in px per ms.
+ * @param {Number} deltaTime
+ * @param {Number} x
+ * @param {Number} y
+ * @return {Object} velocity `x` and `y`
+ */
+function getVelocity(deltaTime, x, y) {
+    return {
+        x: x / deltaTime || 0,
+        y: y / deltaTime || 0
+    };
+}
+
+/**
+ * get the direction between two points
+ * @param {Number} x
+ * @param {Number} y
+ * @return {Number} direction
+ */
+function getDirection(x, y) {
+    if (x === y) {
+        return DIRECTION_NONE;
+    }
+
+    if (abs(x) >= abs(y)) {
+        return x < 0 ? DIRECTION_LEFT : DIRECTION_RIGHT;
+    }
+    return y < 0 ? DIRECTION_UP : DIRECTION_DOWN;
+}
+
+/**
+ * calculate the absolute distance between two points
+ * @param {Object} p1 {x, y}
+ * @param {Object} p2 {x, y}
+ * @param {Array} [props] containing x and y keys
+ * @return {Number} distance
+ */
+function getDistance(p1, p2, props) {
+    if (!props) {
+        props = PROPS_XY;
+    }
+    var x = p2[props[0]] - p1[props[0]],
+        y = p2[props[1]] - p1[props[1]];
+
+    return Math.sqrt((x * x) + (y * y));
+}
+
+/**
+ * calculate the angle between two coordinates
+ * @param {Object} p1
+ * @param {Object} p2
+ * @param {Array} [props] containing x and y keys
+ * @return {Number} angle
+ */
+function getAngle(p1, p2, props) {
+    if (!props) {
+        props = PROPS_XY;
+    }
+    var x = p2[props[0]] - p1[props[0]],
+        y = p2[props[1]] - p1[props[1]];
+    return Math.atan2(y, x) * 180 / Math.PI;
+}
+
+/**
+ * calculate the rotation degrees between two pointersets
+ * @param {Array} start array of pointers
+ * @param {Array} end array of pointers
+ * @return {Number} rotation
+ */
+function getRotation(start, end) {
+    return getAngle(end[1], end[0], PROPS_CLIENT_XY) + getAngle(start[1], start[0], PROPS_CLIENT_XY);
+}
+
+/**
+ * calculate the scale factor between two pointersets
+ * no scale is 1, and goes down to 0 when pinched together, and bigger when pinched out
+ * @param {Array} start array of pointers
+ * @param {Array} end array of pointers
+ * @return {Number} scale
+ */
+function getScale(start, end) {
+    return getDistance(end[0], end[1], PROPS_CLIENT_XY) / getDistance(start[0], start[1], PROPS_CLIENT_XY);
+}
+
+var MOUSE_INPUT_MAP = {
+    mousedown: INPUT_START,
+    mousemove: INPUT_MOVE,
+    mouseup: INPUT_END
+};
+
+var MOUSE_ELEMENT_EVENTS = 'mousedown';
+var MOUSE_WINDOW_EVENTS = 'mousemove mouseup';
+
+/**
+ * Mouse events input
+ * @constructor
+ * @extends Input
+ */
+function MouseInput() {
+    this.evEl = MOUSE_ELEMENT_EVENTS;
+    this.evWin = MOUSE_WINDOW_EVENTS;
+
+    this.pressed = false; // mousedown state
+
+    Input.apply(this, arguments);
+}
+
+inherit(MouseInput, Input, {
+    /**
+     * handle mouse events
+     * @param {Object} ev
+     */
+    handler: function MEhandler(ev) {
+        var eventType = MOUSE_INPUT_MAP[ev.type];
+
+        // on start we want to have the left mouse button down
+        if (eventType & INPUT_START && ev.button === 0) {
+            this.pressed = true;
+        }
+
+        if (eventType & INPUT_MOVE && ev.which !== 1) {
+            eventType = INPUT_END;
+        }
+
+        // mouse must be down
+        if (!this.pressed) {
+            return;
+        }
+
+        if (eventType & INPUT_END) {
+            this.pressed = false;
+        }
+
+        this.callback(this.manager, eventType, {
+            pointers: [ev],
+            changedPointers: [ev],
+            pointerType: INPUT_TYPE_MOUSE,
+            srcEvent: ev
+        });
+    }
+});
+
+var POINTER_INPUT_MAP = {
+    pointerdown: INPUT_START,
+    pointermove: INPUT_MOVE,
+    pointerup: INPUT_END,
+    pointercancel: INPUT_CANCEL,
+    pointerout: INPUT_CANCEL
+};
+
+// in IE10 the pointer types is defined as an enum
+var IE10_POINTER_TYPE_ENUM = {
+    2: INPUT_TYPE_TOUCH,
+    3: INPUT_TYPE_PEN,
+    4: INPUT_TYPE_MOUSE,
+    5: INPUT_TYPE_KINECT // see https://twitter.com/jacobrossi/status/480596438489890816
+};
+
+var POINTER_ELEMENT_EVENTS = 'pointerdown';
+var POINTER_WINDOW_EVENTS = 'pointermove pointerup pointercancel';
+
+// IE10 has prefixed support, and case-sensitive
+if (window.MSPointerEvent && !window.PointerEvent) {
+    POINTER_ELEMENT_EVENTS = 'MSPointerDown';
+    POINTER_WINDOW_EVENTS = 'MSPointerMove MSPointerUp MSPointerCancel';
+}
+
+/**
+ * Pointer events input
+ * @constructor
+ * @extends Input
+ */
+function PointerEventInput() {
+    this.evEl = POINTER_ELEMENT_EVENTS;
+    this.evWin = POINTER_WINDOW_EVENTS;
+
+    Input.apply(this, arguments);
+
+    this.store = (this.manager.session.pointerEvents = []);
+}
+
+inherit(PointerEventInput, Input, {
+    /**
+     * handle mouse events
+     * @param {Object} ev
+     */
+    handler: function PEhandler(ev) {
+        var store = this.store;
+        var removePointer = false;
+
+        var eventTypeNormalized = ev.type.toLowerCase().replace('ms', '');
+        var eventType = POINTER_INPUT_MAP[eventTypeNormalized];
+        var pointerType = IE10_POINTER_TYPE_ENUM[ev.pointerType] || ev.pointerType;
+
+        var isTouch = (pointerType == INPUT_TYPE_TOUCH);
+
+        // get index of the event in the store
+        var storeIndex = inArray(store, ev.pointerId, 'pointerId');
+
+        // start and mouse must be down
+        if (eventType & INPUT_START && (ev.button === 0 || isTouch)) {
+            if (storeIndex < 0) {
+                store.push(ev);
+                storeIndex = store.length - 1;
+            }
+        } else if (eventType & (INPUT_END | INPUT_CANCEL)) {
+            removePointer = true;
+        }
+
+        // it not found, so the pointer hasn't been down (so it's probably a hover)
+        if (storeIndex < 0) {
+            return;
+        }
+
+        // update the event in the store
+        store[storeIndex] = ev;
+
+        this.callback(this.manager, eventType, {
+            pointers: store,
+            changedPointers: [ev],
+            pointerType: pointerType,
+            srcEvent: ev
+        });
+
+        if (removePointer) {
+            // remove from the store
+            store.splice(storeIndex, 1);
+        }
+    }
+});
+
+var SINGLE_TOUCH_INPUT_MAP = {
+    touchstart: INPUT_START,
+    touchmove: INPUT_MOVE,
+    touchend: INPUT_END,
+    touchcancel: INPUT_CANCEL
+};
+
+var SINGLE_TOUCH_TARGET_EVENTS = 'touchstart';
+var SINGLE_TOUCH_WINDOW_EVENTS = 'touchstart touchmove touchend touchcancel';
+
+/**
+ * Touch events input
+ * @constructor
+ * @extends Input
+ */
+function SingleTouchInput() {
+    this.evTarget = SINGLE_TOUCH_TARGET_EVENTS;
+    this.evWin = SINGLE_TOUCH_WINDOW_EVENTS;
+    this.started = false;
+
+    Input.apply(this, arguments);
+}
+
+inherit(SingleTouchInput, Input, {
+    handler: function TEhandler(ev) {
+        var type = SINGLE_TOUCH_INPUT_MAP[ev.type];
+
+        // should we handle the touch events?
+        if (type === INPUT_START) {
+            this.started = true;
+        }
+
+        if (!this.started) {
+            return;
+        }
+
+        var touches = normalizeSingleTouches.call(this, ev, type);
+
+        // when done, reset the started state
+        if (type & (INPUT_END | INPUT_CANCEL) && touches[0].length - touches[1].length === 0) {
+            this.started = false;
+        }
+
+        this.callback(this.manager, type, {
+            pointers: touches[0],
+            changedPointers: touches[1],
+            pointerType: INPUT_TYPE_TOUCH,
+            srcEvent: ev
+        });
+    }
+});
+
+/**
+ * @this {TouchInput}
+ * @param {Object} ev
+ * @param {Number} type flag
+ * @returns {undefined|Array} [all, changed]
+ */
+function normalizeSingleTouches(ev, type) {
+    var all = toArray(ev.touches);
+    var changed = toArray(ev.changedTouches);
+
+    if (type & (INPUT_END | INPUT_CANCEL)) {
+        all = uniqueArray(all.concat(changed), 'identifier', true);
+    }
+
+    return [all, changed];
+}
+
+var TOUCH_INPUT_MAP = {
+    touchstart: INPUT_START,
+    touchmove: INPUT_MOVE,
+    touchend: INPUT_END,
+    touchcancel: INPUT_CANCEL
+};
+
+var TOUCH_TARGET_EVENTS = 'touchstart touchmove touchend touchcancel';
+
+/**
+ * Multi-user touch events input
+ * @constructor
+ * @extends Input
+ */
+function TouchInput() {
+    this.evTarget = TOUCH_TARGET_EVENTS;
+    this.targetIds = {};
+
+    Input.apply(this, arguments);
+}
+
+inherit(TouchInput, Input, {
+    handler: function MTEhandler(ev) {
+        var type = TOUCH_INPUT_MAP[ev.type];
+        var touches = getTouches.call(this, ev, type);
+        if (!touches) {
+            return;
+        }
+
+        this.callback(this.manager, type, {
+            pointers: touches[0],
+            changedPointers: touches[1],
+            pointerType: INPUT_TYPE_TOUCH,
+            srcEvent: ev
+        });
+    }
+});
+
+/**
+ * @this {TouchInput}
+ * @param {Object} ev
+ * @param {Number} type flag
+ * @returns {undefined|Array} [all, changed]
+ */
+function getTouches(ev, type) {
+    var allTouches = toArray(ev.touches);
+    var targetIds = this.targetIds;
+
+    // when there is only one touch, the process can be simplified
+    if (type & (INPUT_START | INPUT_MOVE) && allTouches.length === 1) {
+        targetIds[allTouches[0].identifier] = true;
+        return [allTouches, allTouches];
+    }
+
+    var i,
+        targetTouches,
+        changedTouches = toArray(ev.changedTouches),
+        changedTargetTouches = [],
+        target = this.target;
+
+    // get target touches from touches
+    targetTouches = allTouches.filter(function(touch) {
+        return hasParent(touch.target, target);
+    });
+
+    // collect touches
+    if (type === INPUT_START) {
+        i = 0;
+        while (i < targetTouches.length) {
+            targetIds[targetTouches[i].identifier] = true;
+            i++;
+        }
+    }
+
+    // filter changed touches to only contain touches that exist in the collected target ids
+    i = 0;
+    while (i < changedTouches.length) {
+        if (targetIds[changedTouches[i].identifier]) {
+            changedTargetTouches.push(changedTouches[i]);
+        }
+
+        // cleanup removed touches
+        if (type & (INPUT_END | INPUT_CANCEL)) {
+            delete targetIds[changedTouches[i].identifier];
+        }
+        i++;
+    }
+
+    if (!changedTargetTouches.length) {
+        return;
+    }
+
+    return [
+        // merge targetTouches with changedTargetTouches so it contains ALL touches, including 'end' and 'cancel'
+        uniqueArray(targetTouches.concat(changedTargetTouches), 'identifier', true),
+        changedTargetTouches
+    ];
+}
+
+/**
+ * Combined touch and mouse input
+ *
+ * Touch has a higher priority then mouse, and while touching no mouse events are allowed.
+ * This because touch devices also emit mouse events while doing a touch.
+ *
+ * @constructor
+ * @extends Input
+ */
+
+var DEDUP_TIMEOUT = 2500;
+var DEDUP_DISTANCE = 25;
+
+function TouchMouseInput() {
+    Input.apply(this, arguments);
+
+    var handler = bindFn(this.handler, this);
+    this.touch = new TouchInput(this.manager, handler);
+    this.mouse = new MouseInput(this.manager, handler);
+
+    this.primaryTouch = null;
+    this.lastTouches = [];
+}
+
+inherit(TouchMouseInput, Input, {
+    /**
+     * handle mouse and touch events
+     * @param {Hammer} manager
+     * @param {String} inputEvent
+     * @param {Object} inputData
+     */
+    handler: function TMEhandler(manager, inputEvent, inputData) {
+        var isTouch = (inputData.pointerType == INPUT_TYPE_TOUCH),
+            isMouse = (inputData.pointerType == INPUT_TYPE_MOUSE);
+
+        if (isMouse && inputData.sourceCapabilities && inputData.sourceCapabilities.firesTouchEvents) {
+            return;
+        }
+
+        // when we're in a touch event, record touches to  de-dupe synthetic mouse event
+        if (isTouch) {
+            recordTouches.call(this, inputEvent, inputData);
+        } else if (isMouse && isSyntheticEvent.call(this, inputData)) {
+            return;
+        }
+
+        this.callback(manager, inputEvent, inputData);
+    },
+
+    /**
+     * remove the event listeners
+     */
+    destroy: function destroy() {
+        this.touch.destroy();
+        this.mouse.destroy();
+    }
+});
+
+function recordTouches(eventType, eventData) {
+    if (eventType & INPUT_START) {
+        this.primaryTouch = eventData.changedPointers[0].identifier;
+        setLastTouch.call(this, eventData);
+    } else if (eventType & (INPUT_END | INPUT_CANCEL)) {
+        setLastTouch.call(this, eventData);
+    }
+}
+
+function setLastTouch(eventData) {
+    var touch = eventData.changedPointers[0];
+
+    if (touch.identifier === this.primaryTouch) {
+        var lastTouch = {x: touch.clientX, y: touch.clientY};
+        this.lastTouches.push(lastTouch);
+        var lts = this.lastTouches;
+        var removeLastTouch = function() {
+            var i = lts.indexOf(lastTouch);
+            if (i > -1) {
+                lts.splice(i, 1);
+            }
+        };
+        setTimeout(removeLastTouch, DEDUP_TIMEOUT);
+    }
+}
+
+function isSyntheticEvent(eventData) {
+    var x = eventData.srcEvent.clientX, y = eventData.srcEvent.clientY;
+    for (var i = 0; i < this.lastTouches.length; i++) {
+        var t = this.lastTouches[i];
+        var dx = Math.abs(x - t.x), dy = Math.abs(y - t.y);
+        if (dx <= DEDUP_DISTANCE && dy <= DEDUP_DISTANCE) {
+            return true;
+        }
+    }
+    return false;
+}
+
+var PREFIXED_TOUCH_ACTION = prefixed(TEST_ELEMENT.style, 'touchAction');
+var NATIVE_TOUCH_ACTION = PREFIXED_TOUCH_ACTION !== undefined;
+
+// magical touchAction value
+var TOUCH_ACTION_COMPUTE = 'compute';
+var TOUCH_ACTION_AUTO = 'auto';
+var TOUCH_ACTION_MANIPULATION = 'manipulation'; // not implemented
+var TOUCH_ACTION_NONE = 'none';
+var TOUCH_ACTION_PAN_X = 'pan-x';
+var TOUCH_ACTION_PAN_Y = 'pan-y';
+var TOUCH_ACTION_MAP = getTouchActionProps();
+
+/**
+ * Touch Action
+ * sets the touchAction property or uses the js alternative
+ * @param {Manager} manager
+ * @param {String} value
+ * @constructor
+ */
+function TouchAction(manager, value) {
+    this.manager = manager;
+    this.set(value);
+}
+
+TouchAction.prototype = {
+    /**
+     * set the touchAction value on the element or enable the polyfill
+     * @param {String} value
+     */
+    set: function(value) {
+        // find out the touch-action by the event handlers
+        if (value == TOUCH_ACTION_COMPUTE) {
+            value = this.compute();
+        }
+
+        if (NATIVE_TOUCH_ACTION && this.manager.element.style && TOUCH_ACTION_MAP[value]) {
+            this.manager.element.style[PREFIXED_TOUCH_ACTION] = value;
+        }
+        this.actions = value.toLowerCase().trim();
+    },
+
+    /**
+     * just re-set the touchAction value
+     */
+    update: function() {
+        this.set(this.manager.options.touchAction);
+    },
+
+    /**
+     * compute the value for the touchAction property based on the recognizer's settings
+     * @returns {String} value
+     */
+    compute: function() {
+        var actions = [];
+        each(this.manager.recognizers, function(recognizer) {
+            if (boolOrFn(recognizer.options.enable, [recognizer])) {
+                actions = actions.concat(recognizer.getTouchAction());
+            }
+        });
+        return cleanTouchActions(actions.join(' '));
+    },
+
+    /**
+     * this method is called on each input cycle and provides the preventing of the browser behavior
+     * @param {Object} input
+     */
+    preventDefaults: function(input) {
+        var srcEvent = input.srcEvent;
+        var direction = input.offsetDirection;
+
+        // if the touch action did prevented once this session
+        if (this.manager.session.prevented) {
+            srcEvent.preventDefault();
+            return;
+        }
+
+        var actions = this.actions;
+        var hasNone = inStr(actions, TOUCH_ACTION_NONE) && !TOUCH_ACTION_MAP[TOUCH_ACTION_NONE];
+        var hasPanY = inStr(actions, TOUCH_ACTION_PAN_Y) && !TOUCH_ACTION_MAP[TOUCH_ACTION_PAN_Y];
+        var hasPanX = inStr(actions, TOUCH_ACTION_PAN_X) && !TOUCH_ACTION_MAP[TOUCH_ACTION_PAN_X];
+
+        if (hasNone) {
+            //do not prevent defaults if this is a tap gesture
+
+            var isTapPointer = input.pointers.length === 1;
+            var isTapMovement = input.distance < 2;
+            var isTapTouchTime = input.deltaTime < 250;
+
+            if (isTapPointer && isTapMovement && isTapTouchTime) {
+                return;
+            }
+        }
+
+        if (hasPanX && hasPanY) {
+            // `pan-x pan-y` means browser handles all scrolling/panning, do not prevent
+            return;
+        }
+
+        if (hasNone ||
+            (hasPanY && direction & DIRECTION_HORIZONTAL) ||
+            (hasPanX && direction & DIRECTION_VERTICAL)) {
+            return this.preventSrc(srcEvent);
+        }
+    },
+
+    /**
+     * call preventDefault to prevent the browser's default behavior (scrolling in most cases)
+     * @param {Object} srcEvent
+     */
+    preventSrc: function(srcEvent) {
+        this.manager.session.prevented = true;
+        srcEvent.preventDefault();
+    }
+};
+
+/**
+ * when the touchActions are collected they are not a valid value, so we need to clean things up. *
+ * @param {String} actions
+ * @returns {*}
+ */
+function cleanTouchActions(actions) {
+    // none
+    if (inStr(actions, TOUCH_ACTION_NONE)) {
+        return TOUCH_ACTION_NONE;
+    }
+
+    var hasPanX = inStr(actions, TOUCH_ACTION_PAN_X);
+    var hasPanY = inStr(actions, TOUCH_ACTION_PAN_Y);
+
+    // if both pan-x and pan-y are set (different recognizers
+    // for different directions, e.g. horizontal pan but vertical swipe?)
+    // we need none (as otherwise with pan-x pan-y combined none of these
+    // recognizers will work, since the browser would handle all panning
+    if (hasPanX && hasPanY) {
+        return TOUCH_ACTION_NONE;
+    }
+
+    // pan-x OR pan-y
+    if (hasPanX || hasPanY) {
+        return hasPanX ? TOUCH_ACTION_PAN_X : TOUCH_ACTION_PAN_Y;
+    }
+
+    // manipulation
+    if (inStr(actions, TOUCH_ACTION_MANIPULATION)) {
+        return TOUCH_ACTION_MANIPULATION;
+    }
+
+    return TOUCH_ACTION_AUTO;
+}
+
+function getTouchActionProps() {
+    if (!NATIVE_TOUCH_ACTION) {
+        return false;
+    }
+    var touchMap = {};
+    var cssSupports = window.CSS && window.CSS.supports;
+    ['auto', 'manipulation', 'pan-y', 'pan-x', 'pan-x pan-y', 'none'].forEach(function(val) {
+
+        // If css.supports is not supported but there is native touch-action assume it supports
+        // all values. This is the case for IE 10 and 11.
+        touchMap[val] = cssSupports ? window.CSS.supports('touch-action', val) : true;
+    });
+    return touchMap;
+}
+
+/**
+ * Recognizer flow explained; *
+ * All recognizers have the initial state of POSSIBLE when a input session starts.
+ * The definition of a input session is from the first input until the last input, with all it's movement in it. *
+ * Example session for mouse-input: mousedown -> mousemove -> mouseup
+ *
+ * On each recognizing cycle (see Manager.recognize) the .recognize() method is executed
+ * which determines with state it should be.
+ *
+ * If the recognizer has the state FAILED, CANCELLED or RECOGNIZED (equals ENDED), it is reset to
+ * POSSIBLE to give it another change on the next cycle.
+ *
+ *               Possible
+ *                  |
+ *            +-----+---------------+
+ *            |                     |
+ *      +-----+-----+               |
+ *      |           |               |
+ *   Failed      Cancelled          |
+ *                          +-------+------+
+ *                          |              |
+ *                      Recognized       Began
+ *                                         |
+ *                                      Changed
+ *                                         |
+ *                                  Ended/Recognized
+ */
+var STATE_POSSIBLE = 1;
+var STATE_BEGAN = 2;
+var STATE_CHANGED = 4;
+var STATE_ENDED = 8;
+var STATE_RECOGNIZED = STATE_ENDED;
+var STATE_CANCELLED = 16;
+var STATE_FAILED = 32;
+
+/**
+ * Recognizer
+ * Every recognizer needs to extend from this class.
+ * @constructor
+ * @param {Object} options
+ */
+function Recognizer(options) {
+    this.options = assign({}, this.defaults, options || {});
+
+    this.id = uniqueId();
+
+    this.manager = null;
+
+    // default is enable true
+    this.options.enable = ifUndefined(this.options.enable, true);
+
+    this.state = STATE_POSSIBLE;
+
+    this.simultaneous = {};
+    this.requireFail = [];
+}
+
+Recognizer.prototype = {
+    /**
+     * @virtual
+     * @type {Object}
+     */
+    defaults: {},
+
+    /**
+     * set options
+     * @param {Object} options
+     * @return {Recognizer}
+     */
+    set: function(options) {
+        assign(this.options, options);
+
+        // also update the touchAction, in case something changed about the directions/enabled state
+        this.manager && this.manager.touchAction.update();
+        return this;
+    },
+
+    /**
+     * recognize simultaneous with an other recognizer.
+     * @param {Recognizer} otherRecognizer
+     * @returns {Recognizer} this
+     */
+    recognizeWith: function(otherRecognizer) {
+        if (invokeArrayArg(otherRecognizer, 'recognizeWith', this)) {
+            return this;
+        }
+
+        var simultaneous = this.simultaneous;
+        otherRecognizer = getRecognizerByNameIfManager(otherRecognizer, this);
+        if (!simultaneous[otherRecognizer.id]) {
+            simultaneous[otherRecognizer.id] = otherRecognizer;
+            otherRecognizer.recognizeWith(this);
+        }
+        return this;
+    },
+
+    /**
+     * drop the simultaneous link. it doesnt remove the link on the other recognizer.
+     * @param {Recognizer} otherRecognizer
+     * @returns {Recognizer} this
+     */
+    dropRecognizeWith: function(otherRecognizer) {
+        if (invokeArrayArg(otherRecognizer, 'dropRecognizeWith', this)) {
+            return this;
+        }
+
+        otherRecognizer = getRecognizerByNameIfManager(otherRecognizer, this);
+        delete this.simultaneous[otherRecognizer.id];
+        return this;
+    },
+
+    /**
+     * recognizer can only run when an other is failing
+     * @param {Recognizer} otherRecognizer
+     * @returns {Recognizer} this
+     */
+    requireFailure: function(otherRecognizer) {
+        if (invokeArrayArg(otherRecognizer, 'requireFailure', this)) {
+            return this;
+        }
+
+        var requireFail = this.requireFail;
+        otherRecognizer = getRecognizerByNameIfManager(otherRecognizer, this);
+        if (inArray(requireFail, otherRecognizer) === -1) {
+            requireFail.push(otherRecognizer);
+            otherRecognizer.requireFailure(this);
+        }
+        return this;
+    },
+
+    /**
+     * drop the requireFailure link. it does not remove the link on the other recognizer.
+     * @param {Recognizer} otherRecognizer
+     * @returns {Recognizer} this
+     */
+    dropRequireFailure: function(otherRecognizer) {
+        if (invokeArrayArg(otherRecognizer, 'dropRequireFailure', this)) {
+            return this;
+        }
+
+        otherRecognizer = getRecognizerByNameIfManager(otherRecognizer, this);
+        var index = inArray(this.requireFail, otherRecognizer);
+        if (index > -1) {
+            this.requireFail.splice(index, 1);
+        }
+        return this;
+    },
+
+    /**
+     * has require failures boolean
+     * @returns {boolean}
+     */
+    hasRequireFailures: function() {
+        return this.requireFail.length > 0;
+    },
+
+    /**
+     * if the recognizer can recognize simultaneous with an other recognizer
+     * @param {Recognizer} otherRecognizer
+     * @returns {Boolean}
+     */
+    canRecognizeWith: function(otherRecognizer) {
+        return !!this.simultaneous[otherRecognizer.id];
+    },
+
+    /**
+     * You should use `tryEmit` instead of `emit` directly to check
+     * that all the needed recognizers has failed before emitting.
+     * @param {Object} input
+     */
+    emit: function(input) {
+        var self = this;
+        var state = this.state;
+
+        function emit(event) {
+            self.manager.emit(event, input);
+        }
+
+        // 'panstart' and 'panmove'
+        if (state < STATE_ENDED) {
+            emit(self.options.event + stateStr(state));
+        }
+
+        emit(self.options.event); // simple 'eventName' events
+
+        if (input.additionalEvent) { // additional event(panleft, panright, pinchin, pinchout...)
+            emit(input.additionalEvent);
+        }
+
+        // panend and pancancel
+        if (state >= STATE_ENDED) {
+            emit(self.options.event + stateStr(state));
+        }
+    },
+
+    /**
+     * Check that all the require failure recognizers has failed,
+     * if true, it emits a gesture event,
+     * otherwise, setup the state to FAILED.
+     * @param {Object} input
+     */
+    tryEmit: function(input) {
+        if (this.canEmit()) {
+            return this.emit(input);
+        }
+        // it's failing anyway
+        this.state = STATE_FAILED;
+    },
+
+    /**
+     * can we emit?
+     * @returns {boolean}
+     */
+    canEmit: function() {
+        var i = 0;
+        while (i < this.requireFail.length) {
+            if (!(this.requireFail[i].state & (STATE_FAILED | STATE_POSSIBLE))) {
+                return false;
+            }
+            i++;
+        }
+        return true;
+    },
+
+    /**
+     * update the recognizer
+     * @param {Object} inputData
+     */
+    recognize: function(inputData) {
+        // make a new copy of the inputData
+        // so we can change the inputData without messing up the other recognizers
+        var inputDataClone = assign({}, inputData);
+
+        // is is enabled and allow recognizing?
+        if (!boolOrFn(this.options.enable, [this, inputDataClone])) {
+            this.reset();
+            this.state = STATE_FAILED;
+            return;
+        }
+
+        // reset when we've reached the end
+        if (this.state & (STATE_RECOGNIZED | STATE_CANCELLED | STATE_FAILED)) {
+            this.state = STATE_POSSIBLE;
+        }
+
+        this.state = this.process(inputDataClone);
+
+        // the recognizer has recognized a gesture
+        // so trigger an event
+        if (this.state & (STATE_BEGAN | STATE_CHANGED | STATE_ENDED | STATE_CANCELLED)) {
+            this.tryEmit(inputDataClone);
+        }
+    },
+
+    /**
+     * return the state of the recognizer
+     * the actual recognizing happens in this method
+     * @virtual
+     * @param {Object} inputData
+     * @returns {Const} STATE
+     */
+    process: function(inputData) { }, // jshint ignore:line
+
+    /**
+     * return the preferred touch-action
+     * @virtual
+     * @returns {Array}
+     */
+    getTouchAction: function() { },
+
+    /**
+     * called when the gesture isn't allowed to recognize
+     * like when another is being recognized or it is disabled
+     * @virtual
+     */
+    reset: function() { }
+};
+
+/**
+ * get a usable string, used as event postfix
+ * @param {Const} state
+ * @returns {String} state
+ */
+function stateStr(state) {
+    if (state & STATE_CANCELLED) {
+        return 'cancel';
+    } else if (state & STATE_ENDED) {
+        return 'end';
+    } else if (state & STATE_CHANGED) {
+        return 'move';
+    } else if (state & STATE_BEGAN) {
+        return 'start';
+    }
+    return '';
+}
+
+/**
+ * direction cons to string
+ * @param {Const} direction
+ * @returns {String}
+ */
+function directionStr(direction) {
+    if (direction == DIRECTION_DOWN) {
+        return 'down';
+    } else if (direction == DIRECTION_UP) {
+        return 'up';
+    } else if (direction == DIRECTION_LEFT) {
+        return 'left';
+    } else if (direction == DIRECTION_RIGHT) {
+        return 'right';
+    }
+    return '';
+}
+
+/**
+ * get a recognizer by name if it is bound to a manager
+ * @param {Recognizer|String} otherRecognizer
+ * @param {Recognizer} recognizer
+ * @returns {Recognizer}
+ */
+function getRecognizerByNameIfManager(otherRecognizer, recognizer) {
+    var manager = recognizer.manager;
+    if (manager) {
+        return manager.get(otherRecognizer);
+    }
+    return otherRecognizer;
+}
+
+/**
+ * This recognizer is just used as a base for the simple attribute recognizers.
+ * @constructor
+ * @extends Recognizer
+ */
+function AttrRecognizer() {
+    Recognizer.apply(this, arguments);
+}
+
+inherit(AttrRecognizer, Recognizer, {
+    /**
+     * @namespace
+     * @memberof AttrRecognizer
+     */
+    defaults: {
+        /**
+         * @type {Number}
+         * @default 1
+         */
+        pointers: 1
+    },
+
+    /**
+     * Used to check if it the recognizer receives valid input, like input.distance > 10.
+     * @memberof AttrRecognizer
+     * @param {Object} input
+     * @returns {Boolean} recognized
+     */
+    attrTest: function(input) {
+        var optionPointers = this.options.pointers;
+        return optionPointers === 0 || input.pointers.length === optionPointers;
+    },
+
+    /**
+     * Process the input and return the state for the recognizer
+     * @memberof AttrRecognizer
+     * @param {Object} input
+     * @returns {*} State
+     */
+    process: function(input) {
+        var state = this.state;
+        var eventType = input.eventType;
+
+        var isRecognized = state & (STATE_BEGAN | STATE_CHANGED);
+        var isValid = this.attrTest(input);
+
+        // on cancel input and we've recognized before, return STATE_CANCELLED
+        if (isRecognized && (eventType & INPUT_CANCEL || !isValid)) {
+            return state | STATE_CANCELLED;
+        } else if (isRecognized || isValid) {
+            if (eventType & INPUT_END) {
+                return state | STATE_ENDED;
+            } else if (!(state & STATE_BEGAN)) {
+                return STATE_BEGAN;
+            }
+            return state | STATE_CHANGED;
+        }
+        return STATE_FAILED;
+    }
+});
+
+/**
+ * Pan
+ * Recognized when the pointer is down and moved in the allowed direction.
+ * @constructor
+ * @extends AttrRecognizer
+ */
+function PanRecognizer() {
+    AttrRecognizer.apply(this, arguments);
+
+    this.pX = null;
+    this.pY = null;
+}
+
+inherit(PanRecognizer, AttrRecognizer, {
+    /**
+     * @namespace
+     * @memberof PanRecognizer
+     */
+    defaults: {
+        event: 'pan',
+        threshold: 10,
+        pointers: 1,
+        direction: DIRECTION_ALL
+    },
+
+    getTouchAction: function() {
+        var direction = this.options.direction;
+        var actions = [];
+        if (direction & DIRECTION_HORIZONTAL) {
+            actions.push(TOUCH_ACTION_PAN_Y);
+        }
+        if (direction & DIRECTION_VERTICAL) {
+            actions.push(TOUCH_ACTION_PAN_X);
+        }
+        return actions;
+    },
+
+    directionTest: function(input) {
+        var options = this.options;
+        var hasMoved = true;
+        var distance = input.distance;
+        var direction = input.direction;
+        var x = input.deltaX;
+        var y = input.deltaY;
+
+        // lock to axis?
+        if (!(direction & options.direction)) {
+            if (options.direction & DIRECTION_HORIZONTAL) {
+                direction = (x === 0) ? DIRECTION_NONE : (x < 0) ? DIRECTION_LEFT : DIRECTION_RIGHT;
+                hasMoved = x != this.pX;
+                distance = Math.abs(input.deltaX);
+            } else {
+                direction = (y === 0) ? DIRECTION_NONE : (y < 0) ? DIRECTION_UP : DIRECTION_DOWN;
+                hasMoved = y != this.pY;
+                distance = Math.abs(input.deltaY);
+            }
+        }
+        input.direction = direction;
+        return hasMoved && distance > options.threshold && direction & options.direction;
+    },
+
+    attrTest: function(input) {
+        return AttrRecognizer.prototype.attrTest.call(this, input) &&
+            (this.state & STATE_BEGAN || (!(this.state & STATE_BEGAN) && this.directionTest(input)));
+    },
+
+    emit: function(input) {
+
+        this.pX = input.deltaX;
+        this.pY = input.deltaY;
+
+        var direction = directionStr(input.direction);
+
+        if (direction) {
+            input.additionalEvent = this.options.event + direction;
+        }
+        this._super.emit.call(this, input);
+    }
+});
+
+/**
+ * Pinch
+ * Recognized when two or more pointers are moving toward (zoom-in) or away from each other (zoom-out).
+ * @constructor
+ * @extends AttrRecognizer
+ */
+function PinchRecognizer() {
+    AttrRecognizer.apply(this, arguments);
+}
+
+inherit(PinchRecognizer, AttrRecognizer, {
+    /**
+     * @namespace
+     * @memberof PinchRecognizer
+     */
+    defaults: {
+        event: 'pinch',
+        threshold: 0,
+        pointers: 2
+    },
+
+    getTouchAction: function() {
+        return [TOUCH_ACTION_NONE];
+    },
+
+    attrTest: function(input) {
+        return this._super.attrTest.call(this, input) &&
+            (Math.abs(input.scale - 1) > this.options.threshold || this.state & STATE_BEGAN);
+    },
+
+    emit: function(input) {
+        if (input.scale !== 1) {
+            var inOut = input.scale < 1 ? 'in' : 'out';
+            input.additionalEvent = this.options.event + inOut;
+        }
+        this._super.emit.call(this, input);
+    }
+});
+
+/**
+ * Press
+ * Recognized when the pointer is down for x ms without any movement.
+ * @constructor
+ * @extends Recognizer
+ */
+function PressRecognizer() {
+    Recognizer.apply(this, arguments);
+
+    this._timer = null;
+    this._input = null;
+}
+
+inherit(PressRecognizer, Recognizer, {
+    /**
+     * @namespace
+     * @memberof PressRecognizer
+     */
+    defaults: {
+        event: 'press',
+        pointers: 1,
+        time: 251, // minimal time of the pointer to be pressed
+        threshold: 9 // a minimal movement is ok, but keep it low
+    },
+
+    getTouchAction: function() {
+        return [TOUCH_ACTION_AUTO];
+    },
+
+    process: function(input) {
+        var options = this.options;
+        var validPointers = input.pointers.length === options.pointers;
+        var validMovement = input.distance < options.threshold;
+        var validTime = input.deltaTime > options.time;
+
+        this._input = input;
+
+        // we only allow little movement
+        // and we've reached an end event, so a tap is possible
+        if (!validMovement || !validPointers || (input.eventType & (INPUT_END | INPUT_CANCEL) && !validTime)) {
+            this.reset();
+        } else if (input.eventType & INPUT_START) {
+            this.reset();
+            this._timer = setTimeoutContext(function() {
+                this.state = STATE_RECOGNIZED;
+                this.tryEmit();
+            }, options.time, this);
+        } else if (input.eventType & INPUT_END) {
+            return STATE_RECOGNIZED;
+        }
+        return STATE_FAILED;
+    },
+
+    reset: function() {
+        clearTimeout(this._timer);
+    },
+
+    emit: function(input) {
+        if (this.state !== STATE_RECOGNIZED) {
+            return;
+        }
+
+        if (input && (input.eventType & INPUT_END)) {
+            this.manager.emit(this.options.event + 'up', input);
+        } else {
+            this._input.timeStamp = now();
+            this.manager.emit(this.options.event, this._input);
+        }
+    }
+});
+
+/**
+ * Rotate
+ * Recognized when two or more pointer are moving in a circular motion.
+ * @constructor
+ * @extends AttrRecognizer
+ */
+function RotateRecognizer() {
+    AttrRecognizer.apply(this, arguments);
+}
+
+inherit(RotateRecognizer, AttrRecognizer, {
+    /**
+     * @namespace
+     * @memberof RotateRecognizer
+     */
+    defaults: {
+        event: 'rotate',
+        threshold: 0,
+        pointers: 2
+    },
+
+    getTouchAction: function() {
+        return [TOUCH_ACTION_NONE];
+    },
+
+    attrTest: function(input) {
+        return this._super.attrTest.call(this, input) &&
+            (Math.abs(input.rotation) > this.options.threshold || this.state & STATE_BEGAN);
+    }
+});
+
+/**
+ * Swipe
+ * Recognized when the pointer is moving fast (velocity), with enough distance in the allowed direction.
+ * @constructor
+ * @extends AttrRecognizer
+ */
+function SwipeRecognizer() {
+    AttrRecognizer.apply(this, arguments);
+}
+
+inherit(SwipeRecognizer, AttrRecognizer, {
+    /**
+     * @namespace
+     * @memberof SwipeRecognizer
+     */
+    defaults: {
+        event: 'swipe',
+        threshold: 10,
+        velocity: 0.3,
+        direction: DIRECTION_HORIZONTAL | DIRECTION_VERTICAL,
+        pointers: 1
+    },
+
+    getTouchAction: function() {
+        return PanRecognizer.prototype.getTouchAction.call(this);
+    },
+
+    attrTest: function(input) {
+        var direction = this.options.direction;
+        var velocity;
+
+        if (direction & (DIRECTION_HORIZONTAL | DIRECTION_VERTICAL)) {
+            velocity = input.overallVelocity;
+        } else if (direction & DIRECTION_HORIZONTAL) {
+            velocity = input.overallVelocityX;
+        } else if (direction & DIRECTION_VERTICAL) {
+            velocity = input.overallVelocityY;
+        }
+
+        return this._super.attrTest.call(this, input) &&
+            direction & input.offsetDirection &&
+            input.distance > this.options.threshold &&
+            input.maxPointers == this.options.pointers &&
+            abs(velocity) > this.options.velocity && input.eventType & INPUT_END;
+    },
+
+    emit: function(input) {
+        var direction = directionStr(input.offsetDirection);
+        if (direction) {
+            this.manager.emit(this.options.event + direction, input);
+        }
+
+        this.manager.emit(this.options.event, input);
+    }
+});
+
+/**
+ * A tap is ecognized when the pointer is doing a small tap/click. Multiple taps are recognized if they occur
+ * between the given interval and position. The delay option can be used to recognize multi-taps without firing
+ * a single tap.
+ *
+ * The eventData from the emitted event contains the property `tapCount`, which contains the amount of
+ * multi-taps being recognized.
+ * @constructor
+ * @extends Recognizer
+ */
+function TapRecognizer() {
+    Recognizer.apply(this, arguments);
+
+    // previous time and center,
+    // used for tap counting
+    this.pTime = false;
+    this.pCenter = false;
+
+    this._timer = null;
+    this._input = null;
+    this.count = 0;
+}
+
+inherit(TapRecognizer, Recognizer, {
+    /**
+     * @namespace
+     * @memberof PinchRecognizer
+     */
+    defaults: {
+        event: 'tap',
+        pointers: 1,
+        taps: 1,
+        interval: 300, // max time between the multi-tap taps
+        time: 250, // max time of the pointer to be down (like finger on the screen)
+        threshold: 9, // a minimal movement is ok, but keep it low
+        posThreshold: 10 // a multi-tap can be a bit off the initial position
+    },
+
+    getTouchAction: function() {
+        return [TOUCH_ACTION_MANIPULATION];
+    },
+
+    process: function(input) {
+        var options = this.options;
+
+        var validPointers = input.pointers.length === options.pointers;
+        var validMovement = input.distance < options.threshold;
+        var validTouchTime = input.deltaTime < options.time;
+
+        this.reset();
+
+        if ((input.eventType & INPUT_START) && (this.count === 0)) {
+            return this.failTimeout();
+        }
+
+        // we only allow little movement
+        // and we've reached an end event, so a tap is possible
+        if (validMovement && validTouchTime && validPointers) {
+            if (input.eventType != INPUT_END) {
+                return this.failTimeout();
+            }
+
+            var validInterval = this.pTime ? (input.timeStamp - this.pTime < options.interval) : true;
+            var validMultiTap = !this.pCenter || getDistance(this.pCenter, input.center) < options.posThreshold;
+
+            this.pTime = input.timeStamp;
+            this.pCenter = input.center;
+
+            if (!validMultiTap || !validInterval) {
+                this.count = 1;
+            } else {
+                this.count += 1;
+            }
+
+            this._input = input;
+
+            // if tap count matches we have recognized it,
+            // else it has began recognizing...
+            var tapCount = this.count % options.taps;
+            if (tapCount === 0) {
+                // no failing requirements, immediately trigger the tap event
+                // or wait as long as the multitap interval to trigger
+                if (!this.hasRequireFailures()) {
+                    return STATE_RECOGNIZED;
+                } else {
+                    this._timer = setTimeoutContext(function() {
+                        this.state = STATE_RECOGNIZED;
+                        this.tryEmit();
+                    }, options.interval, this);
+                    return STATE_BEGAN;
+                }
+            }
+        }
+        return STATE_FAILED;
+    },
+
+    failTimeout: function() {
+        this._timer = setTimeoutContext(function() {
+            this.state = STATE_FAILED;
+        }, this.options.interval, this);
+        return STATE_FAILED;
+    },
+
+    reset: function() {
+        clearTimeout(this._timer);
+    },
+
+    emit: function() {
+        if (this.state == STATE_RECOGNIZED) {
+            this._input.tapCount = this.count;
+            this.manager.emit(this.options.event, this._input);
+        }
+    }
+});
+
+/**
+ * Simple way to create a manager with a default set of recognizers.
+ * @param {HTMLElement} element
+ * @param {Object} [options]
+ * @constructor
+ */
+function Hammer(element, options) {
+    options = options || {};
+    options.recognizers = ifUndefined(options.recognizers, Hammer.defaults.preset);
+    return new Manager(element, options);
+}
+
+/**
+ * @const {string}
+ */
+Hammer.VERSION = '2.0.7';
+
+/**
+ * default settings
+ * @namespace
+ */
+Hammer.defaults = {
+    /**
+     * set if DOM events are being triggered.
+     * But this is slower and unused by simple implementations, so disabled by default.
+     * @type {Boolean}
+     * @default false
+     */
+    domEvents: false,
+
+    /**
+     * The value for the touchAction property/fallback.
+     * When set to `compute` it will magically set the correct value based on the added recognizers.
+     * @type {String}
+     * @default compute
+     */
+    touchAction: TOUCH_ACTION_COMPUTE,
+
+    /**
+     * @type {Boolean}
+     * @default true
+     */
+    enable: true,
+
+    /**
+     * EXPERIMENTAL FEATURE -- can be removed/changed
+     * Change the parent input target element.
+     * If Null, then it is being set the to main element.
+     * @type {Null|EventTarget}
+     * @default null
+     */
+    inputTarget: null,
+
+    /**
+     * force an input class
+     * @type {Null|Function}
+     * @default null
+     */
+    inputClass: null,
+
+    /**
+     * Default recognizer setup when calling `Hammer()`
+     * When creating a new Manager these will be skipped.
+     * @type {Array}
+     */
+    preset: [
+        // RecognizerClass, options, [recognizeWith, ...], [requireFailure, ...]
+        [RotateRecognizer, {enable: false}],
+        [PinchRecognizer, {enable: false}, ['rotate']],
+        [SwipeRecognizer, {direction: DIRECTION_HORIZONTAL}],
+        [PanRecognizer, {direction: DIRECTION_HORIZONTAL}, ['swipe']],
+        [TapRecognizer],
+        [TapRecognizer, {event: 'doubletap', taps: 2}, ['tap']],
+        [PressRecognizer]
+    ],
+
+    /**
+     * Some CSS properties can be used to improve the working of Hammer.
+     * Add them to this method and they will be set when creating a new Manager.
+     * @namespace
+     */
+    cssProps: {
+        /**
+         * Disables text selection to improve the dragging gesture. Mainly for desktop browsers.
+         * @type {String}
+         * @default 'none'
+         */
+        userSelect: 'none',
+
+        /**
+         * Disable the Windows Phone grippers when pressing an element.
+         * @type {String}
+         * @default 'none'
+         */
+        touchSelect: 'none',
+
+        /**
+         * Disables the default callout shown when you touch and hold a touch target.
+         * On iOS, when you touch and hold a touch target such as a link, Safari displays
+         * a callout containing information about the link. This property allows you to disable that callout.
+         * @type {String}
+         * @default 'none'
+         */
+        touchCallout: 'none',
+
+        /**
+         * Specifies whether zooming is enabled. Used by IE10>
+         * @type {String}
+         * @default 'none'
+         */
+        contentZooming: 'none',
+
+        /**
+         * Specifies that an entire element should be draggable instead of its contents. Mainly for desktop browsers.
+         * @type {String}
+         * @default 'none'
+         */
+        userDrag: 'none',
+
+        /**
+         * Overrides the highlight color shown when the user taps a link or a JavaScript
+         * clickable element in iOS. This property obeys the alpha value, if specified.
+         * @type {String}
+         * @default 'rgba(0,0,0,0)'
+         */
+        tapHighlightColor: 'rgba(0,0,0,0)'
+    }
+};
+
+var STOP = 1;
+var FORCED_STOP = 2;
+
+/**
+ * Manager
+ * @param {HTMLElement} element
+ * @param {Object} [options]
+ * @constructor
+ */
+function Manager(element, options) {
+    this.options = assign({}, Hammer.defaults, options || {});
+
+    this.options.inputTarget = this.options.inputTarget || element;
+
+    this.handlers = {};
+    this.session = {};
+    this.recognizers = [];
+    this.oldCssProps = {};
+
+    this.element = element;
+    this.input = createInputInstance(this);
+    this.touchAction = new TouchAction(this, this.options.touchAction);
+
+    toggleCssProps(this, true);
+
+    each(this.options.recognizers, function(item) {
+        var recognizer = this.add(new (item[0])(item[1]));
+        item[2] && recognizer.recognizeWith(item[2]);
+        item[3] && recognizer.requireFailure(item[3]);
+    }, this);
+}
+
+Manager.prototype = {
+    /**
+     * set options
+     * @param {Object} options
+     * @returns {Manager}
+     */
+    set: function(options) {
+        assign(this.options, options);
+
+        // Options that need a little more setup
+        if (options.touchAction) {
+            this.touchAction.update();
+        }
+        if (options.inputTarget) {
+            // Clean up existing event listeners and reinitialize
+            this.input.destroy();
+            this.input.target = options.inputTarget;
+            this.input.init();
+        }
+        return this;
+    },
+
+    /**
+     * stop recognizing for this session.
+     * This session will be discarded, when a new [input]start event is fired.
+     * When forced, the recognizer cycle is stopped immediately.
+     * @param {Boolean} [force]
+     */
+    stop: function(force) {
+        this.session.stopped = force ? FORCED_STOP : STOP;
+    },
+
+    /**
+     * run the recognizers!
+     * called by the inputHandler function on every movement of the pointers (touches)
+     * it walks through all the recognizers and tries to detect the gesture that is being made
+     * @param {Object} inputData
+     */
+    recognize: function(inputData) {
+        var session = this.session;
+        if (session.stopped) {
+            return;
+        }
+
+        // run the touch-action polyfill
+        this.touchAction.preventDefaults(inputData);
+
+        var recognizer;
+        var recognizers = this.recognizers;
+
+        // this holds the recognizer that is being recognized.
+        // so the recognizer's state needs to be BEGAN, CHANGED, ENDED or RECOGNIZED
+        // if no recognizer is detecting a thing, it is set to `null`
+        var curRecognizer = session.curRecognizer;
+
+        // reset when the last recognizer is recognized
+        // or when we're in a new session
+        if (!curRecognizer || (curRecognizer && curRecognizer.state & STATE_RECOGNIZED)) {
+            curRecognizer = session.curRecognizer = null;
+        }
+
+        var i = 0;
+        while (i < recognizers.length) {
+            recognizer = recognizers[i];
+
+            // find out if we are allowed try to recognize the input for this one.
+            // 1.   allow if the session is NOT forced stopped (see the .stop() method)
+            // 2.   allow if we still haven't recognized a gesture in this session, or the this recognizer is the one
+            //      that is being recognized.
+            // 3.   allow if the recognizer is allowed to run simultaneous with the current recognized recognizer.
+            //      this can be setup with the `recognizeWith()` method on the recognizer.
+            if (session.stopped !== FORCED_STOP && ( // 1
+                    !curRecognizer || recognizer == curRecognizer || // 2
+                    recognizer.canRecognizeWith(curRecognizer))) { // 3
+                recognizer.recognize(inputData);
+            } else {
+                recognizer.reset();
+            }
+
+            // if the recognizer has been recognizing the input as a valid gesture, we want to store this one as the
+            // current active recognizer. but only if we don't already have an active recognizer
+            if (!curRecognizer && recognizer.state & (STATE_BEGAN | STATE_CHANGED | STATE_ENDED)) {
+                curRecognizer = session.curRecognizer = recognizer;
+            }
+            i++;
+        }
+    },
+
+    /**
+     * get a recognizer by its event name.
+     * @param {Recognizer|String} recognizer
+     * @returns {Recognizer|Null}
+     */
+    get: function(recognizer) {
+        if (recognizer instanceof Recognizer) {
+            return recognizer;
+        }
+
+        var recognizers = this.recognizers;
+        for (var i = 0; i < recognizers.length; i++) {
+            if (recognizers[i].options.event == recognizer) {
+                return recognizers[i];
+            }
+        }
+        return null;
+    },
+
+    /**
+     * add a recognizer to the manager
+     * existing recognizers with the same event name will be removed
+     * @param {Recognizer} recognizer
+     * @returns {Recognizer|Manager}
+     */
+    add: function(recognizer) {
+        if (invokeArrayArg(recognizer, 'add', this)) {
+            return this;
+        }
+
+        // remove existing
+        var existing = this.get(recognizer.options.event);
+        if (existing) {
+            this.remove(existing);
+        }
+
+        this.recognizers.push(recognizer);
+        recognizer.manager = this;
+
+        this.touchAction.update();
+        return recognizer;
+    },
+
+    /**
+     * remove a recognizer by name or instance
+     * @param {Recognizer|String} recognizer
+     * @returns {Manager}
+     */
+    remove: function(recognizer) {
+        if (invokeArrayArg(recognizer, 'remove', this)) {
+            return this;
+        }
+
+        recognizer = this.get(recognizer);
+
+        // let's make sure this recognizer exists
+        if (recognizer) {
+            var recognizers = this.recognizers;
+            var index = inArray(recognizers, recognizer);
+
+            if (index !== -1) {
+                recognizers.splice(index, 1);
+                this.touchAction.update();
+            }
+        }
+
+        return this;
+    },
+
+    /**
+     * bind event
+     * @param {String} events
+     * @param {Function} handler
+     * @returns {EventEmitter} this
+     */
+    on: function(events, handler) {
+        if (events === undefined) {
+            return;
+        }
+        if (handler === undefined) {
+            return;
+        }
+
+        var handlers = this.handlers;
+        each(splitStr(events), function(event) {
+            handlers[event] = handlers[event] || [];
+            handlers[event].push(handler);
+        });
+        return this;
+    },
+
+    /**
+     * unbind event, leave emit blank to remove all handlers
+     * @param {String} events
+     * @param {Function} [handler]
+     * @returns {EventEmitter} this
+     */
+    off: function(events, handler) {
+        if (events === undefined) {
+            return;
+        }
+
+        var handlers = this.handlers;
+        each(splitStr(events), function(event) {
+            if (!handler) {
+                delete handlers[event];
+            } else {
+                handlers[event] && handlers[event].splice(inArray(handlers[event], handler), 1);
+            }
+        });
+        return this;
+    },
+
+    /**
+     * emit event to the listeners
+     * @param {String} event
+     * @param {Object} data
+     */
+    emit: function(event, data) {
+        // we also want to trigger dom events
+        if (this.options.domEvents) {
+            triggerDomEvent(event, data);
+        }
+
+        // no handlers, so skip it all
+        var handlers = this.handlers[event] && this.handlers[event].slice();
+        if (!handlers || !handlers.length) {
+            return;
+        }
+
+        data.type = event;
+        data.preventDefault = function() {
+            data.srcEvent.preventDefault();
+        };
+
+        var i = 0;
+        while (i < handlers.length) {
+            handlers[i](data);
+            i++;
+        }
+    },
+
+    /**
+     * destroy the manager and unbinds all events
+     * it doesn't unbind dom events, that is the user own responsibility
+     */
+    destroy: function() {
+        this.element && toggleCssProps(this, false);
+
+        this.handlers = {};
+        this.session = {};
+        this.input.destroy();
+        this.element = null;
+    }
+};
+
+/**
+ * add/remove the css properties as defined in manager.options.cssProps
+ * @param {Manager} manager
+ * @param {Boolean} add
+ */
+function toggleCssProps(manager, add) {
+    var element = manager.element;
+    if (!element.style) {
+        return;
+    }
+    var prop;
+    each(manager.options.cssProps, function(value, name) {
+        prop = prefixed(element.style, name);
+        if (add) {
+            manager.oldCssProps[prop] = element.style[prop];
+            element.style[prop] = value;
+        } else {
+            element.style[prop] = manager.oldCssProps[prop] || '';
+        }
+    });
+    if (!add) {
+        manager.oldCssProps = {};
+    }
+}
+
+/**
+ * trigger dom event
+ * @param {String} event
+ * @param {Object} data
+ */
+function triggerDomEvent(event, data) {
+    var gestureEvent = document.createEvent('Event');
+    gestureEvent.initEvent(event, true, true);
+    gestureEvent.gesture = data;
+    data.target.dispatchEvent(gestureEvent);
+}
+
+assign(Hammer, {
+    INPUT_START: INPUT_START,
+    INPUT_MOVE: INPUT_MOVE,
+    INPUT_END: INPUT_END,
+    INPUT_CANCEL: INPUT_CANCEL,
+
+    STATE_POSSIBLE: STATE_POSSIBLE,
+    STATE_BEGAN: STATE_BEGAN,
+    STATE_CHANGED: STATE_CHANGED,
+    STATE_ENDED: STATE_ENDED,
+    STATE_RECOGNIZED: STATE_RECOGNIZED,
+    STATE_CANCELLED: STATE_CANCELLED,
+    STATE_FAILED: STATE_FAILED,
+
+    DIRECTION_NONE: DIRECTION_NONE,
+    DIRECTION_LEFT: DIRECTION_LEFT,
+    DIRECTION_RIGHT: DIRECTION_RIGHT,
+    DIRECTION_UP: DIRECTION_UP,
+    DIRECTION_DOWN: DIRECTION_DOWN,
+    DIRECTION_HORIZONTAL: DIRECTION_HORIZONTAL,
+    DIRECTION_VERTICAL: DIRECTION_VERTICAL,
+    DIRECTION_ALL: DIRECTION_ALL,
+
+    Manager: Manager,
+    Input: Input,
+    TouchAction: TouchAction,
+
+    TouchInput: TouchInput,
+    MouseInput: MouseInput,
+    PointerEventInput: PointerEventInput,
+    TouchMouseInput: TouchMouseInput,
+    SingleTouchInput: SingleTouchInput,
+
+    Recognizer: Recognizer,
+    AttrRecognizer: AttrRecognizer,
+    Tap: TapRecognizer,
+    Pan: PanRecognizer,
+    Swipe: SwipeRecognizer,
+    Pinch: PinchRecognizer,
+    Rotate: RotateRecognizer,
+    Press: PressRecognizer,
+
+    on: addEventListeners,
+    off: removeEventListeners,
+    each: each,
+    merge: merge,
+    extend: extend,
+    assign: assign,
+    inherit: inherit,
+    bindFn: bindFn,
+    prefixed: prefixed
+});
+
+// this prevents errors when Hammer is loaded in the presence of an AMD
+//  style loader but by script tag, not by the loader.
+var freeGlobal = (typeof window !== 'undefined' ? window : (typeof self !== 'undefined' ? self : {})); // jshint ignore:line
+freeGlobal.Hammer = Hammer;
+
+if (true) {
+    !(__WEBPACK_AMD_DEFINE_RESULT__ = (function() {
+        return Hammer;
+    }).call(exports, __webpack_require__, exports, module),
+				__WEBPACK_AMD_DEFINE_RESULT__ !== undefined && (module.exports = __WEBPACK_AMD_DEFINE_RESULT__));
+} else {}
+
+})(window, document, 'Hammer');
 
 
 /***/ }),

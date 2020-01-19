@@ -51,7 +51,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<app-header></app-header>";
+    __webpack_exports__["default"] = "<app-index></app-index>";
     /***/
   },
 
@@ -71,7 +71,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony default export */
 
 
-    __webpack_exports__["default"] = "<div class=\"header\">\n    <div class=\"wrapper\">\n        <!-- 背景 -->\n        <div class=\"\"></div>\n        <!-- 头像 -->\n        <div class=\"\">哈哈哈</div>\n    </div>\n</div>\n";
+    __webpack_exports__["default"] = "<div class=\"wrapper\">\n    <div class=\"index\"></div>\n</div>";
+    /***/
+  },
+
+  /***/
+  "./node_modules/raw-loader/dist/cjs.js!./src/app/index/index.component.html":
+  /*!**********************************************************************************!*\
+    !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/index/index.component.html ***!
+    \**********************************************************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function node_modulesRawLoaderDistCjsJsSrcAppIndexIndexComponentHtml(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "<div class=\"index\">\n    <div class=\"wrapper\">\n        <!-- 个人信息 -->\n        <div class=\"person-info\">\n            <div class=\"avatar\">\n               <img src=\"{{personInfo.avatar}}\" alt=\"nickname\"> \n            </div>\n            <div class=\"content\">\n                <p>{{personInfo.nickname}}</p>\n                <p>{{personInfo.age}}</p>\n            </div>\n        </div>\n        <!-- 主图片 -->\n        <div class=\"index-img\">\n            <img src=\"{{personInfo.indexImg}}\" alt=\"\">\n        </div>\n        <!-- 操作区 -->\n        <div class=\"acton-area\">\n            <i class=\"icon\">\n                <img src=\"./../../assets/icon/github.png\" alt=\"\">\n            </i>\n            <i class=\"icon\">\n                <img src=\"./../../assets/icon/qq.png\" alt=\"\">\n            </i>\n            <i class=\"icon\">\n                <img src=\"./../../assets/icon/wechat.png\" alt=\"\">\n            </i>\n        </div>\n        <!-- 进入博客 -->\n        <div class=\"next\">\n            <span>next</span>\n        </div>\n    </div>\n</div>";
     /***/
   },
 
@@ -749,17 +769,29 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _header_header_component__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    /*! @angular/platform-browser/animations */
+    "./node_modules/@angular/platform-browser/fesm2015/animations.js");
+    /* harmony import */
+
+
+    var _header_header_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! ./header/header.component */
     "./src/app/header/header.component.ts");
+    /* harmony import */
+
+
+    var _index_index_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(
+    /*! ./index/index.component */
+    "./src/app/index/index.component.ts");
 
     var AppModule = function AppModule() {
       _classCallCheck(this, AppModule);
     };
 
     AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
-      declarations: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"], _header_header_component__WEBPACK_IMPORTED_MODULE_4__["HeaderComponent"]],
-      imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"]],
+      declarations: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"], _header_header_component__WEBPACK_IMPORTED_MODULE_5__["HeaderComponent"], _index_index_component__WEBPACK_IMPORTED_MODULE_6__["IndexComponent"]],
+      imports: [_angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"], _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__["BrowserAnimationsModule"]],
       providers: [],
       bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
     })], AppModule);
@@ -846,6 +878,97 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   },
 
   /***/
+  "./src/app/index/index.component.css":
+  /*!*******************************************!*\
+    !*** ./src/app/index/index.component.css ***!
+    \*******************************************/
+
+  /*! exports provided: default */
+
+  /***/
+  function srcAppIndexIndexComponentCss(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony default export */
+
+
+    __webpack_exports__["default"] = "/* 个人信息 */\n.index{\n    background-color: rgba(124,177,190,0.32);\n    padding-bottom: 20px;\n}\n.person-info{\n    display: -webkit-box;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n            flex-direction: row;\n    -webkit-box-align: center;\n            align-items: center;\n}\n.person-info > .avatar{\n   width: 16%;\n   padding: 3.6% 3.6%;\n}\n.person-info > .avatar > img {\n    border-radius: 50%;\n    width: 100%;\n}\n.person-info > .content{\n   width: 84%;\n}\n.person-info > .content > p{\n    color: rgba(0,0,0,.54);\n}\n.person-info > .content > p:first-child {\n    font-size: 1.2rem;\n    color: rgba(0,0,0,.86);\n}\n/* 首页图片 */\n.index-img > img{\n    width: 100%;\n}\n/* 功能区 */\n.acton-area{\n    display: -webkit-box;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n            flex-direction: row;\n    justify-content: space-around;\n    padding: 36px 0;\n}\n.acton-area > .icon > img{\n    width: 30px;  \n}\n/*  */\n.next{\n    text-align: center;\n}\n.next > span {\n    display: inline-block;\n    width: 86%;\n    border:2px solid rgba(0,0,0,.54);\n    padding: 10px 0;\n    border-left: none;\n    border-right: none;\n    font-size: 1.3rem;\n    color: rgba(0,0,0,.54);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvaW5kZXgvaW5kZXguY29tcG9uZW50LmNzcyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxTQUFTO0FBQ1Q7SUFDSSx3Q0FBd0M7SUFDeEMsb0JBQW9CO0FBQ3hCO0FBQ0E7SUFDSSxvQkFBYTtJQUFiLGFBQWE7SUFDYiw4QkFBbUI7SUFBbkIsNkJBQW1CO1lBQW5CLG1CQUFtQjtJQUNuQix5QkFBbUI7WUFBbkIsbUJBQW1CO0FBQ3ZCO0FBQ0E7R0FDRyxVQUFVO0dBQ1Ysa0JBQWtCO0FBQ3JCO0FBQ0E7SUFDSSxrQkFBa0I7SUFDbEIsV0FBVztBQUNmO0FBQ0E7R0FDRyxVQUFVO0FBQ2I7QUFDQTtJQUNJLHNCQUFzQjtBQUMxQjtBQUNBO0lBQ0ksaUJBQWlCO0lBQ2pCLHNCQUFzQjtBQUMxQjtBQUNBLFNBQVM7QUFDVDtJQUNJLFdBQVc7QUFDZjtBQUNBLFFBQVE7QUFDUjtJQUNJLG9CQUFhO0lBQWIsYUFBYTtJQUNiLDhCQUFtQjtJQUFuQiw2QkFBbUI7WUFBbkIsbUJBQW1CO0lBQ25CLDZCQUE2QjtJQUM3QixlQUFlO0FBQ25CO0FBQ0E7SUFDSSxXQUFXO0FBQ2Y7QUFDQSxLQUFLO0FBQ0w7SUFDSSxrQkFBa0I7QUFDdEI7QUFDQTtJQUNJLHFCQUFxQjtJQUNyQixVQUFVO0lBQ1YsZ0NBQWdDO0lBQ2hDLGVBQWU7SUFDZixpQkFBaUI7SUFDakIsa0JBQWtCO0lBQ2xCLGlCQUFpQjtJQUNqQixzQkFBc0I7QUFDMUIiLCJmaWxlIjoic3JjL2FwcC9pbmRleC9pbmRleC5jb21wb25lbnQuY3NzIiwic291cmNlc0NvbnRlbnQiOlsiLyog5Liq5Lq65L+h5oGvICovXG4uaW5kZXh7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogcmdiYSgxMjQsMTc3LDE5MCwwLjMyKTtcbiAgICBwYWRkaW5nLWJvdHRvbTogMjBweDtcbn1cbi5wZXJzb24taW5mb3tcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGZsZXgtZGlyZWN0aW9uOiByb3c7XG4gICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbn1cbi5wZXJzb24taW5mbyA+IC5hdmF0YXJ7XG4gICB3aWR0aDogMTYlO1xuICAgcGFkZGluZzogMy42JSAzLjYlO1xufVxuLnBlcnNvbi1pbmZvID4gLmF2YXRhciA+IGltZyB7XG4gICAgYm9yZGVyLXJhZGl1czogNTAlO1xuICAgIHdpZHRoOiAxMDAlO1xufVxuLnBlcnNvbi1pbmZvID4gLmNvbnRlbnR7XG4gICB3aWR0aDogODQlO1xufVxuLnBlcnNvbi1pbmZvID4gLmNvbnRlbnQgPiBwe1xuICAgIGNvbG9yOiByZ2JhKDAsMCwwLC41NCk7XG59XG4ucGVyc29uLWluZm8gPiAuY29udGVudCA+IHA6Zmlyc3QtY2hpbGQge1xuICAgIGZvbnQtc2l6ZTogMS4ycmVtO1xuICAgIGNvbG9yOiByZ2JhKDAsMCwwLC44Nik7XG59XG4vKiDpppbpobXlm77niYcgKi9cbi5pbmRleC1pbWcgPiBpbWd7XG4gICAgd2lkdGg6IDEwMCU7XG59XG4vKiDlip/og73ljLogKi9cbi5hY3Rvbi1hcmVhe1xuICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgZmxleC1kaXJlY3Rpb246IHJvdztcbiAgICBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWFyb3VuZDtcbiAgICBwYWRkaW5nOiAzNnB4IDA7XG59XG4uYWN0b24tYXJlYSA+IC5pY29uID4gaW1ne1xuICAgIHdpZHRoOiAzMHB4OyAgXG59XG4vKiAgKi9cbi5uZXh0e1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbn1cbi5uZXh0ID4gc3BhbiB7XG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICAgIHdpZHRoOiA4NiU7XG4gICAgYm9yZGVyOjJweCBzb2xpZCByZ2JhKDAsMCwwLC41NCk7XG4gICAgcGFkZGluZzogMTBweCAwO1xuICAgIGJvcmRlci1sZWZ0OiBub25lO1xuICAgIGJvcmRlci1yaWdodDogbm9uZTtcbiAgICBmb250LXNpemU6IDEuM3JlbTtcbiAgICBjb2xvcjogcmdiYSgwLDAsMCwuNTQpO1xufSJdfQ== */";
+    /***/
+  },
+
+  /***/
+  "./src/app/index/index.component.ts":
+  /*!******************************************!*\
+    !*** ./src/app/index/index.component.ts ***!
+    \******************************************/
+
+  /*! exports provided: IndexComponent */
+
+  /***/
+  function srcAppIndexIndexComponentTs(module, __webpack_exports__, __webpack_require__) {
+    "use strict";
+
+    __webpack_require__.r(__webpack_exports__);
+    /* harmony export (binding) */
+
+
+    __webpack_require__.d(__webpack_exports__, "IndexComponent", function () {
+      return IndexComponent;
+    });
+    /* harmony import */
+
+
+    var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(
+    /*! tslib */
+    "./node_modules/tslib/tslib.es6.js");
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! @angular/core */
+    "./node_modules/@angular/core/fesm2015/core.js");
+
+    var IndexComponent =
+    /*#__PURE__*/
+    function () {
+      function IndexComponent() {
+        _classCallCheck(this, IndexComponent);
+
+        this.icon = {
+          qqImg: "",
+          wxImg: "",
+          githubImg: ""
+        };
+        this.personInfo = {
+          avatar: "./../../assets/avatar.jpg",
+          nickname: "Iangai Hang",
+          indexImg: "./../../assets/index01.jpg",
+          age: "22"
+        };
+      }
+
+      _createClass(IndexComponent, [{
+        key: "ngOnInit",
+        value: function ngOnInit() {}
+      }]);
+
+      return IndexComponent;
+    }();
+
+    IndexComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+      selector: 'app-index',
+      template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! raw-loader!./index.component.html */
+      "./node_modules/raw-loader/dist/cjs.js!./src/app/index/index.component.html")).default,
+      styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(
+      /*! ./index.component.css */
+      "./src/app/index/index.component.css")).default]
+    })], IndexComponent);
+    /***/
+  },
+
+  /***/
   "./src/environments/environment.ts":
   /*!*****************************************!*\
     !*** ./src/environments/environment.ts ***!
@@ -911,33 +1034,45 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* harmony import */
 
 
-    var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    var hammerjs__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(
+    /*! hammerjs */
+    "./node_modules/hammerjs/hammer.js");
+    /* harmony import */
+
+
+    var hammerjs__WEBPACK_IMPORTED_MODULE_1___default =
+    /*#__PURE__*/
+    __webpack_require__.n(hammerjs__WEBPACK_IMPORTED_MODULE_1__);
+    /* harmony import */
+
+
+    var _angular_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
     /*! @angular/core */
     "./node_modules/@angular/core/fesm2015/core.js");
     /* harmony import */
 
 
-    var _angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(
+    var _angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
     /*! @angular/platform-browser-dynamic */
     "./node_modules/@angular/platform-browser-dynamic/fesm2015/platform-browser-dynamic.js");
     /* harmony import */
 
 
-    var _app_app_module__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(
+    var _app_app_module__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
     /*! ./app/app.module */
     "./src/app/app.module.ts");
     /* harmony import */
 
 
-    var _environments_environment__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(
+    var _environments_environment__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(
     /*! ./environments/environment */
     "./src/environments/environment.ts");
 
-    if (_environments_environment__WEBPACK_IMPORTED_MODULE_4__["environment"].production) {
-      Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["enableProdMode"])();
+    if (_environments_environment__WEBPACK_IMPORTED_MODULE_5__["environment"].production) {
+      Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["enableProdMode"])();
     }
 
-    Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_2__["platformBrowserDynamic"])().bootstrapModule(_app_app_module__WEBPACK_IMPORTED_MODULE_3__["AppModule"]).catch(function (err) {
+    Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_3__["platformBrowserDynamic"])().bootstrapModule(_app_app_module__WEBPACK_IMPORTED_MODULE_4__["AppModule"]).catch(function (err) {
       return console.error(err);
     });
     /***/
