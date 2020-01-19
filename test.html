@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        .site-info{
+            width: 100%;
+        }
+        .intro-con{
+            width: 100%;
+            min-height: 200px;
+            font-size: 0.7rem;
+        }
+        .site-info-box{
+            width: inherit;
+            display: flex;
+            flex-wrap: wrap;    
+            flex-direction: row;
+            border:1px solid black;
+        }
+        .site-info-list{
+            width: 20%;
+            font-size: 0.7rem;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            border-bottom: 1px solid black;
+        }
+        .site-info-left{
+            border-right: 1px solid black;
+            border-left: 1px solid black;
+            text-align: center;
+        }
+        .site-info-left,
+        .site-info-right{
+            font-size: 0.52rem;
+            width: 50%;
+            min-height: 30px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+        }
+        .device-info > .site-info-box > .site-info-list > .site-info-left:first-child{
+            background-color: rgba(255, 235, 156, 1);
+            color: orangered;
+        }
+        .site-info > .site-info-box > .site-info-list > .site-info-left:first-child{
+            background-color: rgba(180, 198, 231, 1);
+        }
+        .test-info > .site-info-box > .site-info-list > .site-info-left:first-child{
+            background-color: rgba(198, 239, 206, 1);
+            color: green;
+        }
+        .water-level-info > .site-info-box > .site-info-list > .site-info-left:first-child{
+            background-color: rgba(255, 199, 206, 1);
+            color: brown;
+        }
+        .benchmark-info .site-info-box > .site-info-list > .site-info-left:first-child{
+            background-color: rgba(198, 239, 206, 1);
+            color: green;
+        }
+        .pic > img {
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="wrap">
+        <div class="wrapper">
+            <div class="site-img">
+                <img src="Picture1.png" alt="" style="width: 100%">
+            </div>
+
+            <div class="site-intro">
+                <div class="intro-title">站点介绍</div>
+                <textarea class="intro-con">
+    柳子港站于1953年2月由长江水利委员会设立为水位站，1953年5月改为水文站移交湖北省农林厅水利局领导，1964年移交湖北省水文总站，1993年10月更名为湖北省武汉市水文水资源勘测局柳子港水文站。
+    柳子港水文站是长江流域中游下段北岸一级支流举水河下游的二类精度的国家基本水文站，举水流域控制站，湖北省重要防汛站，设站目的为收集探索水文特征值和区域沿河长的变化规律所需具有代表性的系列样本资料，为防汛抗旱、水资源评价及利用服务。测站位于武汉市新洲区凤凰镇庙岗山村，东经114°45′43.7″，北纬30°55′39.2 ″，集水面积2997平方公里，观测项目有水位、流量、泥沙、水质、降水、土壤墒情，承担区域水资源调查任务，管辖区域内所有中小河流水文站点。基本断面最大水面宽360米，水位流量关系受洪水涨落和冲淤影响，实测最高水位33.58米（2016年），实测最大流量5539立方米每秒（1991年）。
+    柳子港站承担向中央防办、省、市防汛指挥部门和地方政府及相关单位报汛任务，在防汛减灾、抗旱排涝、水资源评价及合理分配方面发挥极其重要的作用。
+                </textarea>
+            </div>
+
+            <div class="site-info">
+                <div>站点信息</div>
+                <ul class="site-info-box">
+                    <li class="site-info-list">
+                        <div class="site-info-left">站名</div>
+                        <div class="site-info-right">柳子港水文站</div　>
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">站码</div>
+                        <div class="site-info-right">61612400</div　class="site-info-left">
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">地理位置</div>
+                        <div class="site-info-right">新洲区凤凰镇冈山村</div　class="site-info-left">
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">东经</div>
+                        <div class="site-info-right">114°45′43.7"</div　class="site-info－right">
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">北纬</div>
+                        <div class="site-info-right">30°55′39.2"</div>
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">流域</div>
+                        <div class="site-info-right">长江</div>
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">水系</div>
+                        <div class="site-info-right">长江中游下段北岸</div>
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">河流</div>
+                        <div class="site-info-right">举水</div>
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">设站年份</div>
+                        <div class="site-info-right">1953</div>
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">管理单位</div>
+                        <div class="site-info-right">武汉市水文局</div>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="test-info">
+                <div>测试信息</div>
+                <ul class="site-info-box">
+                    <li class="site-info-list">
+                        <div class="site-info-left">站类</div>
+                        <div class="site-info-right">基站类</div>
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">站点分类</div>
+                        <div class="site-info-right">总要站</div>
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">观测项目</div>
+                        <div class="site-info-right">雨量、水位、流量、蒸发、泥沙、水质、水温、墒情</div>
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">测验方式</div>
+                        <div class="site-info-right">人工、自动</div>
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">高程基面</div>
+                        <div class="site-info-right">冻结基面</div>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 大断面图 -->
+            <div class="pic">
+                <p>大断面图</p>
+                <img src="Picture2.png" alt="">
+            </div>
+
+            <div class="benchmark-info">
+                <div>水准点及水尺高程</div>
+                <ul class="site-info-box">
+                    <li class="site-info-list">
+                        <div class="site-info-left">冻结基面</div>
+                        <div class="site-info-right"></div　>
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">校核基面1</div>
+                        <div class="site-info-right"></div　class="site-info-left">
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">校核基面2</div>
+                        <div class="site-info-right"></div　class="site-info-left">
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">p1</div>
+                        <div class="site-info-right"></div　class="site-info－right">
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">p2</div>
+                        <div class="site-info-right"></div　class="site-info－right">
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">p3</div>
+                        <div class="site-info-right"></div　class="site-info－right">
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">p4</div>
+                        <div class="site-info-right"></div　class="site-info－right">
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">p5</div>
+                        <div class="site-info-right"></div　class="site-info－right">
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">p6</div>
+                        <div class="site-info-right"></div　class="site-info－right">
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">p7</div>
+                        <div class="site-info-right"></div　class="site-info－right">
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">p8</div>
+                        <div class="site-info-right"></div　class="site-info－right">
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">p9</div>
+                        <div class="site-info-right"></div　class="site-info－right">
+                    </li>
+                    
+                </ul>
+            </div>
+
+            <div class="water-level-info">
+                <div>水情信息</div>
+                <ul class="site-info-box">
+                    <li class="site-info-list">
+                        <div class="site-info-left">设防水位</div>
+                        <div class="site-info-right">28.00</div>
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">警戒水位</div>
+                        <div class="site-info-left">29.00</div>
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">保证水位</div>
+                        <div class="site-info-right">33.11</div>
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">历史最高洪水位</div>
+                        <div class="site-info-right">ADCP</div>
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">出现年份</div>
+                        <div class="site-info-right">EB601</div>
+                    </li>
+                </ul>
+            </div>
+            <!-- 设备信息 -->
+            <div class="device-info">
+                <div>设备信息</div>
+                <ul class="site-info-box">
+                    <li class="site-info-list">
+                        <div class="site-info-left">通讯设备</div>
+                        <div class="site-info-right">金安,西安山脉</div>
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">雨量设备</div>
+                        <div class="site-info-left">南水　JDZ-05</div>
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">水位设备</div>
+                        <div class="site-info-right">澳水HS40</div>
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">测流设备</div>
+                        <div class="site-info-right">ADCP</div>
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">蒸发设备</div>
+                        <div class="site-info-right">EB601</div>
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">水温设备</div>
+                        <div class="site-info-right"></div>
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">测沙设备</div>
+                        <div class="site-info-right"></div>
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left">熵情设备</div>
+                        <div class="site-info-right"></div>
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left"></div>
+                        <div class="site-info-right"></div>
+                    </li>
+                    <li class="site-info-list">
+                        <div class="site-info-left"></div>
+                        <div class="site-info-right"></div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
