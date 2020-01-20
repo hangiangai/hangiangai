@@ -32,7 +32,7 @@ webpackEmptyAsyncContext.id = "./$$_lazy_route_resource lazy recursive";
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<app-index></app-index>");
+/* harmony default export */ __webpack_exports__["default"] = ("\n<!-- 路由插槽 -->\n<router-outlet></router-outlet>");
 
 /***/ }),
 
@@ -45,7 +45,20 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"wrapper\">\n    <div class=\"index\"></div>\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"wrapper\">\n    <div class=\"index\">hangiangai</div>\n</div>");
+
+/***/ }),
+
+/***/ "./node_modules/raw-loader/dist/cjs.js!./src/app/home/home.component.html":
+/*!********************************************************************************!*\
+  !*** ./node_modules/raw-loader/dist/cjs.js!./src/app/home/home.component.html ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"wrapper\">\n\n    <div class=\"back-button\">\n        <button (click)=\"back()\">back</button>\n    </div>\n    <!--  -->\n    <div class=\"nav-bar\">\n        <div class=\"nav-bar-box\">\n            <ul class=\"nav-menu\">\n                <li class=\"nav-menu-list\" \n                *ngFor=\"let item of navBarList\">\n                    <span class=\"menu-name\">{{item.name}}</span>\n                    <span class=\"count\">{{item.count}}</span>\n                </li>\n            </ul>\n        </div>\n    </div>\n    <!--  -->\n    <div class=\"blogs-box\">\n        <div class=\"blogs-content\">\n            <ul class=\"blogs-ul\">\n                <li class=\"blogs-li\" *ngFor=\"let item of [1,2,3,4,5,6]\">\n                    <div class=\"time\">2019-10-22</div>\n                    <div class=\"content\">\n                        <span class=\"title\">golang语言易错点</span>\n                        <span class=\"body\">\n                            支付环节除了需要满足上述验证方式外,还需要对订单账号进行验证:\n                            购买商品需要查询是否存在对应京东订单号以及订单是否已经存在于数据库内并已支付.\n                            充值积分需要验证对应的付款单号以及数据库内是否已经存在充值记录.\n                            发放积分需要验证数据库内是否已经存在对应的发放记录以及上报的审核记录.\n                        </span>\n                    </div>\n                </li>\n            </ul>\n        </div>\n    </div>\n</div>");
 
 /***/ }),
 
@@ -58,7 +71,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"index\">\n    <div class=\"wrapper\">\n        <!-- 个人信息 -->\n        <div class=\"person-info\">\n            <div class=\"avatar\">\n               <img src=\"{{personInfo.avatar}}\" alt=\"nickname\"> \n            </div>\n            <div class=\"content\">\n                <p>{{personInfo.nickname}}</p>\n                <p>{{personInfo.age}}</p>\n            </div>\n        </div>\n        <!-- 主图片 -->\n        <div class=\"index-img\">\n            <img src=\"{{personInfo.indexImg}}\" alt=\"\">\n        </div>\n        <!-- 操作区 -->\n        <div class=\"acton-area\">\n            <i class=\"icon\">\n                <img src=\"./../../assets/icon/github.png\" alt=\"\">\n            </i>\n            <i class=\"icon\">\n                <img src=\"./../../assets/icon/qq.png\" alt=\"\">\n            </i>\n            <i class=\"icon\">\n                <img src=\"./../../assets/icon/wechat.png\" alt=\"\">\n            </i>\n        </div>\n        <!-- 进入博客 -->\n        <div class=\"next\">\n            <span>next</span>\n        </div>\n    </div>\n</div>");
+/* harmony default export */ __webpack_exports__["default"] = ("<div class=\"index\">\n    <div class=\"wrapper\">\n        <!-- 个人信息 -->\n        <div class=\"person-info\">\n            <div class=\"avatar\">\n               <img src=\"{{personInfo.avatar}}\" alt=\"nickname\"> \n            </div>\n            <div class=\"content\">\n                <p>{{personInfo.nickname}}</p>\n                <p>{{personInfo.age}}</p>\n            </div>\n        </div>\n        <!-- 主图片 -->\n        <div class=\"index-img\">\n            <img src=\"{{personInfo.indexImg}}\" alt=\"\">\n        </div>\n        <!-- 操作区 -->\n        <div class=\"acton-area\">\n            <i class=\"icon\">\n                <img src=\"./../../assets/icon/github.png\" alt=\"\">\n            </i>\n            <i class=\"icon\">\n                <img src=\"./../../assets/icon/qq.png\" alt=\"\">\n            </i>\n            <i class=\"icon\">\n                <img src=\"./../../assets/icon/wechat.png\" alt=\"\">\n            </i>\n        </div>\n        <!-- 进入博客 -->\n        <div class=\"next\">\n            <span (click)=\"next()\">next</span>\n        </div>\n    </div>\n</div>");
 
 /***/ }),
 
@@ -322,6 +335,9 @@ let AppComponent = class AppComponent {
     constructor() {
         this.title = 'blogs';
     }
+    ngInit() {
+        console.log("test");
+    }
 };
 AppComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
@@ -352,6 +368,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @angular/platform-browser/animations */ "./node_modules/@angular/platform-browser/fesm2015/animations.js");
 /* harmony import */ var _header_header_component__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./header/header.component */ "./src/app/header/header.component.ts");
 /* harmony import */ var _index_index_component__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./index/index.component */ "./src/app/index/index.component.ts");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+/* harmony import */ var _home_home_component__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./home/home.component */ "./src/app/home/home.component.ts");
 
 
 
@@ -359,18 +377,46 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+//路由
+const appRoutes = [
+    {
+        path: 'header',
+        component: _header_header_component__WEBPACK_IMPORTED_MODULE_5__["HeaderComponent"],
+        data: { title: 'Heroes List' }
+    },
+    {
+        path: 'home',
+        component: _home_home_component__WEBPACK_IMPORTED_MODULE_8__["HomeComponent"]
+    },
+    {
+        path: 'index',
+        component: _index_index_component__WEBPACK_IMPORTED_MODULE_6__["IndexComponent"],
+    },
+    {
+        path: '',
+        // 重定向
+        redirectTo: '/index',
+        pathMatch: 'full'
+    },
+];
 let AppModule = class AppModule {
 };
 AppModule = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_2__["NgModule"])({
+        //声明组件
         declarations: [
             _app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"],
             _header_header_component__WEBPACK_IMPORTED_MODULE_5__["HeaderComponent"],
-            _index_index_component__WEBPACK_IMPORTED_MODULE_6__["IndexComponent"]
+            _index_index_component__WEBPACK_IMPORTED_MODULE_6__["IndexComponent"],
+            _home_home_component__WEBPACK_IMPORTED_MODULE_8__["HomeComponent"]
         ],
+        //导入模块
         imports: [
             _angular_platform_browser__WEBPACK_IMPORTED_MODULE_1__["BrowserModule"],
             _angular_platform_browser_animations__WEBPACK_IMPORTED_MODULE_4__["BrowserAnimationsModule"],
+            _angular_router__WEBPACK_IMPORTED_MODULE_7__["RouterModule"].forRoot(appRoutes, { enableTracing: true })
         ],
         providers: [],
         bootstrap: [_app_component__WEBPACK_IMPORTED_MODULE_3__["AppComponent"]]
@@ -425,6 +471,86 @@ HeaderComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
 
 /***/ }),
 
+/***/ "./src/app/home/home.component.css":
+/*!*****************************************!*\
+  !*** ./src/app/home/home.component.css ***!
+  \*****************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony default export */ __webpack_exports__["default"] = (".wrapper{\n    background-color: rgba(0, 0, 0, 0.06);\n}\n.nav-menu{\n    list-style: none;\n    display: -webkit-box;\n    display: flex;\n    -webkit-box-orient: horizontal;\n    -webkit-box-direction: normal;\n            flex-direction: row;\n    padding: 10px 0;\n    border-bottom: 1px solid rgba(0, 0, 0, 0.22);\n}\n.nav-menu > .nav-menu-list {\n    width: 20%;\n    text-align: center;\n    color: rgba(0, 0, 0, 0.64);\n    font-family: 'Bitstream Vera Sans';\n    font-size: 0.96rem;\n}\n.nav-menu > .nav-menu-list > .menu-name {\n    padding-right: 2.2px;\n}\n/*  */\n.blogs-li{\n    background-color: rgba(255, 255, 255, 0.9);\n    margin-bottom: 6px;\n}\n.blogs-li > .time {\n    padding: 8px 6px;\n    border-bottom: 1px solid rgba(0, 0, 0, 0.1);\n    font-size: 1.2rem;\n}\n.blogs-li > .content > .title,.body {\n    display: block;\n    padding: 0 6px;\n}\n.blogs-li > .content > .title{\n    font-size: 0.96rem;\n    padding: 6px 6px;\n    color: rgba(0, 0, 0, 0.96);\n}\n.blogs-li > .content > .body {\n    font-size: 0.86rem;\n    color: rgba(0, 0, 0, 0.76);\n}\n.back-button > button {\n    position: fixed;\n    z-index: 100000;\n    background-color: rosybrown;\n    bottom: 10px;\n    right: 10px;\n    border-style: none;\n    width: 40px;\n    height: 40px;\n    border-radius: 50%;\n    background-color: rgba(66, 133, 244, 1);\n    color: rgba(255, 255, 255, 0.9);\n}\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvaG9tZS9ob21lLmNvbXBvbmVudC5jc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7SUFDSSxxQ0FBcUM7QUFDekM7QUFDQTtJQUNJLGdCQUFnQjtJQUNoQixvQkFBYTtJQUFiLGFBQWE7SUFDYiw4QkFBbUI7SUFBbkIsNkJBQW1CO1lBQW5CLG1CQUFtQjtJQUNuQixlQUFlO0lBQ2YsNENBQTRDO0FBQ2hEO0FBQ0E7SUFDSSxVQUFVO0lBQ1Ysa0JBQWtCO0lBQ2xCLDBCQUEwQjtJQUMxQixrQ0FBa0M7SUFDbEMsa0JBQWtCO0FBQ3RCO0FBQ0E7SUFDSSxvQkFBb0I7QUFDeEI7QUFDQSxLQUFLO0FBQ0w7SUFDSSwwQ0FBMEM7SUFDMUMsa0JBQWtCO0FBQ3RCO0FBQ0E7SUFDSSxnQkFBZ0I7SUFDaEIsMkNBQTJDO0lBQzNDLGlCQUFpQjtBQUNyQjtBQUNBO0lBQ0ksY0FBYztJQUNkLGNBQWM7QUFDbEI7QUFDQTtJQUNJLGtCQUFrQjtJQUNsQixnQkFBZ0I7SUFDaEIsMEJBQTBCO0FBQzlCO0FBQ0E7SUFDSSxrQkFBa0I7SUFDbEIsMEJBQTBCO0FBQzlCO0FBRUE7SUFDSSxlQUFlO0lBQ2YsZUFBZTtJQUNmLDJCQUEyQjtJQUMzQixZQUFZO0lBQ1osV0FBVztJQUNYLGtCQUFrQjtJQUNsQixXQUFXO0lBQ1gsWUFBWTtJQUNaLGtCQUFrQjtJQUNsQix1Q0FBdUM7SUFDdkMsK0JBQStCO0FBQ25DIiwiZmlsZSI6InNyYy9hcHAvaG9tZS9ob21lLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyIud3JhcHBlcntcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDAsIDAsIDAsIDAuMDYpO1xufVxuLm5hdi1tZW51e1xuICAgIGxpc3Qtc3R5bGU6IG5vbmU7XG4gICAgZGlzcGxheTogZmxleDtcbiAgICBmbGV4LWRpcmVjdGlvbjogcm93O1xuICAgIHBhZGRpbmc6IDEwcHggMDtcbiAgICBib3JkZXItYm90dG9tOiAxcHggc29saWQgcmdiYSgwLCAwLCAwLCAwLjIyKTtcbn1cbi5uYXYtbWVudSA+IC5uYXYtbWVudS1saXN0IHtcbiAgICB3aWR0aDogMjAlO1xuICAgIHRleHQtYWxpZ246IGNlbnRlcjtcbiAgICBjb2xvcjogcmdiYSgwLCAwLCAwLCAwLjY0KTtcbiAgICBmb250LWZhbWlseTogJ0JpdHN0cmVhbSBWZXJhIFNhbnMnO1xuICAgIGZvbnQtc2l6ZTogMC45NnJlbTtcbn1cbi5uYXYtbWVudSA+IC5uYXYtbWVudS1saXN0ID4gLm1lbnUtbmFtZSB7XG4gICAgcGFkZGluZy1yaWdodDogMi4ycHg7XG59XG4vKiAgKi9cbi5ibG9ncy1saXtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDI1NSwgMjU1LCAyNTUsIDAuOSk7XG4gICAgbWFyZ2luLWJvdHRvbTogNnB4O1xufVxuLmJsb2dzLWxpID4gLnRpbWUge1xuICAgIHBhZGRpbmc6IDhweCA2cHg7XG4gICAgYm9yZGVyLWJvdHRvbTogMXB4IHNvbGlkIHJnYmEoMCwgMCwgMCwgMC4xKTtcbiAgICBmb250LXNpemU6IDEuMnJlbTtcbn1cbi5ibG9ncy1saSA+IC5jb250ZW50ID4gLnRpdGxlLC5ib2R5IHtcbiAgICBkaXNwbGF5OiBibG9jaztcbiAgICBwYWRkaW5nOiAwIDZweDtcbn1cbi5ibG9ncy1saSA+IC5jb250ZW50ID4gLnRpdGxle1xuICAgIGZvbnQtc2l6ZTogMC45NnJlbTtcbiAgICBwYWRkaW5nOiA2cHggNnB4O1xuICAgIGNvbG9yOiByZ2JhKDAsIDAsIDAsIDAuOTYpO1xufVxuLmJsb2dzLWxpID4gLmNvbnRlbnQgPiAuYm9keSB7XG4gICAgZm9udC1zaXplOiAwLjg2cmVtO1xuICAgIGNvbG9yOiByZ2JhKDAsIDAsIDAsIDAuNzYpO1xufVxuXG4uYmFjay1idXR0b24gPiBidXR0b24ge1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB6LWluZGV4OiAxMDAwMDA7XG4gICAgYmFja2dyb3VuZC1jb2xvcjogcm9zeWJyb3duO1xuICAgIGJvdHRvbTogMTBweDtcbiAgICByaWdodDogMTBweDtcbiAgICBib3JkZXItc3R5bGU6IG5vbmU7XG4gICAgd2lkdGg6IDQwcHg7XG4gICAgaGVpZ2h0OiA0MHB4O1xuICAgIGJvcmRlci1yYWRpdXM6IDUwJTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiByZ2JhKDY2LCAxMzMsIDI0NCwgMSk7XG4gICAgY29sb3I6IHJnYmEoMjU1LCAyNTUsIDI1NSwgMC45KTtcbn0iXX0= */");
+
+/***/ }),
+
+/***/ "./src/app/home/home.component.ts":
+/*!****************************************!*\
+  !*** ./src/app/home/home.component.ts ***!
+  \****************************************/
+/*! exports provided: HomeComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HomeComponent", function() { return HomeComponent; });
+/* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
+
+
+let HomeComponent = class HomeComponent {
+    constructor(router) {
+        this.router = router;
+        //导航条信息
+        this.navBarList = [
+            {
+                value: Math.random(),
+                name: "动态",
+            },
+            {
+                value: Math.random(),
+                name: "专栏",
+                count: 0
+            },
+            {
+                value: Math.random(),
+                name: "沸点",
+                count: 1
+            },
+            {
+                value: Math.random(),
+                name: "分享",
+                count: 0
+            },
+            {
+                value: Math.random(),
+                name: "更多",
+            }
+        ];
+    }
+    ngOnInit() {
+    }
+    back() {
+        this.router.navigate(['/index']);
+    }
+};
+HomeComponent.ctorParameters = () => [
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] }
+];
+HomeComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
+    Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
+        selector: 'app-home',
+        template: tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! raw-loader!./home.component.html */ "./node_modules/raw-loader/dist/cjs.js!./src/app/home/home.component.html")).default,
+        styles: [tslib__WEBPACK_IMPORTED_MODULE_0__["__importDefault"](__webpack_require__(/*! ./home.component.css */ "./src/app/home/home.component.css")).default]
+    })
+], HomeComponent);
+
+
+
+/***/ }),
+
 /***/ "./src/app/index/index.component.css":
 /*!*******************************************!*\
   !*** ./src/app/index/index.component.css ***!
@@ -450,15 +576,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "IndexComponent", function() { return IndexComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm2015/core.js");
+/* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm2015/router.js");
+
 
 
 let IndexComponent = class IndexComponent {
-    constructor() {
+    constructor(router, route) {
+        this.router = router;
+        this.route = route;
+        // 图标地址
         this.icon = {
             qqImg: "",
             wxImg: "",
             githubImg: ""
         };
+        //个人信息
         this.personInfo = {
             avatar: "./../../assets/avatar.jpg",
             nickname: "Iangai Hang",
@@ -466,9 +598,18 @@ let IndexComponent = class IndexComponent {
             age: "22"
         };
     }
+    //进入博客
+    next() {
+        //路由跳转
+        this.router.navigate(['/home']);
+    }
     ngOnInit() {
     }
 };
+IndexComponent.ctorParameters = () => [
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["Router"] },
+    { type: _angular_router__WEBPACK_IMPORTED_MODULE_2__["ActivatedRoute"] }
+];
 IndexComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
     Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
         selector: 'app-index',
